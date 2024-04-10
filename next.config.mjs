@@ -5,8 +5,8 @@
 const nextConfig = {
   //basePath: isProductive ? '/financial-lit' : '',
   output: 'export',
-  assetPrefix: process.env.assetPrefix,
-  basePath: process.env.basePath,
+  //assetPrefix: process.env.assetPrefix,
+  //basePath: process.env.basePath,
   images: {
     unoptimized: true,
   },
