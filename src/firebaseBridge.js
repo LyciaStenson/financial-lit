@@ -10,11 +10,7 @@ let hasUserBeemCreated = false;
 
 let currentUser = {
     id: 0,
-    code: "12345678",
     firstName: "",
-    lastName: "",
-    school: "",
-    year: "",
     scoreAmount: 0
 }
 
@@ -29,8 +25,8 @@ const firebaseConfig = {
 };
 
 export async function getServerSideProps(){
-    firebaseConfig.apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
-    firebaseConfig.authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN;
+    firebaseConfig.apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY,    
+    firebaseConfig.authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
     firebaseConfig.projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
     firebaseConfig.storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET;
     firebaseConfig.messagingSenderId = process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
@@ -46,8 +42,6 @@ export function createFirebase(){
     database = getFirestore(app);
     auth = getAuth(app);
 }
-
-
 
 let hasUserLoggedIn = false;
 
@@ -70,18 +64,9 @@ if(auth != undefined){
         if (user) {
             console.log("User found!");
             currentUser = user;
-            let nameWithDash = user.email.split("@");
-            let name = nameWithDash[0].split("-");
-    
-            let first = name[0];
-            let last = name[1];
-    
-            currentUser.firstName = first;
-            currentUser.lastName = last;
-            currentUser.scoreAmount = 0;
-            hasUserLoggedIn = true;
-            //createAccount();
-        } else {
+            currentUser.id = user.uid;
+            currentUser.firstName = "David";
+            } else {
             console.log("No User!");
             hasUserLoggedIn = false;
         }
@@ -136,13 +121,6 @@ export async function createAccount(firstName, lastName, schoolName, yearGroup, 
             lastName,
             scoreAmount
         });
-
-        currentUser.id = docRef.id;
-        currentUser.firstName = firstName;
-        currentUser.lastName = lastName;
-        currentUser.school = schoolName; //Note (Sam): We get this for the leaberboards. I think? But might remove if not.
-        currentUser.year = yearGroup;
-        currentUser.score = scoreAmount;
 
         console.log("Document written with ID: ", currentUser);
         hasUserBeemCreated = true;
@@ -205,31 +183,6 @@ export async function getQuestionData() {
     });
 
     return dataArray;
-
-    /*const dataRef = doc(database, "questions", "Click True", "Question 01", "G00Vomw4oHmi15imdZSl");
-    return getDoc(dataRef)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const dataArray = [];
-                snapshot.((childSnapshot) => {
-                    const userData = childSnapshot.val();
-                    dataArray.push({
-                       userData
-                    });   
-                });
-
-                dataArray.sort((a, b) => b.score - a.score); // Sort in descending order
-
-                return dataArray;
-            } else {
-                console.log("No question data available");
-                return [];
-            }
-        })
-        .catch((error) => {
-            console.error("Error getting leaderboard data:", error);
-            throw error; // Propagate the error further
-        });*/
 }
 
 export async function setQuestionData(question, choices) {

@@ -1,12 +1,16 @@
+import { AuthContextProvider } from "./pageLoading";
+
 type Props = {
     children: React.ReactNode;
 }
 
 const GameFirebaseLayout = ({ children }: Props) => {
     return (
-        <div>
-            {children}
-        </div>
+        <AuthContextProvider>
+            <div>
+                {children}
+            </div>
+        </AuthContextProvider>
     );
 };
 

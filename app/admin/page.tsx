@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { setQuestionData } from '@/src/firebaseBridge';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-//import QRCode from "react-qr-code";
+import QRCode from "react-qr-code";
 
 const AdminPage = () => {
     const [question, setQuestion] = useState('');
@@ -46,14 +46,12 @@ const AdminPage = () => {
         <div>
             <div className="grid w-3/5 gap-2 p-4">
                 <h1 className='text-3xl'>Admin Page</h1>
-                
-                {/*
+
                 <QRCode
                 size={400}
                 value={"https://uniglos.github.io/RT-Financial-Lit"}
-                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                    style={{ height: "auto", maxWidth: "10%", width: "10%" }}
                 />
-                */}
                 
                 <h1 className='text-xl'>Add Question</h1>
                 <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
