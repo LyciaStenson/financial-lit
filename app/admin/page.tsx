@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { setQuestionData } from '@/src/firebaseBridge';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import QRCode from "react-qr-code";
 
 const AdminPage = () => {
     const [question, setQuestion] = useState('');
@@ -39,6 +40,13 @@ const AdminPage = () => {
     return (
         <div>
             <h1>Admin</h1>
+
+            <QRCode
+            size={400}
+            value={window.location.href}
+            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            />
+
             <div className="grid w-3/5 gap-2">
                 <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
                 {choices.map((choice, index) => (

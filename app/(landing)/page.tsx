@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/input-otp"
 
 import { useState } from "react"
-//import QRCode from "react-qr-code"
 
 export default function Home() {
   const router = useRouter()
@@ -30,13 +29,6 @@ export default function Home() {
         Get Started (Firebase)
       </Button>
       
-      {/*
-      <QRCode
-        //size={400}
-        //value={window.location.href
-        //style={{ height: "auto", maxWidth: "100%", width: "100%"
-      */}
-
       <InputOTP maxLength={400} onChange={(value) => setValue(value)}>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
