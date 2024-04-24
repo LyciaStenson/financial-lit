@@ -44,7 +44,7 @@ const AdminPage = () => {
             <QRCode
             size={400}
             value={"financial-lit.vercel.app"}
-            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+            style={{ height: "auto", maxWidth: "10%", width: "10%" }}
             />
 
             <div className="grid w-3/5 gap-2">
