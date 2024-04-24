@@ -29,12 +29,12 @@ const firebaseConfig = {
 };
 
 export async function getServerSideProps(){
-    firebaseConfig.apiKey = process.env.FIREBASE_API_KEY,    
-    firebaseConfig.authDomain = process.env.FIREBASE_AUTH_DOMAIN
-    firebaseConfig.projectId = process.env.FIREBASE_PROJECT_ID;
-    firebaseConfig.storageBucket = process.env.FIREBASE_STORAGE_BUCKET;
-    firebaseConfig.messagingSenderId = process.env.FIREBASE_MESSAGING_SENDER_ID;
-    firebaseConfig.appId = process.env.FIREBASE_APP_ID;
+    firebaseConfig.apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+    firebaseConfig.authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN;
+    firebaseConfig.projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+    firebaseConfig.storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET;
+    firebaseConfig.messagingSenderId = process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
+    firebaseConfig.appId = process.env.NEXT_PUBLIC_FIREBASE_APP_ID;
 }
 
 let app = undefined;

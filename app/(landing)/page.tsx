@@ -29,7 +29,7 @@ export default function Home() {
         Get Started (Firebase)
       </Button>
 
-      <InputOTP maxLength={400} onChange={(value) => setValue(value)}>
+      <InputOTP maxLength={8} onChange={(value) => setValue(value)}>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
           <InputOTPSlot index={1} />
