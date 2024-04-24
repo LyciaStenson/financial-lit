@@ -43,7 +43,7 @@ const AdminPage = () => {
 
             <QRCode
             size={400}
-            value={window.location.href}
+            value={"financial-lit.vercel.app"}
             style={{ height: "auto", maxWidth: "100%", width: "100%" }}
             />
 
