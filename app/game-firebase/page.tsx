@@ -1,7 +1,7 @@
 'use client';
 
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { getCurrentUser, hasUserBeenCreated, setScore, setQuestionData, randomScore, createUserWithPassword, getHasUserLoggedIn, returnAuth, logOut } from "@/src/firebaseBridge";
+import { getCurrentUser, hasUserBeenCreated, setScore, setQuestionData, randomScore, createUserWithPassword, getHasUserLoggedIn, returnAuth, logOut, getServerSideProps, createFirebase } from "@/src/firebaseBridge";
 import { getCurrentQuestion, loadQuiz, hasQuestionsLoaded, hasAllQuestionBeenCompleted, checkCurrentQuestion } from "@/src/game"
 import { Button } from "@/components/ui/button";
 import RegistrationForm from "./registration";
@@ -17,6 +17,9 @@ const GameFirebasePage = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    getServerSideProps();
+    createFirebase();
 
     const handleRegister = () => {
         console.log(email);
@@ -48,22 +51,6 @@ const GameFirebasePage = () => {
     useEffect(() => {
         setUserScore(userScore);
     }, [userScore]);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(returnAuth(), function (user) {
-            if (user) {
-                console.log("User found!");
-                setUserLoggedIn(true);
-                setUserSelected(true);
-                //createAccount();
-            } else {
-                console.log("No User!");
-                setUserLoggedIn(false);
-            }
-        });
-
-        return () => unsubscribe(); // Cleanup function
-    }, []);
 
     return (
         <div className="flex flex-col justify-center items-center">

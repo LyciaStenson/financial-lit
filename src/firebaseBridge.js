@@ -20,18 +20,34 @@ let currentUser = {
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyA56SfIyzjF_IpdEwULJe_ljsNMiYbF2F4",    
-    authDomain: "rt-financial-lit.firebaseapp.com",
-    projectId: "rt-financial-lit",
-    storageBucket: "rt-financial-lit.appspot.com",
-    messagingSenderId: "118520334145",
-    appId: "1:118520334145:web:625dc06131a5a0edc3c3c0",
-    measurementId: "G-WGB10PRJHY"
+    apiKey: "",    
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
 };
 
-const app = initializeApp(firebaseConfig);
-const database = getFirestore(app);
-const auth = getAuth(app);
+export async function getServerSideProps(){
+    firebaseConfig.apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY,    
+    firebaseConfig.authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    firebaseConfig.projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+    firebaseConfig.storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET;
+    firebaseConfig.messagingSenderId = process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
+    firebaseConfig.appId = process.env.NEXT_PUBLIC_FIREBASE_APP_ID;
+}
+
+let app = undefined;
+let database = undefined;
+let auth = undefined;
+
+export function createFirebase(){
+    app = initializeApp(firebaseConfig);
+    database = getFirestore(app);
+    auth = getAuth(app);
+}
+
+
 
 let hasUserLoggedIn = false;
 
@@ -49,27 +65,30 @@ export function getCurrentUser() {
             return currentUser;
     }
 }
+if(auth != undefined){
+    onAuthStateChanged(auth, function (user) {
+        if (user) {
+            console.log("User found!");
+            currentUser = user;
+            let nameWithDash = user.email.split("@");
+            let name = nameWithDash[0].split("-");
+    
+            let first = name[0];
+            let last = name[1];
+    
+            currentUser.firstName = first;
+            currentUser.lastName = last;
+            currentUser.scoreAmount = 0;
+            hasUserLoggedIn = true;
+            //createAccount();
+        } else {
+            console.log("No User!");
+            hasUserLoggedIn = false;
+        }
+    });
+}
 
-onAuthStateChanged(auth, function (user) {
-    if (user) {
-        console.log("User found!");
-        currentUser = user;
-        let nameWithDash = user.email.split("@");
-        let name = nameWithDash[0].split("-");
 
-        let first = name[0];
-        let last = name[1];
-
-        currentUser.firstName = first;
-        currentUser.lastName = last;
-        currentUser.scoreAmount = 0;
-        hasUserLoggedIn = true;
-        //createAccount();
-    } else {
-        console.log("No User!");
-        hasUserLoggedIn = false;
-    }
-});
 
 export function getHasUserLoggedIn(){
     return hasUserLoggedIn;

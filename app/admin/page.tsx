@@ -6,15 +6,21 @@ import { Textarea } from '@/components/ui/textarea';
 import { setQuestionData } from '@/src/firebaseBridge';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import QRCode from "react-qr-code";
+//import QRCode from "react-qr-code";
 
 const AdminPage = () => {
     const [question, setQuestion] = useState('');
     const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
+    const [school, setSchool] = useState('');
 
     const handleQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setQuestion(event.target.value);
     };
+
+    const handleSchoolName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        console.log(event.target.name);
+        setSchool(event.target.name);
+    }
 
     const handleChoiceAnswerChange = (index: number, event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const updatedChoices = [...choices];
@@ -24,7 +30,6 @@ const AdminPage = () => {
 
     const handleChoiceResultChange = (index: number, value: boolean) => {
         const updatedChoices = [...choices];
-        console.log(value);
         updatedChoices[index].Result = value;
         setChoices(updatedChoices);
     };
@@ -39,18 +44,21 @@ const AdminPage = () => {
 
     return (
         <div>
-            <h1>Admin</h1>
-
-            <QRCode
-            size={400}
-            value={"financial-lit.vercel.app"}
-            style={{ height: "auto", maxWidth: "10%", width: "10%" }}
-            />
-
-            <div className="grid w-3/5 gap-2">
+            <div className="grid w-3/5 gap-2 p-4">
+                <h1 className='text-3xl'>Admin Page</h1>
+                
+                {/*
+                <QRCode
+                size={400}
+                value={"https://uniglos.github.io/RT-Financial-Lit"}
+                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                />
+                */}
+                
+                <h1 className='text-xl'>Add Question</h1>
                 <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
                 {choices.map((choice, index) => (
-                    <div key={index}>
+                    <div key={index} className='space-y-2'>
                         <Textarea placeholder={`Choice ${index + 1}`} value={choice.Answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
                         <Switch id={`true-false-${index}`} checked={choices[index].Result} onCheckedChange={(value) => handleChoiceResultChange(index, value)} />
                         <Label htmlFor={`true-false-${index}`}>{choices[index].Result ? 'True' : 'False'}</Label>
@@ -60,6 +68,11 @@ const AdminPage = () => {
                     <Button onClick={handleAddChoice}>Add Choice</Button>
                 </div>
                 <Button onClick={handleAddQuestion}>Add Question</Button>
+            </div>
+            <div className="grid w-3/5 gap-2 p-4">
+                <h1 className='text-xl'>Add Users</h1>
+                <Textarea id='school' placeholder="School Name Here." value={school} onChange={handleSchoolName} />
+                <Button onClick={handleAddQuestion}>Add User</Button>
             </div>
         </div>
     );

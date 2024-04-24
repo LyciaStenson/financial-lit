@@ -28,7 +28,7 @@ export default function Home() {
       <Button variant="default" shape="default" onClick={() => router.push('/game-firebase')}>
         Get Started (Firebase)
       </Button>
-      
+
       <InputOTP maxLength={400} onChange={(value) => setValue(value)}>
         <InputOTPGroup>
           <InputOTPSlot index={0} />
