@@ -11,9 +11,12 @@ const buttonVariants = cva(
       variant: {
         default: "bg-white text-slate-500 border-slate-200 border-2 border-b-4 hover:bg-slate-100 active:border-b-2",
         defaultOutline: "",
-        primary: "bg-fin-lit-gold text-fin-lit-blue border-fin-lit-blue border-2 border-b-4 hover:bg-fin-lit-gold/80 active:border-b-2",
-        primaryOutline: "bg-white text-fin-lit-gold",
-        secondary: "bg-fin-lit-blue text-white border-fin-lit-blue hover:bg-fin-lit-blue/80 border-b-4 active:border-b-0"
+        primary: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue border-2 border-b-4 hover:bg-fin-lit-gold/80 active:border-b-2",
+        primaryOutline: "bg-white text-moneyconf-gold",
+        secondary: "bg-moneyconf-blue text-white border-moneyconf-blue hover:bg-fin-lit-blue/80 border-b-4 active:border-b-0",
+        lessonCompleted: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue",
+        lessonUnlocked: "bg-moneyconf-green text-moneyconf-blue border-moneyconf-blue",
+        lessonLocked: "bg-moneyconf-grey text-moneyconf-blue border-moneyconf-blue"
       },
       size: {
         default: "h-14 px-11 py-2",

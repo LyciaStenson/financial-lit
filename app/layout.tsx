@@ -4,7 +4,7 @@ import { Montserrat } from "next/font/google";
 
 import "./globals.css";
 
-const montserrat = Montserrat({ subsets: ["latin"], weight: "400" });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "My Money Confidence",

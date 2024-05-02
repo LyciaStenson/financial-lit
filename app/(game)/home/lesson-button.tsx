@@ -1,56 +1,49 @@
 'use client'
 
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 type Props = {
     day: number;
     totalCount: number;
-    locked?: boolean;
+    //locked?: boolean;
+    //variant: string;
     current?: boolean;
-    percentage: number;
 }
 
 export const LessonButton = ({
     day,
     totalCount,
-    locked,
+    //variant,
+    //locked,
     current,
-    percentage
 }: Props) => {
-    const cycleLength = 8;
-    const cycleIndex = day % cycleLength;
+    //const cycleLength = 12;
+    //const cycleIndex = (day-1) % cycleLength;
 
-    let indentationLevel;
+    let indentationLevel = -2.5 * Math.cos((day-1) * Math.PI / 5);
 
-    if (cycleIndex <= 2) {
-        indentationLevel = cycleIndex;
-    } else if (cycleIndex <= 4) {
-        indentationLevel = 4 - cycleIndex;
-    } else if (cycleIndex <= 6) {
-        indentationLevel = 4 - cycleIndex;
-    } else {
-        indentationLevel = cycleIndex - 8;
-    }
+    const leftShift = indentationLevel * 100;
 
-    const rightPosition = indentationLevel * 40;
-
-    const isCompleted = !current && !locked;
-
-    const href = isCompleted ? '/lesson/${index}' : '/lesson';
+    //const href = isCompleted ? '/lesson/${index}' : '/lesson';
+    const href = "/lesson";
 
     return (
+    <div className="relative">
         <Button
-            className="w-[130px] h-[130px] border-2"
-            variant="primary"
+            className="w-[130px] h-[130px] border-[2.5px] relative shadow-[inset_0_-17px_0px_rgba(0,0,0,0.3),inset_0_4px_0px_rgb(255,255,255,0.7)]"
+            style={{
+                left: leftShift
+            }}
+            variant={(day >= 2) ? (day == 2) ? "lessonUnlocked" : "lessonLocked" : "lessonCompleted"}
             shape="round"
         >
-            <div>
-                <div className="w-[100px] h-[100px] border-fin-lit-blue border-2 rounded-full text-3xl flex items-center justify-center">
-                    Day {day}
-                </div>
+        <div>
+            <div className="w-[100px] h-[100px] relative bg-stripes border-moneyconf-blue border-[2.5px] rounded-full text-3xl flex flex-col items-center justify-center">
+                <p>Day</p>
+                <p>{day}</p>
             </div>
+        </div>
         </Button>
+    </div>
     )
 }

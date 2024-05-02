@@ -84,17 +84,17 @@ export async function logOut(){
         await signOut(auth);
         console.log("Singed Out");
     }catch(error){
-        console.log("Error singing out: ", error);
+        console.log("Error signing out: ", error);
     }
 }
 
-export async function logInWithEmail(email, password) {
+export async function signInWithEmail(email, password) {
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        console.log('User logged in successfully!');
+        console.log('User signed in successfully!');
         hasUserLoggedIn = true;
     } catch (error) {
-        console.error('Error logging in:', error);
+        console.error('Error signing in:', error);
     }
 }
 
@@ -171,7 +171,7 @@ export async function setScore(scoreAmount) {
 
 export async function getQuestionData() {
 
-    const collectionRef = collection(database, "questions", "Click True", "Question 01");
+    const collectionRef = collection(database, "questions", "QuestionType", "ClickTrue");
     const querySnapshot = await getDocs(collectionRef);
     const dataArray = [];
 
@@ -187,7 +187,7 @@ export async function getQuestionData() {
 
 export async function setQuestionData(question, choices) {
     try {
-        const collectionRef = collection(database, "questions", "Click True", "Question 01");
+        const collectionRef = collection(database, "questions", "QuestionType", "ClickTrue");
         const docRef = await addDoc(collectionRef, {
             question,
             choices

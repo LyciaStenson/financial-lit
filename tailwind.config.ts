@@ -19,11 +19,11 @@ const config = {
     },
     extend: {
       colors: {
-        'fin-lit-gold': '#ffd400',
-        'fin-lit-purple': '#390176',
-        'fin-lit-grey': '#91b3fa',
-        'fin-lit-green': '#8cc63f',
-        'fin-lit-blue' : '#000072',
+        'moneyconf-gold': '#ffd400',
+        'moneyconf-purple': '#390176',
+        'moneyconf-grey': '#cccccc',
+        'moneyconf-green': '#8cc63f',
+        'moneyconf-blue' : '#000072',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -80,11 +80,14 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "caret-blink": "caret-blink 1.25s ease-out infinite",
+        "caret-blink": "caret-blink 1.25s ease-out infinite"
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@designbycode/tailwindcss-stripes")
+  ],
 } satisfies Config
 
 export default config
