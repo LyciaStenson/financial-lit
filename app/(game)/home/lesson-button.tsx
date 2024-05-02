@@ -34,7 +34,7 @@ export const LessonButton = ({
             style={{
                 left: leftShift
             }}
-            variant={(day >= 2) ? (day == 2) ? "lessonUnlocked" : "lessonLocked" : "lessonCompleted"}
+            variant={(day >= 4) ? (day == 4) ? "lessonUnlocked" : "lessonLocked" : "lessonCompleted"}
             shape="round"
         >
         <div>
