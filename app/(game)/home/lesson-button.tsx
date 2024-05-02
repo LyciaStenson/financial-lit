@@ -20,7 +20,7 @@ export const LessonButton = ({
     //const cycleLength = 12;
     //const cycleIndex = (day-1) % cycleLength;
 
-    let indentationLevel = -1.5 * Math.cos((day-1) * Math.PI / 5);
+    let indentationLevel = -1.35 * Math.cos((day-1) * Math.PI / 5);
 
     const leftShift = indentationLevel * 100;
 
