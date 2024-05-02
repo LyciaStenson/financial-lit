@@ -43,7 +43,7 @@ export function createFirebase(){
     auth = getAuth(app);
 }
 
-let hasUserLoggedIn = false;
+let hasUserSignedIn = false;
 
 export function hasUserBeenCreated() {
     return hasUserBeemCreated;
@@ -68,21 +68,21 @@ if(auth != undefined){
             currentUser.firstName = "David";
             } else {
             console.log("No User!");
-            hasUserLoggedIn = false;
+            hasUserSignedIn = false;
         }
     });
 }
 
 
 
-export function getHasUserLoggedIn(){
-    return hasUserLoggedIn;
+export function getHasUserSignedIn(){
+    return hasUserSignedIn;
 }
 
-export async function logOut(){
+export async function signOutFirebase(){
     try{
         await signOut(auth);
-        console.log("Singed Out");
+        console.log("Signed Out");
     }catch(error){
         console.log("Error signing out: ", error);
     }
@@ -92,7 +92,7 @@ export async function signInWithEmail(email, password) {
     try {
         await signInWithEmailAndPassword(auth, email, password);
         console.log('User signed in successfully!');
-        hasUserLoggedIn = true;
+        hasUserSignedIn = true;
     } catch (error) {
         console.error('Error signing in:', error);
     }
