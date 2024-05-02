@@ -20,7 +20,7 @@ export const LessonButton = ({
     //const cycleLength = 12;
     //const cycleIndex = (day-1) % cycleLength;
 
-    let indentationLevel = -2.5 * Math.cos((day-1) * Math.PI / 5);
+    let indentationLevel = -1.5 * Math.cos((day-1) * Math.PI / 5);
 
     const leftShift = indentationLevel * 100;
 
@@ -34,7 +34,7 @@ export const LessonButton = ({
             style={{
                 left: leftShift
             }}
-            variant={(day >= 4) ? (day == 4) ? "lessonUnlocked" : "lessonLocked" : "lessonCompleted"}
+            variant={(day >= 5) ? (day == 5) ? "lessonUnlocked" : "lessonLocked" : "lessonCompleted"}
             shape="round"
         >
         <div>
