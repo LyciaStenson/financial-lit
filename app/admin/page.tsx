@@ -1,7 +1,6 @@
 'use client';
 
 import { setUserDetails, getCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
-import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { setQuestionData } from '@/src/firebaseBridge';
@@ -21,45 +20,45 @@ function randomIntFromInterval() {
 const AdminPage = () => {
     //Is Admin
     if (getCurrentUser().role == 'admin') {
-        const [question, setQuestion] = useState('');
-        const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
-        const [studentName, setStudentName] = useState('');
+        //const [question, setQuestion] = useState('');
+        //const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
+        //const [studentName, setStudentName] = useState('');
 
         const handleQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setQuestion(event.target.value);
+            //setQuestion(event.target.value);
         };
 
         const handleStudentName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setStudentName(event.target.value);
+            //setStudentName(event.target.value);
         };
 
         const handleChoiceAnswerChange = (index: number, event: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const updatedChoices = [...choices];
-            updatedChoices[index].Answer = event.target.value;
-            setChoices(updatedChoices);
+            //const updatedChoices = [...choices];
+            //updatedChoices[index].Answer = event.target.value;
+            //setChoices(updatedChoices);
         };
 
         const handleChoiceResultChange = (index: number, value: boolean) => {
-            const updatedChoices = [...choices];
-            updatedChoices[index].Result = value;
-            setChoices(updatedChoices);
+            //const updatedChoices = [...choices];
+            //updatedChoices[index].Result = value;
+            //setChoices(updatedChoices);
         };
 
         const handleAddChoice = () => {
-            setChoices(prevChoices => [...prevChoices, { Answer: '', Result: false }]);
+            //setChoices(prevChoices => [...prevChoices, { Answer: '', Result: false }]);
         };
 
         const handleAddQuestion = () => {
-            setQuestionData(question, choices);
+            //setQuestionData(question, choices);
         };
 
         const handleAddUser = () => {
-            let emailId:string = randomIntFromInterval().toString();
-            let email:string = emailId + "@moneyconfidence.co.uk";
-            signUp(email, "23@f1-*1HA%^3(DA)").then((result:UserCredential | null) => {
-                let user = setUserDetails( result!.user.uid, emailId, studentName, "student");
-                setData("users/", user.UUID!, user);
-            });
+            //let emailId:string = randomIntFromInterval().toString();
+            //let email:string = emailId + "@moneyconfidence.co.uk";
+            //signUp(email, "23@f1-*1HA%^3(DA)").then((result:UserCredential | null) => {
+                //let user = setUserDetails( result!.user.uid, emailId, studentName, "student");
+                //setData("users/", user.UUID!, user);
+            //});
         }
 
         return (
@@ -76,14 +75,6 @@ const AdminPage = () => {
                 */}
 
                     <h1 className='text-xl'>Add Question</h1>
-                    <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
-                    {choices.map((choice, index) => (
-                        <div key={index} className='space-y-2'>
-                            <Textarea placeholder={`Choice ${index + 1}`} value={choice.Answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
-                            <Switch id={`true-false-${index}`} checked={choices[index].Result} onCheckedChange={(value) => handleChoiceResultChange(index, value)} />
-                            <Label htmlFor={`true-false-${index}`}>{choices[index].Result ? 'True' : 'False'}</Label>
-                        </div>
-                    ))}
                     <div>
                         <Button onClick={handleAddChoice}>Add Choice</Button>
                     </div>
@@ -91,7 +82,6 @@ const AdminPage = () => {
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">
                     <h1 className='text-xl'>Add Users</h1>
-                    <Textarea placeholder="Student Name." value={studentName} onChange={handleStudentName} />
                     <Button onClick={handleAddUser}>Add User</Button>
                 </div>
             </div>
