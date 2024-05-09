@@ -13,13 +13,7 @@ function Page(): JSX.Element {
     event.preventDefault();
 
     // Attempt to sign up with provided email and password
-    const { result, error } = await signUp( email, password );
-
-    if ( error ) {
-      // Display and log any sign-up errors
-      console.log( error );
-      return;
-    }
+    const result = await signUp( email, password );
 
     // Sign up successful
     console.log( result );

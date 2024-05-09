@@ -1,4 +1,4 @@
-import { Sidebar } from "@/components/sidebar";
+//import { Sidebar } from "@/components/sidebar";
 import { Topbar } from "@/components/topbar";
 
 type Props = {
@@ -9,9 +9,9 @@ const GameLayout = ({ children }: Props) => {
     return (
     <>
         <Topbar/>
-        <Sidebar className="hidden md:flex"></Sidebar>
-        <main className="md:pl-[256px] h-full pt-[50px] md:pt-0">
-            <div className="max-w-[850px] mx-auto pt-6 h-full flex justify-center">
+        {/*<Sidebar className="hidden md:flex"></Sidebar>*/}
+        <main className="h-full pt-[90px]"> {/*md:pl-[256px] md:pt-0*/}
+            <div className="max-w-[850px] mx-auto h-full flex justify-center">
                 {children}
             </div>
         </main>

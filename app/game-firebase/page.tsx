@@ -13,8 +13,8 @@ function Page(): JSX.Element {
 
   useEffect( () => {
     // Redirect to the home page if the user is not logged in
-    if ( user == null ) {
-      router.push( "/dashboard " );
+    if ( user != null ) {
+      router.push( "/home " );
     }
     // }, [ user ] );
   }, [ user, router ] ); // Include 'router' in the dependency array to resolve eslint warning

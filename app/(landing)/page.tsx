@@ -1,6 +1,6 @@
 'use client'
 
-import { /*useSearchParams,*/ useRouter } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   InputOTP,
@@ -9,16 +9,26 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Home() {
-  const router = useRouter()
-  const [value, setValue] = useState("")
+  const router = useRouter();
+  const [value, setValue] = useState("");
 
-  //const searchParams = useSearchParams();
-  //const id = searchParams.get('id');
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
 
-  //console.log("id > ", id);
+  useEffect(()=>{
+    if(id!){
+      history.pushState({ email: id + "@moneyconfidence.co.uk" }, "", "/login");
+    router.push("/login");
+    }
+  });
+
+  function handleClick() {
+    history.pushState({ email: value + "@moneyconfidence.co.uk" }, "", "/login");
+    router.push("/login");
+  }
 
   return (
     <div className="p-4 space-y-4 flex flex-col">
@@ -49,9 +59,10 @@ export default function Home() {
       ) : (
         <>
           You entered: {value}
-          <Button variant={"primary"}>Sign In!</Button>
-        </>
-      )}
-    </div>
+          <Button variant={"primary"} onClick={() => handleClick()}>Sign In!</Button>
+    </>
+  )
+}
+    </div >
   )
 }

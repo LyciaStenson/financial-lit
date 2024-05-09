@@ -27,7 +27,7 @@ function Page(): JSX.Element {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <h1>Hello { } Dave</h1>
+            <h1>Hello {  }</h1>
             <p>Welcome Back</p>
             {questionsCompleted && (
                 <h1>You have completed todays quiz. Come back tomorrow!</h1>

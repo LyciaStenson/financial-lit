@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/sidebar";
 import { Topbar } from "@/components/topbar";
+import { AuthContextProvider } from "../game-firebase/pageLoading";
 
 type Props = {
     children: React.ReactNode;
@@ -7,14 +8,13 @@ type Props = {
 
 const GameLayout = ({ children }: Props) => {
     return (
-    <>
-        <Topbar/>
-        <main className=" h-full pt-[50px] md:pt-0">
-            <div className="h-full">
-                {children}
-            </div>
-        </main>
-    </>
+        <AuthContextProvider>
+            <main className=" h-full pt-[50px] md:pt-0">
+                <div className="h-full">
+                    {children}
+                </div>
+            </main>
+        </AuthContextProvider>
     );
 };
 

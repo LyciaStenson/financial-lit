@@ -1,5 +1,6 @@
 import { cn  } from "@/lib/utils"
 import { SiderbarItem } from "./siderbar-item";
+import { Rankbar } from "./rankbar";
 
 type Props = {
     className?: string;
@@ -18,6 +19,9 @@ export const Sidebar = ({ className }: Props) => {
                 label="Leaderboard"
                 iconSrc="./astronaut.svg"
                 href="/leaderboard"
+            />
+            <Rankbar
+                points={1000}
             />
         </div>
     );

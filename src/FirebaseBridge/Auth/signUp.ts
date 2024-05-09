@@ -15,5 +15,5 @@ export default async function signUp(email: string, password: string) {
     error = e; // Catch and store any error that occurs during sign-up
   }
 
-  return { result, error }; // Return the sign-up result and error (if any)
+  return result; // Return the sign-up result and error (if any)
 }

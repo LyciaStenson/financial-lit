@@ -21,7 +21,9 @@ const config = {
       colors: {
         'moneyconf-gold': '#ffd400',
         'moneyconf-purple': '#390176',
-        'moneyconf-grey': '#cccccc',
+        'moneyconf-grey-old': '#cccccc',
+        'moneyconf-grey': '#f2f2f2',
+        'moneyconf-grey-border': '#e6e6e6',
         'moneyconf-green': '#8cc63f',
         'moneyconf-blue' : '#000072',
         border: "hsl(var(--border))",

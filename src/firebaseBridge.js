@@ -53,12 +53,12 @@ export function returnAuth(){
     return auth;
 }
 
-export function getCurrentUser() {
-    if (hasUserBeemCreated) {
-        if (currentUser.id != null)
-            return currentUser;
-    }
-}
+//export function getCurrentUser() {
+//    if (hasUserBeemCreated) {
+//        if (currentUser.id != null)
+//            return currentUser;
+//    }
+//}
 if(auth != undefined){
     onAuthStateChanged(auth, function (user) {
         if (user) {

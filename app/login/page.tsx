@@ -1,34 +1,65 @@
 'use client'
+import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import signIn from "@/src/FirebaseBridge/Auth/signIn";
+import getData from "@/src/FirebaseBridge/firestore/getData";
 import { useRouter } from 'next/navigation';
-import { useState } from "react";
+import { stringify } from "querystring";
+import { useEffect, useState } from "react";
+
+const _state = history.state;
 
 function Page(): JSX.Element {
-  const [ username, setUsername ] = useState( '' );
-  const [ password, setPassword ] = useState( '' );
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
 
+  useEffect(() => {
+    if (_state) {
+      signInWhenEnteredCode();
+    }
+  }, [username, password]); // Include 'router' in the dependency array to resolve eslint warning
+
+  async function signInWhenEnteredCode() {
+    setUsername(_state.email);
+    setPassword("23@f1-*1HA%^3(DA)");
+
+    // Attempt to sign in with provided email and password
+    const { result, error } = await signIn(username, password);
+
+    if (error) {
+      // Display and log any sign-in errors
+      console.log(error);
+      return;
+    }
+
+    let data = (await getData("users/", result!.user.uid)).result?.data();
+    setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+
+    // Sign in successful
+    router.push("/home");
+  }
+
   // Handle form submission
-  const handleForm = async ( event: { preventDefault: () => void } ) => {
+  const handleForm = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     // Attempt to sign in with provided email and password
-    const { result, error } = await signIn( username, password );
+    const { result, error } = await signIn(username, password);
 
-    if ( error ) {
+    if (error) {
       // Display and log any sign-in errors
-      console.log( error );
+      console.log(error);
       return;
     }
 
     // Sign in successful
-    console.log( result );
+    console.log(result);
 
     // Redirect to the admin page
     // Typically you would want to redirect them to a protected page an add a check to see if they are admin or 
     // create a new page for admin
 
-    router.push( "/gamescreen" );
+    router.push("/gamescreen");
   }
 
   return (
@@ -41,7 +72,7 @@ function Page(): JSX.Element {
               Email
             </label>
             <input
-              onChange={( e ) => setUsername( e.target.value + "@moneyconfidence.co.uk" )}
+              onChange={(e) => setUsername(e.target.value + "@moneyconfidence.co.uk")}
               required
               placeholder="12345678"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -52,7 +83,7 @@ function Page(): JSX.Element {
               Password
             </label>
             <input
-              onChange={( e ) => setPassword( e.target.value )}
+              onChange={(e) => setPassword(e.target.value)}
               required
               type="password"
               name="password"
