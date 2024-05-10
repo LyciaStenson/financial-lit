@@ -1,10 +1,25 @@
 // RegistrationForm.js
+'use client'
+
 import React, { FormEventHandler, useState } from 'react';
 import { signInWithEmail } from '@/src/firebaseBridge';
+
+import { useRouter } from 'next/router';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const router = useRouter();
+
+  const { query: 
+    id,
+  } = router;
+
+  const prop = {
+    id,
+  }
+  console.log(prop.id);
 
   const handleRegister = async () => {
     signInWithEmail(username, password); 

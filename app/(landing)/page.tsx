@@ -1,6 +1,6 @@
 'use client'
 
-import { useSearchParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   InputOTP,
@@ -9,29 +9,43 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
+import signIn from "@/src/FirebaseBridge/Auth/signIn"
+import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser"
+import getData from "@/src/FirebaseBridge/firestore/getData"
+import { SignInSuspenseWrapper  } from "@/app/(landing)/SignInSuspenseWrapper"
 
 export default function Home() {
   const router = useRouter();
   const [value, setValue] = useState("");
 
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  async function signInWhenEnteredCode(id:string) {
+    const username = id + "@moneyconfidence.co.uk";
+    const password = "23@f1-*1HA%^3(DA)";
 
-  useEffect(()=>{
-    if(id!){
-      history.pushState({ email: id + "@moneyconfidence.co.uk" }, "", "/login");
-    router.push("/login");
+    // Attempt to sign in with provided email and password
+    const { result, error } = await signIn(username, password);
+
+    if (error) {
+      // Display and log any sign-in errors
+      console.log(error);
+      return;
     }
-  });
 
-  function handleClick() {
-    history.pushState({ email: value + "@moneyconfidence.co.uk" }, "", "/login");
-    router.push("/login");
+    let data = (await getData("users/", result!.user.uid)).result?.data();
+    setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+
+    // Sign in successful
+    router.push("/home");
+  }
+
+  function handleClick(value:string) {
+    signInWhenEnteredCode(value);
   }
 
   return (
     <div className="p-4 space-y-4 flex flex-col">
+      <SignInSuspenseWrapper/>
       <Button variant="primary" shape="default" onClick={() => router.push('/home')}>
         Get Started
       </Button>
@@ -59,10 +73,10 @@ export default function Home() {
       ) : (
         <>
           You entered: {value}
-          <Button variant={"primary"} onClick={() => handleClick()}>Sign In!</Button>
-    </>
-  )
-}
+          <Button variant={"primary"} onClick={() => handleClick(value)}>Sign In!</Button>
+        </>
+      )
+      }
     </div >
   )
 }

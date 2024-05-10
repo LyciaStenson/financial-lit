@@ -2,11 +2,8 @@
 import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import signIn from "@/src/FirebaseBridge/Auth/signIn";
 import getData from "@/src/FirebaseBridge/firestore/getData";
-import { useRouter } from 'next/navigation';
-import { stringify } from "querystring";
+import { useRouter  } from 'next/navigation';
 import { useEffect, useState } from "react";
-
-const _state = history.state;
 
 function Page(): JSX.Element {
   const [username, setUsername] = useState('');
@@ -14,30 +11,10 @@ function Page(): JSX.Element {
   const router = useRouter();
 
   useEffect(() => {
-    if (_state) {
-      signInWhenEnteredCode();
-    }
-  }, [username, password]); // Include 'router' in the dependency array to resolve eslint warning
-
-  async function signInWhenEnteredCode() {
-    setUsername(_state.email);
-    setPassword("23@f1-*1HA%^3(DA)");
-
-    // Attempt to sign in with provided email and password
-    const { result, error } = await signIn(username, password);
-
-    if (error) {
-      // Display and log any sign-in errors
-      console.log(error);
-      return;
-    }
-
-    let data = (await getData("users/", result!.user.uid)).result?.data();
-    setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
-
-    // Sign in successful
-    router.push("/home");
-  }
+    //if (_state) {
+    //  signInWhenEnteredCode();
+    //}
+  }); // Include 'router' in the dependency array to resolve eslint warning
 
   // Handle form submission
   const handleForm = async (event: { preventDefault: () => void }) => {
