@@ -11,7 +11,7 @@ type Props = {
     href: string;
 }
 
-export const TopBarItem = ({
+export const TopBarButton = ({
     alt,
     iconSrc,
     href,
