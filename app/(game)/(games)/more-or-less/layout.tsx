@@ -2,7 +2,7 @@ type Props = {
     children: React.ReactNode;
 }
 
-const DragGameLayout = ({ children }: Props) => {
+const MoreOrLessGameLayout = ({ children }: Props) => {
     return (
         <main>
             <div>
@@ -12,4 +12,4 @@ const DragGameLayout = ({ children }: Props) => {
     )
 };
 
-export default DragGameLayout;
+export default MoreOrLessGameLayout;

@@ -1,5 +1,5 @@
 type Props = {
-    points: number;
+    points: number | undefined;
 }
 
 export const Points = ({
@@ -7,7 +7,7 @@ export const Points = ({
 }: Props) => {
     return (
         <h1 className="text-moneyconf-blue font-extrabold text-3xl">
-            {points.toLocaleString()}
+            {points?.toLocaleString()}
         </h1>
     )
 }

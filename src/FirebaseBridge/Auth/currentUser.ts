@@ -4,6 +4,7 @@ export interface currentUser {
     dispalyName: string | null;
     role?: string;
     score?: number;
+    streak?: number;
 }
 
 let user: currentUser;
@@ -19,7 +20,8 @@ export function setUserDetails(uid:string | null, id:string, name:string | null,
         emailID:id,
         dispalyName:name,
         role:r,
-        score:0
+        score:0,
+        streak:0
     }
 
     return newUser;
@@ -36,15 +38,18 @@ export function setCurrentUser(uid:string | null, id:string, name:string | null,
             emailID:id, //The id which is randomly generated to the email
             dispalyName: name,
             role: r,
-            score: 0
+            score: 0,
+            streak:0
         }
     } else {
         user = {
-            UUID:id,
+            UUID:uid,
             emailID:id, //The id which is randomly generated to the email
             dispalyName: name,
             role: r,
-            score: 0
+            score: 0,
+            streak:0
         }
+        console.log("Admin");
     }
 }

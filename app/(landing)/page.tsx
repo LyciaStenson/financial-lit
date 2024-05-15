@@ -14,6 +14,7 @@ import signIn from "@/src/FirebaseBridge/Auth/signIn"
 import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser"
 import getData from "@/src/FirebaseBridge/firestore/getData"
 import { SignInSuspenseWrapper  } from "@/app/(landing)/SignInSuspenseWrapper"
+import { DocumentData, DocumentSnapshot } from "firebase/firestore"
 
 export default function Home() {
   const router = useRouter();
@@ -32,8 +33,11 @@ export default function Home() {
       return;
     }
 
-    let data = (await getData("users/", result!.user.uid)).result?.data();
-    setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+    await getData("users/", result!.user.uid).then((value:{result:DocumentSnapshot<DocumentData, DocumentData> | null}) => {
+      let data = value.result?.data();
+      console.log(data);
+      setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+    });
 
     // Sign in successful
     router.push("/home");

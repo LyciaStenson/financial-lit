@@ -1,5 +1,5 @@
-import { Sidebar } from "@/components/sidebar";
-import { Topbar } from "@/components/topbar";
+import { SideBar } from "@/components/side-bar";
+import { TopBar } from "@/components/top-bar";
 import { AuthContextProvider } from "../game-firebase/pageLoading";
 
 type Props = {

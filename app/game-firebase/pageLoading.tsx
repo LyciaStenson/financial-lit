@@ -2,7 +2,10 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { getCurrentApp } from '@/src/FirebaseBridge/firebaseApp';
-import { setCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
+import { getCurrentUser, setCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
+import getData from '@/src/FirebaseBridge/firestore/getData';
+import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
+import { notFound } from 'next/navigation';
 
 // Initialize Firebase auth instance
 const auth = getAuth(getCurrentApp());
@@ -26,13 +29,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
         // Subscribe to the authentication state changes
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in
                 setUser(user);
 
-                //Split email
-                let name = user.email?.split("@").at(0)
-
-                setCurrentUser(user.uid, name!, null, undefined);
+                getData("users/", user.uid).then((value: { result: DocumentSnapshot<DocumentData, DocumentData> | null }) => {
+                    let data = value.result?.data();
+                    setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+                });
             } else {
                 // User is signed out
                 setUser(null);

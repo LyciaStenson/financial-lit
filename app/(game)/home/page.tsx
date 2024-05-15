@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Banner } from "./banner";
 import { LessonButton } from "./lesson-button";
 import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
+import randomBannerNames from "@/src/randomBannerNames";
 
 const GamePage = () => {
     const [currentUser, setCurrentUser] = useState(getCurrentUser()); 
@@ -16,7 +17,7 @@ const GamePage = () => {
     return (
         <div>
             <div className="gap-[48px] px-6">
-                <Banner title={`Welcome ${ currentUser?.dispalyName } you are on day 6`} description="You're back for more I see... Okay, let's do this!"></Banner>
+                <Banner title={`Welcome ${ currentUser?.dispalyName } you are on day 6`} description={randomBannerNames()}></Banner>
             </div>
         <div className="flex flex-col items-center justify-center relative py-6 space-y-4">
             <LessonButton

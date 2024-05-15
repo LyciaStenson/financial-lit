@@ -2,6 +2,7 @@
 import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import signIn from "@/src/FirebaseBridge/Auth/signIn";
 import getData from "@/src/FirebaseBridge/firestore/getData";
+import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import { useRouter  } from 'next/navigation';
 import { useEffect, useState } from "react";
 
@@ -9,13 +10,7 @@ function Page(): JSX.Element {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
-
-  useEffect(() => {
-    //if (_state) {
-    //  signInWhenEnteredCode();
-    //}
-  }); // Include 'router' in the dependency array to resolve eslint warning
-
+  
   // Handle form submission
   const handleForm = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -29,14 +24,15 @@ function Page(): JSX.Element {
       return;
     }
 
-    // Sign in successful
-    console.log(result);
-
-    // Redirect to the admin page
-    // Typically you would want to redirect them to a protected page an add a check to see if they are admin or 
-    // create a new page for admin
-
-    router.push("/gamescreen");
+    await getData("users/", result!.user.uid).then((value:{result:DocumentSnapshot<DocumentData, DocumentData> | null}) => {
+      let data = value.result?.data();
+      setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+      if(data?.role == "admin"){
+        router.push("\admin");
+      }else if(data?.role == "teacher"){
+        console.log("Teacher");
+      }
+    });          
   }
 
   return (

@@ -22,5 +22,5 @@ export default async function getData(collection:string, id:string) {
   }
 
   // Return the result and error as an object
-  return { result, error };
+  return { result };
 }

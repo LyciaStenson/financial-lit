@@ -1,16 +1,19 @@
 'use client';
 
-import { setUserDetails, getCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
-import React, { useState } from 'react';
+import { setUserDetails, getCurrentUser, currentUser, setCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
+import React, { use, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { setQuestionData } from '@/src/firebaseBridge';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { notFound } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
 import setData from '@/src/FirebaseBridge/firestore/setData';
 import signUp from '@/src/FirebaseBridge/Auth/signUp';
-import { User, UserCredential } from 'firebase/auth';
+import { UserCredential } from 'firebase/auth';
+import getData from '@/src/FirebaseBridge/firestore/getData';
+import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
+import { useAuthContext } from '../game-firebase/pageLoading';
 
 //import QRCode from "react-qr-code";
 
@@ -23,59 +26,76 @@ const AdminPage = () => {
     const [question, setQuestion] = useState('');
     const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
     const [studentName, setStudentName] = useState('');
-    
-    //Is Admin
-    if (getCurrentUser().role == 'admin') {
+    const { user } = useAuthContext() as { user: any }; // Use 'as' to assert the type as { user: any }
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    // Access the user object from the authentication context
+    // const { user } = useAuthContext();
+    const router = useRouter();
+
+
+    useEffect(()=>{
+        console.log(user);
+        getData("users/", user.uid).then((value: { result: DocumentSnapshot<DocumentData, DocumentData> | null }) => {
+            let data = value.result?.data();
+            setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+            console.log(data);
+            if(/^\d+$/.test(data?.emailID)){
+                router.push("\home");   
+                console.log("Hello");
+            }else{
+                setIsAdmin(true);
+            }
+        });
+    });
+
+    if(isAdmin){
         const handleQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
             setQuestion(event.target.value);
         };
-
+    
         const handleStudentName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
             setStudentName(event.target.value);
         };
-
+    
         const handleChoiceAnswerChange = (index: number, event: React.ChangeEvent<HTMLTextAreaElement>) => {
             const updatedChoices = [...choices];
             updatedChoices[index].Answer = event.target.value;
             setChoices(updatedChoices);
         };
-
+    
         const handleChoiceResultChange = (index: number, value: boolean) => {
             const updatedChoices = [...choices];
             updatedChoices[index].Result = value;
             setChoices(updatedChoices);
         };
-
+    
         const handleAddChoice = () => {
             setChoices(prevChoices => [...prevChoices, { Answer: '', Result: false }]);
         };
-
+    
         const handleAddQuestion = () => {
             setQuestionData(question, choices);
         };
-
+    
         const handleAddUser = () => {
-            let emailId:string = randomIntFromInterval().toString();
-            let email:string = emailId + "@moneyconfidence.co.uk";
-            signUp(email, "23@f1-*1HA%^3(DA)").then((result:UserCredential | null) => {
-                let user = setUserDetails( result!.user.uid, emailId, studentName, "student");
+            if (studentName == null || studentName == undefined) {
+                console.log("Student needs a fucking name!");
+                return;
+            }
+    
+            let emailId: string = randomIntFromInterval().toString();
+            let email: string = emailId + "@moneyconfidence.co.uk";
+            signUp(email, "23@f1-*1HA%^3(DA)").then((result: UserCredential | null) => {
+                let user = setUserDetails(result!.user.uid, emailId, studentName, "student");
                 setData("users/", user.UUID!, user);
             });
         }
-
+    
         return (
             <div>
                 <div className="grid w-3/5 gap-2 p-4">
                     <h1 className='text-3xl'>Admin Page</h1>
-
-                    {/*
-                        <QRCode
-                        size={400}
-                        value={"https://uniglos.github.io/RT-Financial-Lit"}
-                            style={{ height: "auto", maxWidth: "10%", width: "10%" }}
-                        />
-                */}
-
                     <h1 className='text-xl'>Add Question</h1>
                     <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
                     {choices.map((choice, index) => (
@@ -97,8 +117,6 @@ const AdminPage = () => {
                 </div>
             </div>
         );
-    } else {
-        return notFound();
     }
 };
 

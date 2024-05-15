@@ -6,13 +6,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type Props = {
-    alt: string;
+    label: string;
     iconSrc: string;
     href: string;
 }
 
-export const TopBarItem = ({
-    alt,
+export const SideBarItem = ({
+    label,
     iconSrc,
     href,
 }: Props) => {
@@ -21,17 +21,19 @@ export const TopBarItem = ({
 
     return (
         <Button
-            variant={"ghost"}
-            className="px-6"
+            variant={active ? "primary" : "default"}
+            className="justify-start h-[52px]"
             asChild
         >
-            <Link href={href} className="relative">
+            <Link href={href}>
                 <Image
                     src={iconSrc}
-                    alt={alt}
-                    width={45}
-                    height={45}
+                    alt={label}
+                    className="mr-5"
+                    width={32}
+                    height={32}
                 />
+                {label}
             </Link>
         </Button>
     )

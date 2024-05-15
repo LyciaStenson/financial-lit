@@ -1,5 +1,8 @@
 'use client'
+import { setUserDetails } from "@/src/FirebaseBridge/Auth/currentUser";
 import signUp from "@/src/FirebaseBridge/Auth/signUp";
+import setData from "@/src/FirebaseBridge/firestore/setData";
+import { UserCredential } from "firebase/auth";
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
 
@@ -13,13 +16,12 @@ function Page(): JSX.Element {
     event.preventDefault();
 
     // Attempt to sign up with provided email and password
-    const result = await signUp( email, password );
-
-    // Sign up successful
-    console.log( result );
-
+    const result = await signUp( email + "@moneyconfidence.co.uk", password ).then((result:UserCredential | null) => {
+      let user = setUserDetails( result!.user.uid, email + "@moneyconfidence.co.uk", email, "admin");
+      setData("users/", user.UUID!, user);
+    });
     // Redirect to the admin page
-    router.push( "/gamescreen" );
+    router.push( "/admin" );
   }
 
   return (
@@ -32,7 +34,7 @@ function Page(): JSX.Element {
               Email
             </label>
             <input
-              onChange={( e ) => setEmail( e.target.value + "@moneyconfidence.co.uk" )}
+              onChange={( e ) => setEmail( e.target.value)}
               required
               placeholder="Enter the Users code here!"
               className="w-full border border-gray-300 rounded px-3 py-2"

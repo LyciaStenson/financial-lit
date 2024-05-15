@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 type Props = {
-    streak: number;
+    streak: number | undefined;
 }
 
 export const StreakIcon = ({
@@ -18,7 +18,7 @@ export const StreakIcon = ({
                 height={45}
             />
             <h1 className="text-moneyconf-gold font-extrabold text-3xl flex items-center justify-center">
-                {streak.toLocaleString()}
+                {streak?.toLocaleString()}
             </h1>
         </div>
 
