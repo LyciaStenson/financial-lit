@@ -1,3 +1,5 @@
+'use client'
+
 import getRandomNumber from "./random/randomNumberGenerator"
 
 export default function getBannerTitleFromFirebase() : string{

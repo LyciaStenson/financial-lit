@@ -1,5 +1,7 @@
+import firebase from "firebase/compat/app";
 import {getCurrentApp} from "../firebaseApp";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { currentUser } from "../Auth/currentUser";
 
 // Get the Firestore instance
 const db = getFirestore(getCurrentApp());
@@ -23,4 +25,24 @@ export default async function getData(collection:string, id:string) {
 
   // Return the result and error as an object
   return { result };
+}
+
+export async function getUsersCollection(path: string): Promise<currentUser[]> {
+  const querySnapshot = await getDocs(collection(db, path));
+  return querySnapshot.docs.map(doc =>{
+    const data = doc.data();
+    return{
+      UUID:data.UUID,
+      emailID:data.emailID,
+      dispalyName:data.dispalyName,
+      role:data.role,
+      score:data.score,
+      streak:data.streak,
+    }
+  });
+}
+
+export async function getCollection(path: string)  {
+  const querySnapshot = await getDocs(collection(db, "cities"));
+  return querySnapshot;
 }

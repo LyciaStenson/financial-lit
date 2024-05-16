@@ -8,8 +8,8 @@ import randomBannerNames from "@/src/randomBannerNames";
 
 export const TopBar = () => {
     return (
-        <div className="w-full h-[90px] bg-white fixed z-50">
-            <div className={"gap-[48px] max-w-[850px] mx-auto flex items-center justify-center space-x-4 top-0"}>
+        <div className="w-full h-[90px] fixed z-50 bg-white">
+            <div className={"px-2 max-w-[600px] h-full mx-auto flex items-center justify-center space-x-10"}>
             <TopBarButton
                 alt="Home"
                 iconSrc="./astronaut-peace.svg"
@@ -22,10 +22,10 @@ export const TopBar = () => {
                 points={1000}
             />
             <Points
-                points={getCurrentUser()?.score}
+                //points={getCurrentUser()?.score}
+                points={1500}
             />
             </div>
         </div>
-
     );
 };

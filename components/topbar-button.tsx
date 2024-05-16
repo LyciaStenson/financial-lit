@@ -29,8 +29,9 @@ export const TopBarButton = ({
                 <Image
                     src={iconSrc}
                     alt={alt}
-                    width={45}
-                    height={45}
+                    width={0}
+                    height={0}
+                    className="w-auto h-[70px]"
                 />
             </Link>
         </Button>

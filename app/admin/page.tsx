@@ -21,6 +21,7 @@ function randomIntFromInterval() {
     return Math.floor(Math.random() * 70000000);
 }
 
+
 const AdminPage = () => {
 
     const [question, setQuestion] = useState('');
@@ -47,7 +48,7 @@ const AdminPage = () => {
                 setIsAdmin(true);
             }
         });
-    });
+    }); 
 
     if(isAdmin){
         const handleQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -89,6 +90,7 @@ const AdminPage = () => {
             signUp(email, "23@f1-*1HA%^3(DA)").then((result: UserCredential | null) => {
                 let user = setUserDetails(result!.user.uid, emailId, studentName, "student");
                 setData("users/", user.UUID!, user);
+                router.push("/admin-downloadPage");
             });
         }
     

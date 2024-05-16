@@ -11,7 +11,7 @@ const GameLayout = ({ children }: Props) => {
         <TopBar/>
         {/*<Sidebar className="hidden md:flex"></Sidebar>*/}
         <main className="h-full pt-[90px]"> {/*md:pl-[256px] md:pt-0*/}
-            <div className="max-w-[850px] mx-auto h-full flex justify-center">
+            <div className="max-w-[600px] mx-auto h-full justify-center">
                 {children}
             </div>
         </main>

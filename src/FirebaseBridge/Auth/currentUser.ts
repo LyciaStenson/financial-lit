@@ -50,6 +50,6 @@ export function setCurrentUser(uid:string | null, id:string, name:string | null,
             score: 0,
             streak:0
         }
-        console.log("Admin");
+        console.log("Admin ", user);
     }
 }
