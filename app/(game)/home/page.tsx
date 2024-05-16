@@ -25,6 +25,7 @@ const GamePage = () => {
                     <LessonButton
                         day={index + 1}
                         href={lessonHref}
+                        key={index}
                     />
                 ))}
             </div>
