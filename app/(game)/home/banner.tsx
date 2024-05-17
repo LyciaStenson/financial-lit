@@ -8,7 +8,7 @@ export const Banner = ({
     description,
 }: Props) => {
     return (
-        <div className="flex w-full rounded-2xl justify-center text-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
+        <div className="flex max-w-[450px] rounded-2xl justify-center text-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
             <div className="space-y-1 z-10">
                 <h1 className="text-lg font-extrabold">
                     {title}

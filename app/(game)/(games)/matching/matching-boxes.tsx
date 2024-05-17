@@ -8,7 +8,7 @@ type Props = {
 }
 const MatchingBoxes = ({one, two, three, four}: Props) => {
     return (
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-3">
                 <MatchingButton text={one}/>
                 <MatchingButton text={two}/>
                 <MatchingButton text={three}/>

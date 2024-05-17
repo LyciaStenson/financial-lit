@@ -12,7 +12,8 @@ export const LessonButton = ({
     day,
     href,
 }: Props) => {
-    let indentation = (0.5 - Math.cos((day-1) * Math.PI/6) * 0.5) * 325;
+    let indentation = (0.5 - Math.cos((day-1) * Math.PI/6) * 0.5) * 265;
+    //let indentation = 30;
 
     const router = useRouter();
 

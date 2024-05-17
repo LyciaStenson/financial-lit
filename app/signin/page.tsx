@@ -20,6 +20,8 @@ function Page(): JSX.Element {
       let user = setUserDetails( result!.user.uid, email + "@moneyconfidence.co.uk", email, "admin");
       setData("users/", user.UUID!, user);
     });
+
+    console.log(result);
     // Redirect to the admin page
     router.push( "/admin" );
   }
@@ -27,7 +29,7 @@ function Page(): JSX.Element {
   return (
     <div className="flex justify-center items-center h-screen text-black">
       <div className="w-96 bg-white rounded shadow p-6">
-        <h1 className="text-3xl font-bold mb-6">Registration</h1>
+        <h1 className="text-3xl font-bold mb-6">Create an Account</h1>
         <form onSubmit={handleForm} className="space-y-4">
           <div>
             <label htmlFor="email" className="block mb-1 font-medium">

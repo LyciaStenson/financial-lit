@@ -12,7 +12,7 @@ import {
 import { useState, useEffect, Suspense } from "react"
 import signIn from "@/src/FirebaseBridge/Auth/signIn"
 import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser"
-import getData from "@/src/FirebaseBridge/firestore/getData"
+import { getData } from "@/src/FirebaseBridge/firestore/getData"
 import { SignInSuspenseWrapper  } from "@/app/(landing)/SignInSuspenseWrapper"
 import { DocumentData, DocumentSnapshot } from "firebase/firestore"
 

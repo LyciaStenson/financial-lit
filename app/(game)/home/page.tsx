@@ -16,7 +16,7 @@ const GamePage = () => {
         }, [getCurrentUser()]);
     
     return (
-        <div>
+        <div className="">
             <Banner title={`${ currentUser?.dispalyName }’s Money Confidence Month: Day 6`} description={"You’re back for more I see... Okay, let’s do this"} />
             <div className="flex flex-col items-start relative py-4 space-y-2">
                 {lessonHrefs.map((lessonHref, index) => (

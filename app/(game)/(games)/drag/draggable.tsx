@@ -17,7 +17,7 @@ const Draggable: React.FC<IDraggable> = (props) => {
         <div
             ref={ setNodeRef }
             style={{ transform: CSS.Translate.toString(transform) }}
-            className="w-44 space-y-5 flex flex-col items-center touch-none"
+            className="space-y-2 flex flex-col items-center touch-none"
             {...attributes}
             {...listeners}
         >
@@ -26,9 +26,9 @@ const Draggable: React.FC<IDraggable> = (props) => {
                 alt="Doctor"
                 width={0}
                 height={0}
-                className="w-auto h-48"
+                className="w-auto h-32"
             />
-            <h3 className="text-3xl text-moneyconf-purple font-extrabold">{props.name}</h3>
+            <h3 className="text-2xl text-moneyconf-purple font-extrabold">{props.name}</h3>
         </div>
     )
 }

@@ -10,7 +10,6 @@ export interface currentUser {
 let user: currentUser;
 
 export function getCurrentUser() {
-    console.log(user);
     return user;
 }
 
@@ -50,6 +49,5 @@ export function setCurrentUser(uid:string | null, id:string, name:string | null,
             score: 0,
             streak:0
         }
-        console.log("Admin ", user);
     }
 }

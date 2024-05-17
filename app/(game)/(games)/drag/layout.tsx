@@ -4,7 +4,7 @@ type Props = {
 
 const DragGameLayout = ({ children }: Props) => {
     return (
-        <main>
+        <main className="max-w-[400px] mx-auto h-full justify-center">
             {children}
         </main>
     )

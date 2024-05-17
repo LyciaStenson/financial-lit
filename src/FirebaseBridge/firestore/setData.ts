@@ -1,8 +1,8 @@
-import { getCurrentApp } from "../firebaseApp";
+import { getFirestoreDatabase } from "../firebaseApp";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 // Get the Firestore instance
-const db = getFirestore(getCurrentApp());
+const db = getFirestoreDatabase();
 
 // Function to add data to a Firestore collection
 export default async function setData(

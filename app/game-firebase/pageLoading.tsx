@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { getCurrentApp } from '@/src/FirebaseBridge/firebaseApp';
 import { getCurrentUser, setCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
-import getData from '@/src/FirebaseBridge/firestore/getData';
+import { getData } from '@/src/FirebaseBridge/firestore/getData';
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { notFound } from 'next/navigation';
 

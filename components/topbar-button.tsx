@@ -25,7 +25,7 @@ export const TopBarButton = ({
             size={"topBar"}
             asChild
         >
-            <Link href={href} className="relative">
+            <Link href={href}>
                 <Image
                     src={iconSrc}
                     alt={alt}

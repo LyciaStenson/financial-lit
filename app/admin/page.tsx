@@ -10,12 +10,9 @@ import { Switch } from '@/components/ui/switch';
 import { notFound, useRouter } from 'next/navigation'
 import setData from '@/src/FirebaseBridge/firestore/setData';
 import signUp from '@/src/FirebaseBridge/Auth/signUp';
-import { UserCredential } from 'firebase/auth';
-import getData from '@/src/FirebaseBridge/firestore/getData';
-import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
+import { User, UserCredential } from 'firebase/auth';
+import { getData } from '@/src/FirebaseBridge/firestore/getData';
 import { useAuthContext } from '../game-firebase/pageLoading';
-
-//import QRCode from "react-qr-code";
 
 function randomIntFromInterval() {
     return Math.floor(Math.random() * 70000000);
@@ -27,28 +24,23 @@ const AdminPage = () => {
     const [question, setQuestion] = useState('');
     const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
     const [studentName, setStudentName] = useState('');
-    const { user } = useAuthContext() as { user: any }; // Use 'as' to assert the type as { user: any }
+    const { user } = useAuthContext() as { user: User }; // Use 'as' to assert the type as { user: any }
     const [isAdmin, setIsAdmin] = useState(false);
 
     // Access the user object from the authentication context
     // const { user } = useAuthContext();
     const router = useRouter();
-
-
-    useEffect(()=>{
-        console.log(user);
-        getData("users/", user.uid).then((value: { result: DocumentSnapshot<DocumentData, DocumentData> | null }) => {
+    
+    if(user){
+        getData("users/", user.uid).then((value) => {
             let data = value.result?.data();
-            setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
-            console.log(data);
-            if(/^\d+$/.test(data?.emailID)){
-                router.push("\home");   
-                console.log("Hello");
-            }else{
+            if(data?.role == "admin"){
                 setIsAdmin(true);
+            }else{
+                return router.push("/home");
             }
-        });
-    }); 
+        })
+    }
 
     if(isAdmin){
         const handleQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -86,7 +78,7 @@ const AdminPage = () => {
             }
     
             let emailId: string = randomIntFromInterval().toString();
-            let email: string = emailId + "@moneyconfidence.co.uk";
+            let email: string = emailId + "@moneyconfidence.student..co.uk";
             signUp(email, "23@f1-*1HA%^3(DA)").then((result: UserCredential | null) => {
                 let user = setUserDetails(result!.user.uid, emailId, studentName, "student");
                 setData("users/", user.UUID!, user);

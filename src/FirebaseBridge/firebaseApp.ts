@@ -3,7 +3,8 @@
     This will get called before any other firebase related functions
 */
 
-import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
+import { getFirestore, initializeFirestore, persistentLocalCache } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCVKpBIpYpehl0RoE7vAZRxGL-U1rHOt9A",
@@ -17,9 +18,18 @@ const firebaseConfig = {
 
 let currentApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
-export function createFirebaseApp(){
-}
+initializeFirestore(currentApp, {localCache: persistentLocalCache()});
+
+let db = getFirestore();
 
 export function getCurrentApp(){
     return currentApp;
 }
+
+export function getFirestoreDatabase(){
+    return db;
+}
+
+
+
+// Enable offline persistence

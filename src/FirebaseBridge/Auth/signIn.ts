@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { getCurrentApp } from "../firebaseApp";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { setCurrentUser } from "./currentUser";
-import getData from "../firestore/getData";
+import { getData } from "../firestore/getData";
 
 // Get the authentication instance using the Firebase app
 const auth = getAuth(getCurrentApp());

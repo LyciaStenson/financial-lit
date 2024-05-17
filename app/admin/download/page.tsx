@@ -1,7 +1,7 @@
 'use client';
 
 import { currentUser, getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
-import { getCollection, getUsersCollection } from "@/src/FirebaseBridge/firestore/getData";
+import { getCollection } from "@/src/FirebaseBridge/firestore/getData";
 import { useEffect, useState } from "react";
 import { useQRCode } from 'next-qrcode';
 
@@ -10,24 +10,18 @@ const DownloadPage = () => {
     const { Canvas } = useQRCode();
 
     let tempUsers: currentUser[] = [];
-    let index:number = 0;
 
     // Now you can use the users array in your component 
     useEffect(() => {
-        if(index < 1){
-            getUsersCollection("users/").then((users: currentUser[]) => {
-                setUsers(users);
-                users.forEach((user) => {
-                    if (user.role == "student") {
-                        tempUsers.push(user);
-                        index++;
-                        console.log(index);
-                    }
-                });
-            
-                setUsers(tempUsers);
-            })
-        }
+        getCollection("users/").then((users: currentUser[]) => {
+            setUsers(users);
+            users.forEach((user) => {
+                if (user.role == "student") {
+                    tempUsers.push(user);
+                }
+            });
+            setUsers(tempUsers);
+        })
     }, []);
 
     return (
@@ -43,7 +37,7 @@ const DownloadPage = () => {
                                     errorCorrectionLevel: 'M',
                                     margin: 5,
                                     scale: 5,
-                                    width: 150,
+                                    width: 70,
                                     color: {
                                         dark: '#390176',
                                         light: '#ffffff',
