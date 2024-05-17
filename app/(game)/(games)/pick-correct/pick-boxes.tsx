@@ -6,7 +6,7 @@ type Props = {
 }
 const PickBoxes = ({one, two}: Props) => {
     return (
-            <div className="flex flex-row space-x-56">
+            <div className="flex flex-row space-x-28">
                 <PickButton text={one}/>
                 <PickButton text={two}/>
             </div>  

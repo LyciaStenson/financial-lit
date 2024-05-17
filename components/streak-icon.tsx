@@ -10,15 +10,15 @@ export const StreakIcon = ({
     streak,
 }: Props) => {
     return (
-        <div className="flex flex-row relative items-center space-x-3">
+        <div className="flex flex-row relative items-center space-x-1">
             <Image
                 src={"./lightning.svg"}
                 alt={"Streak"}
                 width={0}
                 height={0}
-                className="w-auto h-[70px]"
+                className="w-auto h-[60px]"
             />
-            <h1 className="text-moneyconf-gold font-extrabold text-3xl flex items-center justify-center">
+            <h1 className="text-moneyconf-gold font-extrabold text-2xl flex items-center justify-center">
                 {streak?.toLocaleString()}
             </h1>
         </div>

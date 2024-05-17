@@ -9,7 +9,7 @@ import randomBannerNames from "@/src/randomBannerNames";
 export const TopBar = () => {
     return (
         <div className="w-full h-[90px] fixed z-50 bg-white">
-            <div className={"px-2 max-w-[600px] h-full mx-auto flex items-center justify-center space-x-10"}>
+            <div className={"max-w-[450] h-full mx-auto flex items-center justify-center space-x-2"}>
             <TopBarButton
                 alt="Home"
                 iconSrc="./astronaut-peace.svg"
@@ -19,11 +19,11 @@ export const TopBar = () => {
                 streak={5}
             />
             <RankBar
-                points={1000}
+                points={12551}
             />
             <Points
                 //points={getCurrentUser()?.score}
-                points={1500}
+                points={12551}
             />
             </div>
         </div>

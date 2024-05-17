@@ -87,7 +87,7 @@ const config = {
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
+    require("tailwindcss-animated"),
     require("@designbycode/tailwindcss-stripes")
   ],
 } satisfies Config

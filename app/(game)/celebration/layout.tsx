@@ -2,7 +2,7 @@ type Props = {
     children: React.ReactNode;
 }
 
-const DragGameLayout = ({ children }: Props) => {
+const CelebrationLayout = ({ children }: Props) => {
     return (
         <main>
             {children}
@@ -10,4 +10,4 @@ const DragGameLayout = ({ children }: Props) => {
     )
 }
 
-export default DragGameLayout;
+export default CelebrationLayout;

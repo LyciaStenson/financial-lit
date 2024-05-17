@@ -5,9 +5,9 @@ import PickBoxes from "./pick-boxes";
 
 const OrderGamePage = () => {
     return (
-        <div className="flex flex-col space-y-5 border">
+        <div className="flex flex-col space-y-5 border p-1">
             <TopBar />
-            <h1 className="text-3xl font-extrabold text-moneyconf-purple items-center justify-center text-center ">
+            <h1 className="text-2xl font-extrabold text-moneyconf-purple items-center justify-center text-center">
                 Tap the boxes to put it in order below
             </h1>
             <div className="flex flex-row space-x-10 items-center justify-center text-center ">
@@ -16,7 +16,7 @@ const OrderGamePage = () => {
                     alt="Astronaut Laptop"
                     width={0}
                     height={0}
-                    className="w-32 h-auto"
+                    className="w-20 h-auto"
                 />
                 <div className="text-2xl font-extrabold text-moneyconf-purple w-70 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
                     <h2 className="text-2xl">Order the words!</h2>
@@ -29,12 +29,12 @@ const OrderGamePage = () => {
             </div>
             
             <div  className="flex space-y-2 space-x-1 font-extrabold text-moneyconf-purple p-3 border-[2.5px] bg-moneyconf-grey place-items-start justify-start text-start px-2">
-                <h1 className="text-3xl font-extrabold text-moneyconf-purple space-x-10 px-3">
+                <h1 className="text-xl font-extrabold text-moneyconf-purple space-x-10 px-3">
                     APR =   
                 </h1>
-                <h3 className="underline"> {"Place holder for when text selected"} </h3>
-                <h3 className="underline"> {"Option 2"} </h3>
-                <h3 className="underline"> {"Option 3"} </h3>
+                <h3 className="underline"> {"Place"} </h3>
+                <h3 className="underline"> {"holder"} </h3>
+                <h3 className="underline"> {"text"} </h3>
             </div>
             <div className="flex items-center justify-center text-center" >
                 <Continue text = "Lock in guess"/>

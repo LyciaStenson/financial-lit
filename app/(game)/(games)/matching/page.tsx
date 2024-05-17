@@ -5,9 +5,9 @@ import Continue from "./continue";
 
 const MatchingGamePage = () => {
     return (
-        <div className="flex flex-col items-center justify-center text-center space-y-5">
+        <div className="flex flex-col items-center justify-center text-center space-y-5 border">
             <TopBar />
-            <h1 className="text-3xl font-extrabold text-moneyconf-purple">
+            <h1 className="text-2xl font-extrabold text-moneyconf-purple">
                 Tap the matching boxes
             </h1>
             <div className="flex flex-row items-center space-x-10">
@@ -16,9 +16,9 @@ const MatchingGamePage = () => {
                     alt="Astronaut Kick"
                     width={0}
                     height={0}
-                    className="w-40 h-auto"
+                    className="w-32 h-auto"
                 />
-                <div className="text-2xl font-extrabold text-moneyconf-purple w-70 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
+                <div className="text-lg font-extrabold text-moneyconf-purple w-44 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
                     <h2>Match the charity</h2>
                     <h2>logo with its</h2>
                     <h2>description</h2>

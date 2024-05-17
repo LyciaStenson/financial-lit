@@ -8,12 +8,10 @@ type Props = {
 const GameLayout = ({ children }: Props) => {
     return (
     <>
-        <TopBar/>
+        <TopBar />
         {/*<Sidebar className="hidden md:flex"></Sidebar>*/}
-        <main className="h-full pt-[90px]"> {/*md:pl-[256px] md:pt-0*/}
-            <div className="max-w-[600px] mx-auto h-full justify-center">
-                {children}
-            </div>
+        <main className="h-full max-w-[450px] pt-[90px] mx-auto"> {/*md:pl-[256px] md:pt-0*/}
+            {children}
         </main>
     </>
     );

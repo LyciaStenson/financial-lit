@@ -5,7 +5,7 @@ type Props = {
 const MatchingGameLayout = ({ children }: Props) => {
     return (
         <main>
-            <div>
+            <div className="max-w-[400px] mx-auto h-full justify-center">
                 {children}
             </div>
         </main>

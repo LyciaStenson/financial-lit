@@ -22,7 +22,8 @@ export const TopBarButton = ({
     return (
         <Button
             variant={"ghost"}
-            className="px-6"
+            size={"topBar"}
+            className="border"
             asChild
         >
             <Link href={href} className="relative">
