@@ -23,7 +23,6 @@ export const TopBarButton = ({
         <Button
             variant={"ghost"}
             size={"topBar"}
-            className="border"
             asChild
         >
             <Link href={href} className="relative">
