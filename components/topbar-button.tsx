@@ -31,7 +31,7 @@ export const TopBarButton = ({
                     alt={alt}
                     width={0}
                     height={0}
-                    className="w-auto h-[70px]"
+                    className="w-auto h-[60px]"
                 />
             </Link>
         </Button>

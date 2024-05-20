@@ -1,8 +1,9 @@
 "use client"
 
 import Image from "next/image";
-import { TopBar } from "../top-bar";
 
+import { TopBar } from "../top-bar";
+import ContinueButton from "../continue-button"
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import Draggable from "./draggable";
 import Droppable from "./droppable";
@@ -78,6 +79,9 @@ const DragGamePage = () => {
                 />
                 </DndContext>
             </div>
+            <ContinueButton
+                text="Continue"
+            />
         </div>
     )
 }
