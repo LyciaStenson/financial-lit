@@ -1,7 +1,7 @@
 'use client';
 
 import { currentUser, getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
-import { getCollection } from "@/src/FirebaseBridge/firestore/getData";
+import { getUserCollection } from "@/src/FirebaseBridge/firestore/getData";
 import { useEffect, useState } from "react";
 import { useQRCode } from 'next-qrcode';
 
@@ -13,7 +13,7 @@ const DownloadPage = () => {
 
     // Now you can use the users array in your component 
     useEffect(() => {
-        getCollection("users/").then((users: currentUser[]) => {
+        getUserCollection("users/").then((users: currentUser[]) => {
             setUsers(users);
             users.forEach((user) => {
                 if (user.role == "student") {
