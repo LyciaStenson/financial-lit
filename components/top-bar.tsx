@@ -4,12 +4,12 @@ import { Points } from "./points";
 import { StreakIcon } from "./streak-icon";
 
 import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
-import randomBannerNames from "@/src/randomBannerNames";
+import randomBannerNames from "@/src/random/randomBannerNames";
 
 export const TopBar = () => {
     return (
-        <div className="fixed mx-auto max-w-[450px] h-[90px] z-50 bg-white">
-            <div className={"flex items-center justify-center space-x-2"}>
+        <div className="fixed w-full h-[90px] z-50 bg-white">
+            <div className={"flex items-center justify-center space-x-2 mx-auto max-w-[450px]"}>
                 <TopBarButton
                     alt="Home"
                     iconSrc="./astronaut-peace.svg"

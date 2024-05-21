@@ -12,29 +12,33 @@ export const LessonButton = ({
     day,
     href,
 }: Props) => {
-    let indentation = (0.5 - Math.cos((day-1) * Math.PI/6) * 0.5) * 265;
-    //let indentation = 30;
-
     const router = useRouter();
 
+    const sequence = [1,2,3,4,4,4,3,2,1,1]
+
+    let col;
+
+    const cycleIndex = (day-1) % sequence.length;
+
+    col = sequence[cycleIndex];
+
     return (
-        <div>
-            <Button
-                className="w-[125px] h-[125px] border-[2.5px] relative shadow-[inset_0_-17px_0px_rgba(0,0,0,0.3),inset_0_4px_0px_rgb(255,255,255,0.7)]"
-                style={{
-                    left: indentation
-                }}
-                variant={(day >= 6) ? (day == 6) ? "lessonUnlocked" : "lessonLocked" : "lessonCompleted"}
-                shape="round"
-                onClick={() => router.push(href)}
-            >
-                <div>
-                    <div className="w-[95px] h-[95px] relative bg-stripes border-moneyconf-blue border-[2.5px] rounded-full flex flex-col items-center justify-center">
-                        <p className="text-2xl">Day</p>
-                        <p className="text-3xl">{day}</p>
-                    </div>
+        <Button
+            className={"w-[90px] h-[90px] border-[2.5px] shadow-[inset_0_-11px_0px_rgba(0,0,0,0.3),inset_0_3px_0px_rgb(255,255,255,0.7)]"}
+            style={{
+                gridColumn: col,
+                gridRow: day,
+            }}
+            variant={(day >= 6) ? (day == 6) ? "lessonUnlocked" : "lessonLocked" : "lessonCompleted"}
+            shape="round"
+            onClick={() => router.push(href)}
+        >
+            <div>
+                <div className="w-[70px] h-[70px] bg-stripes border-moneyconf-blue border-[2.5px] rounded-full flex flex-col items-center justify-center">
+                    <p className="text-md">Day</p>
+                    <p className="text-xl">{day}</p>
                 </div>
-            </Button>
-        </div>
+            </div>
+        </Button>
     )
 }

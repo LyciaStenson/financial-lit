@@ -1,12 +1,13 @@
-import { getFirestoreDatabase} from "../firebaseApp";
+import { getFirestoreDatabase } from "../firebaseApp";
 import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference } from "firebase/firestore";
 import { currentUser } from "../Auth/currentUser";
+import { quizData } from "@/src/Game/quiz/quizData";
 
 // Get the Firestore instance
 const db = getFirestoreDatabase();
 
 // Function to retrieve a document from a Firestore collection
-export async function getData(collection:string, id:string) {
+export async function getData(collection: string, id: string) {
   // Create a document reference using the provided collection and ID
   const docRef = doc(db, collection, id);
   // Variable to store the result of the operation
@@ -17,8 +18,8 @@ export async function getData(collection:string, id:string) {
   try {
     // Retrieve the document using the document reference
     result = await getDataFromServer(docRef);
-    
-    if(!result) { result = await getDataFromServer(docRef); }
+
+    if (!result) { result = await getDataFromServer(docRef); }
 
   } catch (e) {
     // Catch and store any error that occurs during the operation
@@ -30,39 +31,67 @@ export async function getData(collection:string, id:string) {
   return { result };
 }
 
-export async function getCollection(path: string): Promise<currentUser[]> {
+export async function getDataFromServer(doc: DocumentReference) {
+  return await getDoc(doc);
+}
+
+export async function getUserCollection(path: string): Promise<currentUser[]> {
   const querySnapshot = await getDocsFromCache(collection(db, path));
 
-  if(querySnapshot.empty) return getCollectionFromServer(path);
+  if (querySnapshot.empty) return getUserCollectionFromServer(path);
 
-  return querySnapshot.docs.map(doc =>{
+  return querySnapshot.docs.map(doc => {
     const data = doc.data();
-    return{
-      UUID:data.UUID,
-      emailID:data.emailID,
-      dispalyName:data.dispalyName,
-      role:data.role,
-      score:data.score,
-      streak:data.streak,
+    return {
+      UUID: data.UUID,
+      emailID: data.emailID,
+      dispalyName: data.dispalyName,
+      role: data.role,
+      score: data.score,
+      streak: data.streak,
     }
   });
 }
 
-export async function getDataFromServer(doc:DocumentReference){
-  return await getDoc(doc);
+async function getUserCollectionFromServer(path: string): Promise<currentUser[]> {
+  const querySnapshot = await getDocs(collection(db, path));
+  return querySnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      UUID: data.UUID,
+      emailID: data.emailID,
+      dispalyName: data.dispalyName,
+      role: data.role,
+      score: data.score,
+      streak: data.streak,
+    }
+  });
 }
 
-async function getCollectionFromServer(path:string):Promise<currentUser[]>{
-  const querySnapshot = await getDocs(collection(db, path));
-  return querySnapshot.docs.map(doc =>{
+export async function getQuizCollection(path: string): Promise<quizData[]> {
+  const querySnapshot = await getDocsFromCache(collection(db, path));
+
+  if (querySnapshot.empty) return getQuizCollectionFromServer(path);
+
+  return querySnapshot.docs.map(doc => {
     const data = doc.data();
-    return{
-      UUID:data.UUID,
-      emailID:data.emailID,
-      dispalyName:data.dispalyName,
-      role:data.role,
-      score:data.score,
-      streak:data.streak,
+    return {
+      question: data.question,
+      type: data.type,
+      answer: data.answer
+    }
+  });
+}
+
+export async function getQuizCollectionFromServer(path: string): Promise<quizData[]> {
+  const querySnapshot = await getDocs(collection(db, path));
+
+  return querySnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      question: data.question,
+      type: data.type,
+      answer: data.answer
     }
   });
 }

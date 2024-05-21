@@ -12,7 +12,7 @@ const Droppable: FC<IDroppable> = (props) => {
 
     return (
         <div ref={ setNodeRef } className="w-32 space-y-5">
-            <div className=" h-48 rounded-3xl bg-moneyconf-grey border-4 border-dashed border-moneyconf-green" />
+            <div className="h-48 rounded-3xl bg-moneyconf-grey border-4 border-dashed border-moneyconf-green" />
             <h3 className="text-xl text-moneyconf-purple font-extrabold">{props.name}</h3>
         </div>
     )

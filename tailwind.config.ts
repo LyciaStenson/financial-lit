@@ -26,6 +26,7 @@ const config = {
         'moneyconf-grey-border': '#e6e6e6',
         'moneyconf-green': '#8cc63f',
         'moneyconf-blue' : '#000072',
+        'moneyconf-red' : '#F23B3B',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

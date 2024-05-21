@@ -16,7 +16,7 @@ export const StreakIcon = ({
                 alt={"Streak"}
                 width={0}
                 height={0}
-                className="w-auto h-[60px]"
+                className="w-auto h-[40px]"
             />
             <h1 className="text-moneyconf-gold font-extrabold text-2xl flex items-center justify-center">
                 {streak?.toLocaleString()}

@@ -1,6 +1,7 @@
 'use client';
 
 import { setUserDetails, getCurrentUser, currentUser, setCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
+import { getAllQuizQuestions, setQuizQuestion } from '@/src/Game/quiz/quiz';
 import React, { use, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -13,6 +14,7 @@ import signUp from '@/src/FirebaseBridge/Auth/signUp';
 import { User, UserCredential } from 'firebase/auth';
 import { getData } from '@/src/FirebaseBridge/firestore/getData';
 import { useAuthContext } from '../game-firebase/pageLoading';
+import { quizData, quizType } from '@/src/Game/quiz/quizData';
 
 function randomIntFromInterval() {
     return Math.floor(Math.random() * 70000000);
@@ -24,7 +26,7 @@ const AdminPage = () => {
     const [question, setQuestion] = useState('');
     const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
     const [studentName, setStudentName] = useState('');
-    const { user } = useAuthContext() as { user: User }; // Use 'as' to assert the type as { user: any }
+    const { user } = useAuthContext() as { user: User }; 
     const [isAdmin, setIsAdmin] = useState(false);
 
     // Access the user object from the authentication context
@@ -68,7 +70,12 @@ const AdminPage = () => {
         };
     
         const handleAddQuestion = () => {
-            setQuestionData(question, choices);
+            const data:quizData = {
+                question:question,
+                type:quizType.pick,
+                answer:choices,
+            }
+            setQuizQuestion(data);
         };
     
         const handleAddUser = () => {
@@ -78,11 +85,14 @@ const AdminPage = () => {
             }
     
             let emailId: string = randomIntFromInterval().toString();
-            let email: string = emailId + "@moneyconfidence.student..co.uk";
+            let email: string = emailId + "@moneyconfidence.student.co.uk";
+            console.log(email);
             signUp(email, "23@f1-*1HA%^3(DA)").then((result: UserCredential | null) => {
+                console.log(result);
                 let user = setUserDetails(result!.user.uid, emailId, studentName, "student");
                 setData("users/", user.UUID!, user);
-                router.push("/admin-downloadPage");
+            }).catch((error) =>{
+                console.log(error);
             });
         }
     
@@ -108,6 +118,11 @@ const AdminPage = () => {
                     <h1 className='text-xl'>Add Users</h1>
                     <Textarea placeholder="Student Name." value={studentName} onChange={handleStudentName} />
                     <Button onClick={handleAddUser}>Add User</Button>
+                </div>
+                <div className="grid w-3/5 gap-2 p-4">
+                    <Button onClick={() => router.push("/admin/qr")}>Go to QR Page</Button>
+                    <Button onClick={() => router.push("/admin/certificate")}>Go to Certificate Page</Button>
+                    <Button onClick={() => getAllQuizQuestions()}>Get Quiz Data</Button>
                 </div>
             </div>
         );

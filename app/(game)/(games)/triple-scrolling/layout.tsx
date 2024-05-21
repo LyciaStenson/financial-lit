@@ -2,7 +2,7 @@ type Props = {
     children: React.ReactNode;
 }
 
-const MoreOrLessGameLayout = ({ children }: Props) => {
+const TripleScrollingGameLayout = ({ children }: Props) => {
     return (
         <main>
             <div className="max-w-[400px] mx-auto h-full justify-center">
@@ -12,4 +12,4 @@ const MoreOrLessGameLayout = ({ children }: Props) => {
     )
 };
 
-export default MoreOrLessGameLayout;
+export default TripleScrollingGameLayout;

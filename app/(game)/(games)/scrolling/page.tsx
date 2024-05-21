@@ -49,7 +49,13 @@ const ScrollingGamePage = () => {
                         <Picker.Column key={name} name={name}>
                           {selections.cost.map((option:string) => (
                             <Picker.Item key={option} value={option}>
-                              {option}
+                              {({ selected }) => (
+                                /* Use the `selected` state ti conditionally style the selected item */
+                                //<div style={{ color: selected ? 'red' : 'black' }}>
+                                <div className={selected ? "text-moneyconf-green" : "text-black"}>
+                                  {option}
+                                </div>
+                            )}
                             </Picker.Item>
                           ))}
                         </Picker.Column>

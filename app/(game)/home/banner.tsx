@@ -13,7 +13,7 @@ export const Banner = ({
                 <h1 className="text-lg font-extrabold">
                     {title}
                 </h1>
-                <h2 className="text-2xl font-extrabold">
+                <h2 className="text-xl font-extrabold">
                     {description}
                 </h2>
             </div>

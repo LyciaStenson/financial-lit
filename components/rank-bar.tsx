@@ -29,7 +29,7 @@ export const RankBar = ({
     }
 
     return (
-        <div className="border-2 border-b-[5px] border-moneyconf-blue bg-moneyconf-gold items-center text-center text-moneyconf-blue text-2xl font-extrabold tracking-[14px] indent-[20px] flex rounded-2xl h-12">
+        <div className="border-2 border-b-[5px] border-moneyconf-blue bg-moneyconf-gold items-center text-center text-moneyconf-blue text-xl font-extrabold tracking-[12px] indent-[20px] flex rounded-2xl h-11">
             <div>
                 <span>
                     {rank.toUpperCase()}
