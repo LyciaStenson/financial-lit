@@ -9,7 +9,7 @@ const GameLayout = ({ children }: Props) => {
     return (
     <div className="flex justify-center">
         <TopBar />
-        <main className="max-w-[450px] mx-auto pt-[90px] bg-blue-300">
+        <main className="max-w-[450px] mx-auto pt-[90px]">
             {children}
         </main>
     </div>
