@@ -9,7 +9,7 @@ import randomBannerNames from "@/src/random/randomBannerNames";
 const GamePage = () => {
     const [currentUser, setCurrentUser] = useState(getCurrentUser()); 
 
-    const lessonHrefs = ["drag", "matching", "order", "pick-correct", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home"];
+    const lessonHrefs = ["drag", "drag-bar", "interest", "matching", "more-or-less", "order", "pick-correct", "scrolling", "triple-scrolling", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home"];
 
     useEffect(() => {
             setCurrentUser(getCurrentUser());
@@ -17,19 +17,16 @@ const GamePage = () => {
     
     return (
         <div>
-            <Banner title={`${ currentUser?.dispalyName }’s Money Confidence Month: Day 6`} description={"You’re back for more I see... Okay, let’s do this"} />
-            <div className="">
-                <div className="pt-5 px-5 grid grid-cols-4">
-                {lessonHrefs.map((lessonHref, index) => (
-                    <LessonButton
-                        day={index + 1}
-                        href={lessonHref}
-                        key={index}
-                    />
-                ))}
+            <Banner title={`${ currentUser?.dispalyName }’s Money Confidence Month: Day 8`} description={"You’re back for more I see... Okay, let’s do this"} />
+            <div className="pt-20 px-5 grid grid-cols-4">
+            {lessonHrefs.map((lessonHref, index) => (
+                <LessonButton
+                    day={index + 1}
+                    href={lessonHref}
+                    key={index}
+                />
+            ))}
             </div>
-            </div>
-
         </div>
     );
 };

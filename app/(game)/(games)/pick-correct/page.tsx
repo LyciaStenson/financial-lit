@@ -31,7 +31,7 @@ const PickCorrectGamePage = () => {
 
     return (
         <div>
-            {quizLoaded && question && (
+        {/*{quizLoaded && question && (*/}
                 <div className="flex flex-col items-center justify-center text-center space-y-5 border p-1">
                     <TopBar />
                     <h1 className="text-2xl font-extrabold text-moneyconf-purple">
@@ -66,13 +66,14 @@ const PickCorrectGamePage = () => {
                         />
                     </div>
                     <div className="flex flex-col items-center justify-center space-y-1">
-                        <PickBoxes one={question.UUID!} two="6" />
+                        {/*<PickBoxes one={question.UUID!} two="6" />*/}
+                        <PickBoxes one={"600"} two="6" />
                         <PickBox one="200" />
                         <PickBoxes one="100" two="800" />
                     </div>
                     <Continue text="Continue" />
                 </div>
-            )}
+            {/*})}*/}
         </div>
     );
 }
