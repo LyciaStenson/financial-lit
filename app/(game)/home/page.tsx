@@ -9,7 +9,7 @@ import randomBannerNames from "@/src/random/randomBannerNames";
 const GamePage = () => {
     const [currentUser, setCurrentUser] = useState(getCurrentUser()); 
 
-    const lessonHrefs = ["drag", "drag-bar", "interest", "matching", "more-or-less", "order", "pick-correct", "scrolling", "triple-scrolling", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home"];
+    const lessonHrefs = ["drag", "pick-correct", "drag-bar", "matching", "order", "more-or-less", "triple-scrolling", "interest", "scrolling", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home"];
 
     useEffect(() => {
             setCurrentUser(getCurrentUser());

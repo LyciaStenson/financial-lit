@@ -1,12 +1,10 @@
 import Image from "next/image";
-import { TopBar } from "../top-bar";
 import MatchingBoxes from "./matching-boxes";
 import Continue from "./continue";
 
 const MatchingGamePage = () => {
     return (
         <div className="flex flex-col items-center justify-center text-center space-y-5 border">
-            <TopBar />
             <h1 className="text-2xl font-extrabold text-moneyconf-purple">
                 Tap the matching boxes
             </h1>

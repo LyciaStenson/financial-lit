@@ -38,24 +38,8 @@ const DownloadPage = () => {
                 {
                     users?.map((user, index) => (
                         <div key={index}>
-                            <h1 className='text-2xl'>Hello {user.dispalyName}</h1>
                             <div>
-                                <Canvas
-                                    text={'https://financial-lit.vercel.app/?id=' + user.emailID}
-                                    options={{
-                                        errorCorrectionLevel: 'M',
-                                        margin: 5,
-                                        scale: 5,
-                                        width: 70,
-                                        color: {
-                                            dark: '#390176',
-                                            light: '#ffffff',
-                                        },
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <h3 className='text-xl'>Are you ready to play!</h3>
+                                <h1>{user.dispalyName} is the winner</h1>
                             </div>
                         </div>
                     ))
@@ -66,27 +50,11 @@ const DownloadPage = () => {
                  <div>
                  {
                      users?.map((user, index) => (
-                         <div key={index}>
-                             <h1 className='text-2xl'>Hello {user.dispalyName}</h1>
-                             <div>
-                                 <Canvas
-                                     text={'https://financial-lit.vercel.app/?id=' + user.emailID}
-                                     options={{
-                                         errorCorrectionLevel: 'M',
-                                         margin: 5,
-                                         scale: 5,
-                                         width: 70,
-                                         color: {
-                                             dark: '#000000',
-                                             light: '#ffffff',
-                                         },
-                                     }}
-                                 />
-                             </div>
-                             <div>
-                                 <h3 className='text-xl'>Are you ready to play!</h3>
-                             </div>
-                         </div>
+                        <div key={index}>
+                        <div>
+                            <h1>{user.dispalyName} is the winner</h1>
+                        </div>
+                    </div>
                      ))
                  }
              </div>

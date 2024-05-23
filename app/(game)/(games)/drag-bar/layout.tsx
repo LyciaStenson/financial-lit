@@ -1,3 +1,5 @@
+import { TopBar } from "../top-bar";
+
 type Props = {
     children: React.ReactNode;
 }
@@ -5,7 +7,8 @@ type Props = {
 const DragBarGameLayout = ({ children }: Props) => {
     return (
         <main>
-            <div className="max-w-[600px] mx-auto h-full justify-center">
+            <div className="max-w-[400px] mx-auto h-full justify-center">
+                <TopBar />
                 {children}
             </div>
         </main>

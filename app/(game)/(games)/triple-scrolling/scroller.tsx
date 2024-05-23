@@ -19,25 +19,26 @@ const ScrollerBox = () => {
                 height={0}
              className="w-5 h-auto absolute left-[-22px]"
             />
-            <div className="text-lg font-extrabold text-moneyconf-purple w-20 border-[2.5px] border-moneyconf-purple rounded-lg bg-moneyconf-grey">
-                <Picker value={pickerValue} onChange={setPickerValue}>
-                     {Object.keys(selections).map((name:string) => (
-                       <Picker.Column key={name} name={name}>
-                         {selections.cost.map((option:string) => (
-                           <Picker.Item key={option} value={option}>
-                             {({ selected }) => (
-                               /* Use the `selected` state to conditionally style the selected item */
-                               //<div style={{ color: selected ? 'red' : 'black' }}>
-                               <div className={selected ? "text-moneyconf-green" : "text-black"}>
-                                {option}
-                              </div>
-                          )}
-                         </Picker.Item>
-                       ))}
-                      </Picker.Column>
-                       ))}
-               </Picker>
-             </div>
+              <div className="text-lg font-extrabold text-moneyconf-purple w-20 border-[2.5px] border-moneyconf-purple rounded-lg bg-moneyconf-grey">
+                  <Picker value={pickerValue} onChange={setPickerValue}>
+                       {Object.keys(selections).map((name:string) => (
+                         <Picker.Column key={name} name={name}>
+                           {selections.cost.map((option:string) => (
+                             <Picker.Item key={option} value={option}>
+                               {({ selected }) => (
+                                 /* Use the `selected` state to conditionally style the selected item */
+                                 //<div style={{ color: selected ? 'red' : 'black' }}>
+                                 <div className={selected ? "text-black" : "text-black text-opacity-40"}>
+                                  {option}
+                                </div>
+                            )}
+                           </Picker.Item>
+                         ))}
+                        </Picker.Column>
+                         ))}
+                 </Picker>
+               </div>
+            
         </div>
     )
 }

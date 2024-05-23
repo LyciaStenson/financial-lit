@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { TopBar } from "../top-bar";
 import Continue from "./continue";
 import { Button } from "@/components/ui/button";
 import TextBoxes from "./text-boxes";
@@ -7,7 +6,6 @@ import TextBoxes from "./text-boxes";
 const MoreOrLessGamePage = () => {
     return (
         <div className="flex flex-col items-center justify-center text-center space-y-5 border">
-            <TopBar />
             <h1 className="text-2xl font-extrabold text-moneyconf-purple">
                 Tap the correct box
             </h1>

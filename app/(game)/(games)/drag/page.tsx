@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 
-import { TopBar } from "../top-bar";
 import ContinueButton from "../continue-button"
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import Draggable from "./draggable";
@@ -27,7 +26,6 @@ const DragGamePage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center text-center space-y-5 border p-1">
-            <TopBar />
             <h1 className="text-2xl font-extrabold text-moneyconf-purple">
                 Drag the icons to the correct side
             </h1>

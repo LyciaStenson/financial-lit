@@ -1,13 +1,9 @@
 'use client';
 
 import Image from "next/image";
-import { TopBar } from "../top-bar";
 import Continue from "./continue";
-import { useState } from 'react'
-import Picker from 'react-mobile-picker'
-
-
-  
+import { useState } from 'react';
+import Picker from 'react-mobile-picker';
 
 const ScrollingGamePage = () => {
     const selections = {
@@ -18,7 +14,6 @@ const ScrollingGamePage = () => {
     })
     return (
         <div className="flex flex-col items-center justify-center text-center space-y-5 border">
-            <TopBar />
             <h1 className="text-2xl font-extrabold text-moneyconf-purple">
                 Scroll the dial
             </h1>
@@ -52,7 +47,7 @@ const ScrollingGamePage = () => {
                               {({ selected }) => (
                                 /* Use the `selected` state ti conditionally style the selected item */
                                 //<div style={{ color: selected ? 'red' : 'black' }}>
-                                <div className={selected ? "text-moneyconf-green" : "text-black"}>
+                                <div className={selected ? "text-black" : "text-black text-opacity-40"}>
                                   {option}
                                 </div>
                             )}

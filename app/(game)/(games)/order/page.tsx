@@ -1,12 +1,10 @@
 import Image from "next/image";
-import { TopBar } from "../top-bar";
 import Continue from "./continue";
 import PickBoxes from "./pick-boxes";
 
 const OrderGamePage = () => {
     return (
         <div className="flex flex-col space-y-5 border p-1">
-            <TopBar />
             <h1 className="text-2xl font-extrabold text-moneyconf-purple items-center justify-center text-center">
                 Tap the boxes to put it in order below
             </h1>
@@ -28,10 +26,9 @@ const OrderGamePage = () => {
                 <PickBoxes one = "10" two = "400" three = "70"/> 
             </div>
             
-            <div  className="flex space-y-2 space-x-1 font-extrabold text-moneyconf-purple p-3 border-[2.5px] bg-moneyconf-grey place-items-start justify-start text-start px-2">
-                <h1 className="text-xl font-extrabold text-moneyconf-purple space-x-10 px-3">
-                    APR =   
-                </h1>
+            <div  className="flex space-x-1 font-extrabold text-moneyconf-purple p-3 border-[2.5px] bg-moneyconf-grey place-items-center justify-start text-start px-2">
+                <h3 className="text-xl font-extrabold text-moneyconf-purple px-3">
+                    APR =   </h3>
                 <h3 className="underline"> {"Place"} </h3>
                 <h3 className="underline"> {"holder"} </h3>
                 <h3 className="underline"> {"text"} </h3>

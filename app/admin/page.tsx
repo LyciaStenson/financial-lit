@@ -15,6 +15,8 @@ import { User, UserCredential } from 'firebase/auth';
 import { getData } from '@/src/FirebaseBridge/firestore/getData';
 import { useAuthContext } from '../game-firebase/pageLoading';
 import { quizData, quizType } from '@/src/Game/quiz/quizData';
+import { SideBar } from '@/components/side-bar';
+
 
 function randomIntFromInterval() {
     return Math.floor(Math.random() * 70000000);
@@ -122,7 +124,8 @@ const AdminPage = () => {
                 <div className="grid w-3/5 gap-2 p-4">
                     <Button onClick={() => router.push("/admin/qr")}>Go to QR Page</Button>
                     <Button onClick={() => router.push("/admin/certificate")}>Go to Certificate Page</Button>
-                    <Button onClick={() => getAllQuizQuestions()}>Get Quiz Data</Button>
+                    <Button onClick={() => router.push("/admin/questions")}>Get Quiz Data</Button>
+                    <Button onClick={() => router.push("/admin/users")}>Get User Data</Button>
                 </div>
             </div>
         );

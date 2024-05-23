@@ -1,17 +1,13 @@
 'use client';
 
 import Image from "next/image";
-import { TopBar } from "../top-bar";
 import Continue from "./continue";
 import TextBoxes from "./text-boxes";
 import ScrollerBox from "./scroller";
 
-  
-
 const InterestGamePage = () => {
     return (
         <div className="flex flex-col items-center justify-center text-center space-y-5 border">
-            <TopBar />
             <h1 className="text-xl font-extrabold text-moneyconf-purple p-2">
               Scroll the dials to chose your interest!
             </h1>

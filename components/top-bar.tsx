@@ -9,7 +9,7 @@ import randomBannerNames from "@/src/random/randomBannerNames";
 export const TopBar = () => {
     return (
         <div className="fixed w-full h-[90px] z-50 bg-white">
-            <div className={"flex items-center justify-center space-x-2 mx-auto max-w-[450px]"}>
+            <div className={"flex items-center justify-center space-x-2 mx-auto max-w-[400px]"}>
                 <TopBarButton
                     alt="Home"
                     iconSrc="./astronaut-peace.svg"

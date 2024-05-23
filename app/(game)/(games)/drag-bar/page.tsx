@@ -1,7 +1,6 @@
 'use client'
 
 import Image from "next/image";
-import { TopBar } from "../top-bar";
 import Continue from "./continue";
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -20,7 +19,7 @@ const DragBarGamePage = () => {
 
     return (
         <div className="flex flex-col space-y-5 border">
-            <TopBar />
+
             <h1 className="text-3xl font-extrabold text-moneyconf-purple items-center justify-center text-center ">
             Drag the circle to reach the correct number price
             </h1>
@@ -38,14 +37,14 @@ const DragBarGamePage = () => {
             </div>
             <div className="flex flex-col items-center justify-center space-y-6">
             </div>
-            <div className="flex flex-row space-x-20 items-center justify-center text-center">
-                <div className="flex flex-row space-x-10 items-center justify-center text-center rounded-3xl bg-moneyconf-grey border-4">
+            <div className="flex flex-row space-x-5 items-center justify-center text-center">
+                <div className="flex flex-row space-x-5 items-center justify-center text-center rounded-3xl bg-moneyconf-grey border-4">
                     <Box sx={{height: 300}}>
                         <Slider
                         aria-label="Price"
                         defaultValue={50}
                         getAriaValueText={valuetext}
-                        valueLabelDisplay="auto"
+                        //valueLabelDisplay="auto"
                         shiftStep={30}
                         step={5}
                         marks
@@ -55,7 +54,7 @@ const DragBarGamePage = () => {
                         />
                     </Box>
                 </div>
-                <div className="w-96 h-72 flex items-center justify-center rounded-3xl bg-moneyconf-grey border-4">
+                <div className="w-72 h-72 flex items-center justify-center rounded-3xl bg-moneyconf-grey border-4">
                     <Image
                         src="./trophy-gold.svg"
                         alt="Price item"

@@ -28,7 +28,7 @@ const ScrollerBox = () => {
                              {({ selected }) => (
                                /* Use the `selected` state to conditionally style the selected item */
                                //<div style={{ color: selected ? 'red' : 'black' }}>
-                               <div className={selected ? "text-moneyconf-green" : "text-black"}>
+                               <div className={selected ? "text-black" : "text-black text-opacity-40"}>
                                 {option}
                               </div>
                           )}

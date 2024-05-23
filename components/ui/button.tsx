@@ -16,7 +16,8 @@ const buttonVariants = cva(
         secondary: "bg-moneyconf-blue text-white border-moneyconf-blue hover:bg-fin-lit-blue/80 border-b-4 active:border-b-0",
         lessonCompleted: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue",
         lessonUnlocked: "bg-moneyconf-green text-moneyconf-blue border-moneyconf-blue",
-        lessonLocked: "bg-moneyconf-grey text-moneyconf-blue border-moneyconf-blue"
+        lessonLocked: "bg-moneyconf-grey text-moneyconf-blue border-moneyconf-blue",
+        quiz:"w-32 h-24 rounded-3xl flex items-center justify-center bg-moneyconf-grey border-4 border-dashed border-moneyconf-green"
       },
       size: {
         default: "h-14 px-11 py-2",
