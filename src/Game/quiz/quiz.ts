@@ -10,17 +10,20 @@ export function getCurrentQuestion() {
     return currentQuestion;
 }
 
-export async function getNextQuizQuestion() {
+export async function getNextQuizQuestion():Promise<quizData | null> {
+    let currentQuestion:quizData | null = null;
+    quizDataList = [];
     if (quizDataList.length === 0) {
-        console.log("Fetching all quiz questions...");
         quizDataList = await getAllQuizQuestions();
-        console.log("Fetched questions:", quizDataList);
+        console.log(quizDataList);
     }
 
     if (quizDataList.length > 0) {
-        currentQuestion = quizDataList.shift() || null;
-        console.log("Set current question to:", currentQuestion);
+        currentQuestion = quizDataList.pop()!;
+        return currentQuestion;
     }
+
+    return currentQuestion;
 }
 
 export async function getAllQuizQuestions(): Promise<quizData[]> {

@@ -13,6 +13,7 @@ export enum quizYear{
 export interface quizData{
     UUID?:string;
     question?:string;
+    photoURL?:string;
     year?:quizYear.year3;
     type?:quizType;
     answer?:any;

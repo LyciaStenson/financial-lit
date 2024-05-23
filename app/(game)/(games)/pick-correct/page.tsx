@@ -25,7 +25,6 @@ const PickCorrectGamePage = () => {
         }else{
             console.log("Answer is wrong");
             event.currentTarget.disabled = true;
-            
         }
     }
 

@@ -26,6 +26,7 @@ function randomIntFromInterval() {
 const AdminPage = () => {
 
     const [question, setQuestion] = useState('');
+    const [photoURL, setPhotoURL] = useState('');
     const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
     const [studentName, setStudentName] = useState('');
     const { user } = useAuthContext() as { user: User }; 
@@ -50,7 +51,11 @@ const AdminPage = () => {
         const handleQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
             setQuestion(event.target.value);
         };
-    
+
+        const handlePhotoURLChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+            setPhotoURL(event.target.value);
+        };
+
         const handleStudentName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
             setStudentName(event.target.value);
         };
@@ -104,6 +109,7 @@ const AdminPage = () => {
                     <h1 className='text-3xl'>Admin Page</h1>
                     <h1 className='text-xl'>Add Question</h1>
                     <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
+                    <Textarea placeholder="Photo URL, leave blank if question does not have contain photos" value={photoURL} onChange={handlePhotoURLChange} />
                     {choices.map((choice, index) => (
                         <div key={index} className='space-y-2'>
                             <Textarea placeholder={`Choice ${index + 1}`} value={choice.Answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
