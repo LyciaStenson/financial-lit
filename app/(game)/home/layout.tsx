@@ -5,15 +5,15 @@ type Props = {
     children: React.ReactNode;
 };
 
-const GameLayout = ({ children }: Props) => {
+const HomeLayout = ({ children }: Props) => {
     return (
     <div className="flex justify-center">
         <TopBar />
-        <main className="max-w-[450px] mx-auto pt-[90px]">
+        <main className="max-w-[400px] mx-auto pt-[90px]">
             {children}
         </main>
     </div>
     );
 };
 
-export default GameLayout;
+export default HomeLayout;

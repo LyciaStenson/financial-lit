@@ -1,5 +1,5 @@
 type Props = {
-    points: number;
+    points: number | undefined;
 }
 
 export const RankBar = ({
@@ -8,23 +8,23 @@ export const RankBar = ({
 
     let rank = "newbie";
 
-    if (points >= 34000) {
+    if (points! >= 34000) {
         rank = "master";
-    } else if (points >= 28000) {
+    } else if (points! >= 28000) {
         rank = "magnate";
-    } else if (points >= 22000) {
+    } else if (points! >= 22000) {
         rank = "tycoon";
-    } else if (points >= 16000) {
+    } else if (points! >= 16000) {
         rank = "mogul";
-    } else if (points >= 11000) {
+    } else if (points! >= 11000) {
         rank = "banker";
-    } else if (points >= 7000) {
+    } else if (points! >= 7000) {
         rank = "trader";
-    } else if (points >= 4000) {
+    } else if (points! >= 4000) {
         rank = "earner";
-    } else if (points >= 2000) {
+    } else if (points! >= 2000) {
         rank = "saver";
-    } else if (points >= 1000) {
+    } else if (points! >= 1000) {
         rank = "novice";
     }
 

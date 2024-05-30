@@ -17,11 +17,12 @@ const buttonVariants = cva(
         lessonCompleted: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue",
         lessonUnlocked: "bg-moneyconf-green text-moneyconf-blue border-moneyconf-blue",
         lessonLocked: "bg-moneyconf-grey text-moneyconf-blue border-moneyconf-blue",
-        quiz:"w-32 h-24 rounded-3xl flex items-center justify-center bg-moneyconf-grey border-4 border-dashed border-moneyconf-green"
+        quiz: "rounded-3xl flex items-center justify-center bg-moneyconf-grey border-4 border-dashed border-moneyconf-green"
       },
       size: {
         default: "h-14 px-11 py-2",
-        topBar: "h-[90px]"
+        topBar: "h-[90px]",
+        quiz: "w-32 h-24"
       },
       shape: {
         default: "rounded-xl",

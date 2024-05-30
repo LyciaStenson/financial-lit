@@ -1,3 +1,6 @@
+import { DocumentData, DocumentSnapshot } from "firebase/firestore";
+import { getData } from "../firestore/getData";
+
 export interface currentUser {
     UUID:string | null; //The firebase UID
     emailID?:string; //The id which is randomly generated to the email
@@ -9,7 +12,13 @@ export interface currentUser {
 
 let user: currentUser;
 
-export function getCurrentUser() {
+export function getCurrentUser() :currentUser {
+    getData("users/", user?.UUID!).then((value:{result:DocumentSnapshot<DocumentData, DocumentData> | null}) =>{
+        const result = value.result?.data();
+        user = setUserDetails(result?.UUID, result?.id, result?.name, result?.role);
+        return user;
+    });
+
     return user;
 }
 

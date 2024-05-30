@@ -1,5 +1,6 @@
 'use client';
 
+import { SideBar } from "@/components/side-bar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { currentUser } from "@/src/FirebaseBridge/Auth/currentUser";
@@ -19,12 +20,22 @@ const DownloadPage = () => {
         });
     }
 
+    const loadPage = (path: string) => {
+        router.push(path);
+    };
+
     return (
-        <div>
-            <Button onClick={() => router.push("/admin")}>Back to the admin page</Button>
+        <div className=" pl-[270px]">
+            <SideBar>
+                <Button onClick={() => loadPage("/admin")}>Home</Button>
+                <Button onClick={() => loadPage("/admin/questions")}>Questions</Button>
+                <Button onClick={() => loadPage("/admin/users")}>Users</Button>
+                <Button onClick={() => loadPage("/admin/certificate")}>Certification</Button>
+                <Button onClick={() => loadPage("/admin/qr")}>QR</Button>
+            </SideBar>            
             <Button onClick={() => generate("")}>Get all users</Button>
             {quiz.map((data, index) => (
-                <div key={index} className='space-y-2 bg-gray-500'>
+                <div key={index} className=' space-y-5 bg-gray-500'>
                     <h1>User {index}</h1>
                     <h1>{data.dispalyName}</h1>
                     <h1>{data.role}</h1>

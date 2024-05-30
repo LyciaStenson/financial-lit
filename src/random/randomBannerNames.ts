@@ -7,3 +7,4 @@ export default function getBannerTitleFromFirebase() : string{
     console.log(value);
     return value.toString();
 }
+

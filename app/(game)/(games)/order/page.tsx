@@ -9,13 +9,15 @@ const OrderGamePage = () => {
                 Tap the boxes to put it in order below
             </h1>
             <div className="flex flex-row space-x-10 items-center justify-center text-center ">
-                <Image
-                    src="./astronaut-laptop-coin.svg"
-                    alt="Astronaut Laptop"
-                    width={0}
-                    height={0}
-                    className="w-20 h-auto"
-                />
+                <div className="animate-bounce animate-duration-1000">
+                    <Image
+                        src="./astronaut-laptop-coin.svg"
+                        alt="Astronaut Laptop"
+                        width={0}
+                        height={0}
+                        className="w-20 h-auto"
+                    />
+                </div>                
                 <div className="text-2xl font-extrabold text-moneyconf-purple w-70 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
                     <h2 className="text-2xl">Order the words!</h2>
                 </div>

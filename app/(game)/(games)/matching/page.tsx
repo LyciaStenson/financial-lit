@@ -9,13 +9,15 @@ const MatchingGamePage = () => {
                 Tap the matching boxes
             </h1>
             <div className="flex flex-row items-center space-x-10">
-                <Image
-                    src="./astronaut-money-bags.svg"
-                    alt="Astronaut Kick"
-                    width={0}
-                    height={0}
-                    className="w-32 h-auto"
-                />
+                <div className="animate-jump animate-infinite animate-duration-1000">
+                    <Image
+                        src="./astronaut-money-bags.svg"
+                        alt="Astronaut Kick"
+                        width={0}
+                        height={0}
+                        className="w-32 h-auto"
+                    />
+                </div>               
                 <div className="text-lg font-extrabold text-moneyconf-purple w-44 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
                     <h2>Match the charity</h2>
                     <h2>logo with its</h2>

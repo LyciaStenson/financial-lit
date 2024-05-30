@@ -18,6 +18,7 @@ const ScrollingGamePage = () => {
                 Scroll the dial
             </h1>
             <div className="flex flex-row items-center space-x-10">
+              <div className="animate-wiggle-more animate-infinite animate-duration-1000">
                 <Image
                     src="./astronaut-shopping-trolley.svg"
                     alt="Astronaut shopping"
@@ -25,6 +26,7 @@ const ScrollingGamePage = () => {
                     height={0}
                     className="w-32 h-auto"
                 />
+              </div>
                 <div className="text-lg font-extrabold text-moneyconf-purple w-44 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
                     <h2>Find me the</h2>
                     <h2>cheapest iphone!</h2>
@@ -47,7 +49,7 @@ const ScrollingGamePage = () => {
                               {({ selected }) => (
                                 /* Use the `selected` state ti conditionally style the selected item */
                                 //<div style={{ color: selected ? 'red' : 'black' }}>
-                                <div className={selected ? "text-black" : "text-black text-opacity-40"}>
+                                <div className={selected ? "text-moneyconf-purple" : "text-black text-opacity-40"}>
                                   {option}
                                 </div>
                             )}

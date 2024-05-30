@@ -6,7 +6,7 @@ import { LessonButton } from "./lesson-button";
 import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import randomBannerNames from "@/src/random/randomBannerNames";
 
-const GamePage = () => {
+const HomePage = () => {
     const [currentUser, setCurrentUser] = useState(getCurrentUser()); 
 
     const lessonHrefs = ["drag", "pick-correct", "drag-bar", "matching", "order", "more-or-less", "triple-scrolling", "interest", "scrolling", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home", "home"];
@@ -31,4 +31,4 @@ const GamePage = () => {
     );
 };
 
-export default GamePage;
+export default HomePage;

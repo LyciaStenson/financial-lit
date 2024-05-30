@@ -12,13 +12,15 @@ const InterestGamePage = () => {
               Scroll the dials to chose your interest!
             </h1>
             <div className="flex flex-row items-center space-x-10">
-                <Image
+                <div className="animate-wiggle-more animate-infinite">
+                  <Image
                     src="./astronaut-riding-rocket.svg"
                     alt="Astronaut rocket"
                     width={0}
                     height={0}
                     className="w-32 h-auto"
                 />
+                </div>
                 <div className="text-lg font-extrabold text-moneyconf-purple w-48 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
                     <h2>How much</h2>
                     <h2>interest will I</h2>

@@ -43,7 +43,7 @@ const DownloadPage = () => {
                                     <div className="bg-moneyconf-gold w-72 h-27 flex items-center justify-center space-x-2">
                                         <h1 className='text-l'>Hello {user.dispalyName}</h1>
                                         <Canvas
-                                                text={'https://financial-lit.vercel.app/?id=' + user.emailID}
+                                                text={'https://main.d39ah6port6bt4.amplifyapp.com/game?id=' + user.emailID}
                                                 options={{
                                                     errorCorrectionLevel: 'M',
                                                     margin: 5,

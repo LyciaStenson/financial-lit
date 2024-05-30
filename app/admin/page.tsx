@@ -1,11 +1,10 @@
 'use client';
 
 import { setUserDetails, getCurrentUser, currentUser, setCurrentUser } from '@/src/FirebaseBridge/Auth/currentUser';
-import { getAllQuizQuestions, setQuizQuestion } from '@/src/Game/quiz/quiz';
-import React, { use, useEffect, useState } from 'react';
+import { setQuizQuestion } from '@/src/Game/quiz/quiz';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { setQuestionData } from '@/src/firebaseBridge';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { notFound, useRouter } from 'next/navigation'
@@ -15,6 +14,8 @@ import { User, UserCredential } from 'firebase/auth';
 import { getData } from '@/src/FirebaseBridge/firestore/getData';
 import { useAuthContext } from '../game-firebase/pageLoading';
 import { quizData, quizType } from '@/src/Game/quiz/quizData';
+import { getRandom } from '@/src/random/randomNumberGenerator';
+import { Thermometer } from 'lucide-react';
 import { SideBar } from '@/components/side-bar';
 
 
@@ -25,72 +26,42 @@ function randomIntFromInterval() {
 
 const AdminPage = () => {
 
-    const [question, setQuestion] = useState('');
-    const [photoURL, setPhotoURL] = useState('');
-    const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
     const [studentName, setStudentName] = useState('');
-    const { user } = useAuthContext() as { user: User }; 
+    const { user } = useAuthContext() as { user: User };
     const [isAdmin, setIsAdmin] = useState(false);
 
     // Access the user object from the authentication context
     // const { user } = useAuthContext();
     const router = useRouter();
-    
-    if(user){
+
+    if (user) {
         getData("users/", user.uid).then((value) => {
             let data = value.result?.data();
-            if(data?.role == "admin"){
+            if (data?.role == "admin") {
                 setIsAdmin(true);
-            }else{
+            } else {
                 return router.push("/home");
             }
         })
     }
 
-    if(isAdmin){
-        const handleQuestionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setQuestion(event.target.value);
-        };
+    if (isAdmin) {
 
-        const handlePhotoURLChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setPhotoURL(event.target.value);
+        const loadPage = (path:string) => {
+            router.push(path);
         };
 
         const handleStudentName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
             setStudentName(event.target.value);
         };
     
-        const handleChoiceAnswerChange = (index: number, event: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const updatedChoices = [...choices];
-            updatedChoices[index].Answer = event.target.value;
-            setChoices(updatedChoices);
-        };
-    
-        const handleChoiceResultChange = (index: number, value: boolean) => {
-            const updatedChoices = [...choices];
-            updatedChoices[index].Result = value;
-            setChoices(updatedChoices);
-        };
-    
-        const handleAddChoice = () => {
-            setChoices(prevChoices => [...prevChoices, { Answer: '', Result: false }]);
-        };
-    
-        const handleAddQuestion = () => {
-            const data:quizData = {
-                question:question,
-                type:quizType.pick,
-                answer:choices,
-            }
-            setQuizQuestion(data);
-        };
-    
+
         const handleAddUser = () => {
             if (studentName == null || studentName == undefined) {
                 console.log("Student needs a fucking name!");
                 return;
             }
-    
+
             let emailId: string = randomIntFromInterval().toString();
             let email: string = emailId + "@moneyconfidence.student.co.uk";
             console.log(email);
@@ -98,29 +69,27 @@ const AdminPage = () => {
                 console.log(result);
                 let user = setUserDetails(result!.user.uid, emailId, studentName, "student");
                 setData("users/", user.UUID!, user);
-            }).catch((error) =>{
+            }).catch((error) => {
                 console.log(error);
             });
         }
-    
+
+        const randomNumber = () => {
+            console.log(getRandom());
+        }
+
         return (
-            <div>
+            <div className=" pl-[250px]">
+                <div>
+                    <SideBar>
+                        <Button onClick={() => loadPage("/admin/questions")}>Questions</Button>
+                        <Button onClick={() => loadPage("/admin/users")}>Users</Button>
+                        <Button onClick={() => loadPage("/admin/certificate")}>Certification</Button>
+                        <Button onClick={() => loadPage("/admin/qr")}>QR</Button>                 
+                    </SideBar>
+                </div>
                 <div className="grid w-3/5 gap-2 p-4">
                     <h1 className='text-3xl'>Admin Page</h1>
-                    <h1 className='text-xl'>Add Question</h1>
-                    <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
-                    <Textarea placeholder="Photo URL, leave blank if question does not have contain photos" value={photoURL} onChange={handlePhotoURLChange} />
-                    {choices.map((choice, index) => (
-                        <div key={index} className='space-y-2'>
-                            <Textarea placeholder={`Choice ${index + 1}`} value={choice.Answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
-                            <Switch id={`true-false-${index}`} checked={choices[index].Result} onCheckedChange={(value) => handleChoiceResultChange(index, value)} />
-                            <Label htmlFor={`true-false-${index}`}>{choices[index].Result ? 'True' : 'False'}</Label>
-                        </div>
-                    ))}
-                    <div>
-                        <Button onClick={handleAddChoice}>Add Choice</Button>
-                    </div>
-                    <Button onClick={handleAddQuestion}>Add Question</Button>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">
                     <h1 className='text-xl'>Add Users</h1>
@@ -128,10 +97,7 @@ const AdminPage = () => {
                     <Button onClick={handleAddUser}>Add User</Button>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">
-                    <Button onClick={() => router.push("/admin/qr")}>Go to QR Page</Button>
-                    <Button onClick={() => router.push("/admin/certificate")}>Go to Certificate Page</Button>
-                    <Button onClick={() => router.push("/admin/questions")}>Get Quiz Data</Button>
-                    <Button onClick={() => router.push("/admin/users")}>Get User Data</Button>
+                    <Button onClick={randomNumber}>Random Number</Button>
                 </div>
             </div>
         );

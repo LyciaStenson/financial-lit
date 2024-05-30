@@ -4,7 +4,7 @@ type Props = {
 
 const CelebrationLayout = ({ children }: Props) => {
     return (
-        <main>
+        <main className="max-w-[450px] mx-auto">
             {children}
         </main>
     )

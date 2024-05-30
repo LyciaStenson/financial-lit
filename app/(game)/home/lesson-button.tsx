@@ -31,8 +31,6 @@ export const LessonButton = ({
                 gridRow: day,
                 marginTop: (div5 == 0) ? 10 : -50,
                 marginBottom: (div5 == 0) ? 60 : 0,
-                //marginTop: (col == 1 || col == 4) ? 0 : -50,
-                //marginBottom: (col == 1 || col == 4) ? 0 : 0
             }}
         >
             <Button

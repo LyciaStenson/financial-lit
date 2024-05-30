@@ -49,13 +49,15 @@ const MoreOrLessGamePage = () => {
                 Tap the correct box
             </h1>
             <div className="flex flex-row items-center space-x-10">
-                <Image
-                    src="./astronaut-choice.svg"
-                    alt="Astronaut choice"
-                    width={0}
-                    height={0}
-                    className="w-28 h-auto"
-                />
+                <div className="animate-pulse">
+                    <Image
+                        src="./astronaut-choice.svg"
+                        alt="Astronaut choice"
+                        width={0}
+                        height={0}
+                        className="w-28 h-auto"
+                    />
+                </div>               
                 <div className="text-lg font-extrabold text-moneyconf-purple w-48 h-24 border-[2.5px] flex flex-col items-center justify-center border-moneyconf-purple rounded-3xl">
                     <h2>Does it cost more</h2>
                     <h2>or less?</h2>
@@ -68,11 +70,11 @@ const MoreOrLessGamePage = () => {
                 <div className="flex flex-row space-x-10 items-center justify-center">
                     <div className="w-52 h-56 flex items-center justify-center rounded-3xl bg-moneyconf-grey border-4">
                     <Image
-                        src=""
+                        src="astronaut-choice.svg"
                         alt="Astronaut choice"
                         width={0}
                         height={0}
-                        className="w-auto h-auto"
+                        className="w-36 h-auto"
                     />
                     </div>                  
                     <TextBoxes text = "£250"/>

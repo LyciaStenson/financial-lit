@@ -12,6 +12,7 @@ const TripleScrollingGamePage = () => {
               Scroll the dials to chose your budget!
             </h1>
             <div className="flex flex-row items-center space-x-10">
+              <div className="animate-jump animate-infinite animate-duration-1000">
                 <Image
                     src="./astronaut-laptop.svg"
                     alt="Astronaut laptop"
@@ -19,6 +20,7 @@ const TripleScrollingGamePage = () => {
                     height={0}
                     className="w-32 h-auto"
                 />
+              </div>
                 <div className="text-lg font-extrabold text-moneyconf-purple w-48 p-5 border-[2.5px] border-moneyconf-purple rounded-3xl">
                     <h2>Remaining</h2>
                     <h2>monthly salary =</h2>

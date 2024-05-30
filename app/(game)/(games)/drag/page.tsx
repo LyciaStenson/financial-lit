@@ -30,14 +30,16 @@ const DragGamePage = () => {
                 Drag the icons to the correct side
             </h1>
             <div className="flex flex-row items-center space-x-10 pt-7">
-                <Image
-                    src="./astronaut-money-fingers.svg"
-                    alt="Astronaut Kick"
-                    width={0}
-                    height={0}
-                    priority={true}
-                    className="w-24 h-auto"
-                />
+                <div className="animate-wiggle animate-infinite">
+                    <Image
+                        src="./astronaut-money-fingers.svg"
+                        alt="Astronaut Kick"
+                        width={0}
+                        height={0}
+                        priority={true}
+                        className="w-24 h-auto"
+                    />
+                </div>               
                 <div className="text-xl font-extrabold text-moneyconf-purple w-70 p-5 border-[3px] border-moneyconf-purple rounded-3xl space-y-2">
                     <h2>Is this paid for by</h2>
                     <h2 className="underline">The Government</h2>

@@ -15,7 +15,9 @@ const PickButton = ({ click = () => {}, text, index }: Props) => {
     return (
         <Button 
             onClick={handleClick} // Attach the handleClick function here
-            className="w-32 h-24 rounded-3xl flex items-center justify-center bg-moneyconf-grey border-4 border-dashed border-moneyconf-green"
+            //className="w-32 h-24 rounded-3xl flex items-center justify-center bg-moneyconf-grey border-4 border-dashed border-moneyconf-green"
+            variant="quiz"
+            size="quiz"
         >
             <h3 className="text-2xl text-moneyconf-purple font-extrabold"> {text} </h3>
         </Button>
