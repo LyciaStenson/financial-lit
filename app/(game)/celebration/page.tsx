@@ -1,4 +1,18 @@
+'use client';
+
 import Image from "next/image"
+import Continue from "./continue";
+import { useRouter } from "next/navigation";
+
+//const router = useRouter();
+
+/*const continueQuiz = () =>{
+    if (variant == "lessonUnlocked"){
+        router.push("/activity");
+    } else {
+        router.push("/home");
+    }
+}*/
 
 const CelebrationPage = () => {
     return (
@@ -48,6 +62,7 @@ const CelebrationPage = () => {
                     className="w-48 h-auto animate-jump"
                 />
             </div>
+            <Continue text="Continue"/>
         </div>
     )
 }

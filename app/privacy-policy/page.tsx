@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const PrivacyPolicyPage = () => {
     return ( 
         <div>
@@ -30,10 +32,10 @@ const PrivacyPolicyPage = () => {
                     means a unique account created for You to access our Service or parts of our Service.
                 </li>
                 <li >
-                    means an entity that controls, is controlled by or is under common control with a party, where &quot;control&quot; means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
+                    means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
                 </li>
                 <li>
-                    (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to My Money Confidence ltd., 69a Barton Street, Tewkesbury, GL20 5PY.
+                    (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to My Money Confidence ltd., 69a Barton Street, Tewkesbury, GL20 5PY.
                 </li>
                 <li>
                     are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.
@@ -91,7 +93,7 @@ const PrivacyPolicyPage = () => {
                 Usage Data is collected automatically when using the Service.
             </p>
             <p className="px-16 text-md text-white">
-                Usage Data may include information such as Your Device&apos;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
+                Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
             </p>
             <p className="px-16 text-md text-white">
                 When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.
@@ -114,7 +116,7 @@ const PrivacyPolicyPage = () => {
                 </li>
             </ul>
             <p className="px-16 text-md text-white">
-                Cookies can be &quot;Persistent&quot; or &quot;Session&quot; Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. Learn more about cookies on the Free Privacy Policy website article.
+                Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. Learn more about cookies on the Free Privacy Policy website article.
             </p>
             <p className="px-16 text-md text-white">
                 We use both Session and Persistent Cookies for the purposes set out below:
@@ -160,7 +162,167 @@ const PrivacyPolicyPage = () => {
             </p>
             <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
                 Use of Your Personal Data
-            </h2>         
+            </h2>
+            <p className="px-16 text-md text-white">
+                The Company may use Personal Data for the following purposes:
+            </p>
+            <p className="px-16 text-md text-white">
+                To provide and maintain our Service, including to monitor the usage of our Service.
+            </p>
+            <p className="px-16 text-md text-white">
+                To manage Your Account: to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.
+            </p>
+            <p className="px-16 text-md text-white">
+                For the performance of a contract: the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.
+            </p>
+            <p className="px-16 text-md text-white">
+                To contact You: To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.
+            </p>
+            <p className="px-16 text-md text-white">
+                To provide You with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information.
+            </p>
+            <p className="px-16 text-md text-white">
+                To manage Your requests: To attend and manage Your requests to Us.
+            </p>
+            <p className="px-16 text-md text-white">
+                For business transfers: We may use Your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which Personal Data held by Us about our Service users is among the assets transferred.
+            </p>
+            <p className="px-16 text-md text-white">
+                For other purposes: We may use Your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Service, products, services, marketing and your experience.
+            </p>
+            <p className="px-16 text-md text-white">
+                We may share Your personal information in the following situations:
+            </p>
+            <ul className="list-disc px-16 text-md text-white">
+                <li>
+                    With Service Providers: We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You.
+                </li>
+                <li>
+                    For business transfers: We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of Our business to another company.
+                </li>
+                <li>
+                    With Affiliates: We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us.
+                </li>
+                <li>
+                    With business partners: We may share Your information with Our business partners to offer You certain products, services or promotions.
+                </li>
+                <li>
+                    With other users: when You share personal information or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside.
+                </li>
+                <li>
+                    With Your consent: We may disclose Your personal information for any other purpose with Your consent.
+                </li>
+            </ul>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Retention of Your Personal Data
+            </h2>
+            <p className="px-16 text-md text-white">
+                The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy.
+            </p>
+            <p className="px-16 text-md text-white">
+                We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
+            </p>
+            <p className="px-16 text-md text-white">
+                The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of Our Service, or We are legally obligated to retain this data for longer time periods.
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Delete Your Personal Data
+            </h2>
+            <p className="px-16 text-md text-white">
+                You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.
+            </p>
+            <p className="px-16 text-md text-white">
+                Our Service may give You the ability to delete certain information about You from within the Service.
+            </p>
+            <p className="px-16 text-md text-white">
+                You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any personal information that You have provided to Us.
+            </p>
+            <p className="px-16 text-md text-white">
+                Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Disclosure of Your Personal Data
+            </h2>
+            <h2 className="px-16 text-4xl text-white flex justify-start">
+                Business Transactions
+            </h2>
+            <p className="px-16 text-md text-white">
+                If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Law enforcement
+            </h2>
+            <p className="px-16 text-md text-white">
+                Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Other legal requirements
+            </h2>
+            <p className="px-16 text-md text-white">
+                The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:
+            </p>
+            <ul className="list-disc px-16 text-md text-white">
+                <li>
+                    Comply with a legal obligation
+                </li>
+                <li>
+                    Protect and defend the rights or property of the Company
+                </li>
+                <li>
+                    Prevent or investigate possible wrongdoing in connection with the Service
+                </li>
+                <li>
+                    Protect the personal safety of Users of the Service or the public
+                </li>
+                <li>
+                    Protect against legal liability
+                </li>
+            </ul>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Security of Your Personal Data
+            </h2>
+            <p className="px-16 text-md text-white">
+                The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Children's Privacy
+            </h2>
+            <p className="px-16 text-md text-white">
+                Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.
+            </p>
+            <p className="px-16 text-md text-white">
+                If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Links to Other Websites
+            </h2>
+            <p className="px-16 text-md text-white">
+                Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.
+            </p>
+            <p className="px-16 text-md text-white">
+                We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Changes to this Privacy Policy
+            </h2>
+            <p className="px-16 text-md text-white">
+                We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.
+            </p>
+            <p className="px-16 text-md text-white">
+                We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.
+            </p>
+            <p className="px-16 text-md text-white">
+                You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+            </p>
+            <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
+                Contact Us
+            </h2>
+            <div className="flex flex-row pb-20">
+                    <p className="text-md text-white pl-16"> If you have any questions about this Privacy Policy, You can contact us by email: </p>
+                    <Link href={"mailto:info@mymoneyconfidence.co.uk"} className="text-white px-1">
+                        info@mymoneyconfidence.co.uk 
+                    </Link>
+                </div> 
         </div>
     );
 };

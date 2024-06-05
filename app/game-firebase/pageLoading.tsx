@@ -33,7 +33,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
 
                 getData("users/", user.uid).then((value: { result: DocumentSnapshot<DocumentData, DocumentData> | null }) => {
                     let data = value.result?.data();
-                    setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+                    setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role,  data?.score, data?.streak);
                 });
             } else {
                 // User is signed out

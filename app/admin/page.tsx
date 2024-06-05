@@ -27,6 +27,8 @@ function randomIntFromInterval() {
 const AdminPage = () => {
 
     const [studentName, setStudentName] = useState('');
+    const [role, setRole] = useState('');
+
     const { user } = useAuthContext() as { user: User };
     const [isAdmin, setIsAdmin] = useState(false);
 
@@ -55,17 +57,27 @@ const AdminPage = () => {
             setStudentName(event.target.value);
         };
     
+        const handleRole = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+            setRole(event.target.value);
+        };
 
         const handleAddUser = () => {
             if (studentName == null || studentName == undefined) {
-                console.log("Student needs a fucking name!");
+                alert("Student needs a name!");
                 return;
             }
+            
+            let email: string = "";
+            let emailId: string = "";
+            let password: string = "";
+            if(role == "student"){
+                emailId = randomIntFromInterval().toString();
+                email = emailId + "@moneyconfidence.co.uk";
+                password = "23@f1-*1HA%^3(DA)";
+            }
 
-            let emailId: string = randomIntFromInterval().toString();
-            let email: string = emailId + "@moneyconfidence.student.co.uk";
             console.log(email);
-            signUp(email, "23@f1-*1HA%^3(DA)").then((result: UserCredential | null) => {
+            signUp(email, password, role).then((result: UserCredential | null) => {
                 console.log(result);
                 let user = setUserDetails(result!.user.uid, emailId, studentName, "student");
                 setData("users/", user.UUID!, user);
@@ -89,11 +101,13 @@ const AdminPage = () => {
                     </SideBar>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">
-                    <h1 className='text-3xl'>Admin Page</h1>
+                    <h1 className='text-5xl'>Hello {getCurrentUser().dispalyName}</h1>
+                    <h1 className='text-3xl'>Welcome to the Admin Page</h1>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">
                     <h1 className='text-xl'>Add Users</h1>
-                    <Textarea placeholder="Student Name." value={studentName} onChange={handleStudentName} />
+                    <Textarea placeholder="Name." value={studentName} onChange={handleStudentName} />
+                    <Textarea placeholder="Role." value={role} onChange={handleRole} />
                     <Button onClick={handleAddUser}>Add User</Button>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">

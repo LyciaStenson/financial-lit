@@ -7,6 +7,8 @@ import { Banner } from "./banner";
 import { Button } from "@/components/ui/button";
 import { getRandom } from "@/src/random/randomNumberGenerator";
 import { useState } from "react";
+import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
+import { TopBar } from "@/components/top-bar";
 
 const ActivityGamePage = () => {
 
@@ -23,12 +25,11 @@ const ActivityGamePage = () => {
     event.currentTarget.disabled = true;
   }
 
+  console.log("streak:"+ getCurrentUser()?.streak!)
+
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-5 border">
-
-      <h1 className="text-xl font-extrabold text-moneyconf-purple p-2">
-        Scroll the dials to chose your budget!
-      </h1>
+      <TopBar streak = {getCurrentUser()?.streak!}/>
       <Banner title="Day 6" description="Adam's money Confidence" />
       <div className="flex flex-row items-end justify-center space-x-2">
         <div className="flex flex-col items-center justify-center space-y-2">
@@ -72,7 +73,7 @@ const ActivityGamePage = () => {
         </div>
       </div>
       <div className="flex flex-row space-x-2">
-        <div className="animate-jump animate-infinite animate-duration-1000">
+        <div className="animate-jump animate-delay-500 animate-thrice animate-duration-1000">
           <Image
             src="./safe.svg"
             alt="Safe"
@@ -106,7 +107,7 @@ const ActivityGamePage = () => {
           )}
         </div>
         <Button
-          className={"w-[90px] h-[90px] border-[2.5px] shadow-[inset_0_-11px_0px_rgba(0,0,0,0.3),inset_0_3px_0px_rgb(255,255,255,0.7)]"}
+          className={"w-[90px] h-[90px] border-[2.5px] shadow-[inset_0_-11px_0px_rgba(0,0,0,0.3),inset_0_3px_0px_rgb(255,255,255,0.7)] stripes stripes-size-[200px] stripes-opacity-20 stripes-white"}
           variant="lessonCompleted"
           shape="round"
           onClick={getMorePoints}

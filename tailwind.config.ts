@@ -23,6 +23,7 @@ const config = {
         'moneyconf-purple': '#390176',
         'moneyconf-grey-old': '#cccccc',
         'moneyconf-grey': '#f2f2f2',
+        'moneyconf-grey-dark': '#999999',
         'moneyconf-grey-border': '#e6e6e6',
         'moneyconf-green': '#8cc63f',
         'moneyconf-blue' : '#000072',

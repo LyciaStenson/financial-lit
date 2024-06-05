@@ -7,8 +7,13 @@ type Props = {
 
 const Continue =  ({text, click}: Props) => {
     return (
-            <Button onClick={click} className=" w-96 h-12 rounded-3xl flex items-center justify-center bg-moneyconf-gold border-4 border-dashed border-moneyconf-blue">
-                <h3 className="text-2xl text-moneyconf-purple font-extrabold"> {text} </h3>
+            <Button
+                onClick={click}
+                variant="continue"
+                size="continue"
+                className="shadow-[0_3.5px_0px_rgba(0,0,0,0.3),inset_0_5px_0px_rgb(255,255,255,0.5)]"
+            >
+                {text}
             </Button>
     )
 }

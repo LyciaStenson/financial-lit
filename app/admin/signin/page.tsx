@@ -16,8 +16,9 @@ function Page(): JSX.Element {
     event.preventDefault();
 
     // Attempt to sign up with provided email and password
-    const result = await signUp( email + "@moneyconfidence.co.uk", password ).then((result:UserCredential | null) => {
-      let user = setUserDetails( result!.user.uid, email + "@moneyconfidence.co.uk", email, "None");
+    const result = await signUp( email, password, "none" ).then((result:UserCredential | null) => {
+      if(result === null || result == undefined) return;
+      let user = setUserDetails( result!.user.uid, email, email, "none");
       setData("users/", user.UUID!, user);
     });
 

@@ -14,10 +14,10 @@ const ScrollerBox = () => {
         <div className="flex flex-row items-center relative">
             <Image
                 src="./arrow-green.svg"
-               alt="Arrow Green"
+                alt="Arrow Green"
                 width={0}
                 height={0}
-             className="w-5 h-auto absolute left-[-22px]"
+                className="w-5 h-auto absolute left-[-22px]"
             />
               <div className="text-lg font-extrabold text-moneyconf-purple w-20 border-[2.5px] border-moneyconf-purple rounded-lg bg-moneyconf-grey">
                   <Picker value={pickerValue} onChange={setPickerValue}>

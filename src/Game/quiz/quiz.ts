@@ -3,35 +3,38 @@ import { quizData, quizYear } from "./quizData";
 import setData from "@/src/FirebaseBridge/firestore/setData";
 import { uuidv4 } from "@firebase/util";
 
-export let quizDataList: quizData[] = [];
+export let questions: quizData[] = [];
 export let currentQuestion: quizData | null = null;
+
+let hasQuestionsLoaded = false;
+
+export async function loadQuiz(){
+    if(!hasQuestionsLoaded){
+        await getAllQuizQuestions();
+
+        currentQuestion = questions.pop()!;
+
+        hasQuestionsLoaded = true;
+
+        console.log("Loaded all questions");
+        console.log("Current Questions >> ", currentQuestion);
+    }
+}
 
 export function getCurrentQuestion() {
     return currentQuestion;
 }
 
-export async function getNextQuizQuestion():Promise<quizData | null> {
-    let currentQuestion:quizData | null = null;
-    quizDataList = [];
-    if (quizDataList.length === 0) {
-        quizDataList = await getAllQuizQuestions();
-        console.log(quizDataList);
-    }
-
-    if (quizDataList.length > 0) {
-        currentQuestion = quizDataList.pop()!;
-        return currentQuestion;
-    }
-
+export async function getNextQuizQuestion(){
+    currentQuestion = questions.pop()!;
     return currentQuestion;
 }
 
 export async function getAllQuizQuestions(): Promise<quizData[]> {
-    let d: quizData[] = [];
     try {
         const data = await getQuizCollection("questions/year3/pick/");
         data.forEach((item) => {
-            d.push({
+            questions.push({
                 UUID: item.UUID,
                 question: item.question,
                 type: item.type,
@@ -43,7 +46,7 @@ export async function getAllQuizQuestions(): Promise<quizData[]> {
         console.error("Error fetching quiz questions:", error);
     }
 
-    return d;
+    return questions;
 }
 
 export function setQuizQuestion(data: quizData) {

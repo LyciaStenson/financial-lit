@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import ProgressBar from "./progess-bar";
 
-export const TopBar = () => {
+type Props = {
+    percentage: number
+}
+
+export const TopBar = ({ percentage }: Props) => {
     return (
         <div className="w-full">
             <div className="max-w-[400px] h-[85px] space-x-5 flex items-center justify-center bg-white">
@@ -14,11 +18,11 @@ export const TopBar = () => {
                         alt="Close"
                         width={0}
                         height={0}
-                        className="w-auto h-11"
+                        className="w-auto h-9"
                     />
                 </Link>
                 <ProgressBar
-                    percentage={100}
+                    percentage={percentage}
                 />
                 <div className="animate-jump animate-infinite animate-duration-1000">
                     <Image
@@ -26,7 +30,7 @@ export const TopBar = () => {
                         alt="Timer"
                         width={0}
                         height={0}
-                        className="w-auto h-14"
+                        className="w-auto h-12"
                     />
                 </div>
 

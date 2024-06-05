@@ -33,7 +33,7 @@ const DownloadPage = () => {
                 <Button onClick={() => loadPage("/admin/certificate")}>Certification</Button>
                 <Button onClick={() => loadPage("/admin/qr")}>QR</Button>
             </SideBar>            
-            <Button onClick={() => generate("")}>Get all users</Button>
+            <Button onClick={() => generate("")}>Get all users</Button> 
             {quiz.map((data, index) => (
                 <div key={index} className=' space-y-5 bg-gray-500'>
                     <h1>User {index}</h1>
@@ -41,6 +41,7 @@ const DownloadPage = () => {
                     <h1>{data.role}</h1>
                 </div>
             ))}
+                
         </div>
     );
 };

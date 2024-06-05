@@ -15,6 +15,7 @@ import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser"
 import { getData } from "@/src/FirebaseBridge/firestore/getData"
 import { SignInSuspenseWrapper  } from "@/app/(game)/game/SignInSuspenseWrapper"
 import { DocumentData, DocumentSnapshot } from "firebase/firestore"
+import { FirebaseError } from "firebase/app"
 
 export default function Home() {
   const router = useRouter();
@@ -25,17 +26,17 @@ export default function Home() {
     const password = "23@f1-*1HA%^3(DA)";
 
     // Attempt to sign in with provided email and password
-    const { result, error } = await signIn(username, password);
+    const { result, error } = await signIn(username, password, undefined);
 
     if (error) {
       // Display and log any sign-in errors
-      console.log(error);
-      return;
+       console.log(`login failed ${error}`);
+       return;
     }
 
     await getData("users/", result!.user.uid).then((value:{result:DocumentSnapshot<DocumentData, DocumentData> | null}) => {
       let data = value.result?.data();
-      setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role);
+      setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role, data?.score, data?.streak);
     });
 
     // Sign in successful
