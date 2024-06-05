@@ -32,10 +32,10 @@ const PrivacyPolicyPage = () => {
                     means a unique account created for You to access our Service or parts of our Service.
                 </li>
                 <li >
-                    means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
+                    means an entity that controls, is controlled by or is under common control with a party, where &quot;control&quot; means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
                 </li>
                 <li>
-                    (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to My Money Confidence ltd., 69a Barton Street, Tewkesbury, GL20 5PY.
+                    (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to My Money Confidence ltd., 69a Barton Street, Tewkesbury, GL20 5PY.
                 </li>
                 <li>
                     are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.
@@ -93,7 +93,7 @@ const PrivacyPolicyPage = () => {
                 Usage Data is collected automatically when using the Service.
             </p>
             <p className="px-16 text-md text-white">
-                Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
+                Usage Data may include information such as Your Device&apos;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
             </p>
             <p className="px-16 text-md text-white">
                 When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.
@@ -116,7 +116,7 @@ const PrivacyPolicyPage = () => {
                 </li>
             </ul>
             <p className="px-16 text-md text-white">
-                Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. Learn more about cookies on the Free Privacy Policy website article.
+                Cookies can be &quot;Persistent&quot; or &quot;Session&quot; Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. Learn more about cookies on the Free Privacy Policy website article.
             </p>
             <p className="px-16 text-md text-white">
                 We use both Session and Persistent Cookies for the purposes set out below:
@@ -176,7 +176,7 @@ const PrivacyPolicyPage = () => {
                 For the performance of a contract: the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.
             </p>
             <p className="px-16 text-md text-white">
-                To contact You: To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.
+                To contact You: To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application&apos;s push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.
             </p>
             <p className="px-16 text-md text-white">
                 To provide You with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information.
@@ -285,19 +285,19 @@ const PrivacyPolicyPage = () => {
                 The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.
             </p>
             <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
-                Children's Privacy
+                Children&apos;s Privacy
             </h2>
             <p className="px-16 text-md text-white">
                 Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.
             </p>
             <p className="px-16 text-md text-white">
-                If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.
+                If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent&apos;s consent before We collect and use that information.
             </p>
             <h2 className="px-16 pt-14 text-4xl text-white flex justify-start">
                 Links to Other Websites
             </h2>
             <p className="px-16 text-md text-white">
-                Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.
+                Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party&apos;s site. We strongly advise You to review the Privacy Policy of every site You visit.
             </p>
             <p className="px-16 text-md text-white">
                 We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
@@ -309,7 +309,7 @@ const PrivacyPolicyPage = () => {
                 We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.
             </p>
             <p className="px-16 text-md text-white">
-                We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.
+                We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the &quot;Last updated&quot; date at the top of this Privacy Policy.
             </p>
             <p className="px-16 text-md text-white">
                 You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.

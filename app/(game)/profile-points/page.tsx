@@ -31,7 +31,7 @@ const ProfilePointsGamePage = () => {
       <div className="flex w-full px-5 items-center justify-center">
         <div className="w-96 h-20 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
           <h1 className="text-xl font-extrabold">
-            Adam's money Confidence
+            Adam&CloseCurlyQuote;s money Confidence
           </h1>
         </div>
       </div>

@@ -7,7 +7,9 @@ type Props = {
 const DragGameLayout = ({ children }: Props) => {
     return (
         <main className="max-w-[400px] mx-auto h-full justify-center">
-            <TopBar />
+            <TopBar
+                percentage={0}
+            />
             {children}
         </main>
     )

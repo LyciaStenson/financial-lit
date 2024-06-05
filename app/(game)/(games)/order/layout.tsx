@@ -8,7 +8,9 @@ const OrderGameLayout = ({ children }: Props) => {
     return (
         <main>
             <div className="max-w-[400px] mx-auto h-full justify-center">
-                <TopBar />
+                <TopBar
+                    percentage={0}
+                />
                 {children}
             </div>
         </main>
