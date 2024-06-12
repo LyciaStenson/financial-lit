@@ -7,12 +7,10 @@ import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 
 type Props = {
     streak: number;
+    score: number;
 }
 
-export const TopBar = ({streak}:Props) => {
-
-    console.log(getCurrentUser());
-
+export const TopBar = ({ streak, score }: Props) => {
     return (
         <div className="w-full h-[90px] z-50 bg-white">
             <div className={"flex items-center justify-center space-x-2 mx-auto max-w-[400px]"}>
@@ -25,11 +23,10 @@ export const TopBar = ({streak}:Props) => {
                     streak={streak}
                 />
                 <RankBar
-                    points={getCurrentUser()?.score}
+                    points={score}
                 />
                 <Points
-                    points={getCurrentUser()?.score}
-                    //points={12551}
+                    points={score}
                 />
             </div>
         </div>

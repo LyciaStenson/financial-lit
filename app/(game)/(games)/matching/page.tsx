@@ -1,6 +1,6 @@
 import Image from "next/image";
 import MatchingBoxes from "./matching-boxes";
-import Continue from "./continue";
+import ContinueButton from "../../continue-button";
 
 const MatchingGamePage = () => {
     return (
@@ -28,7 +28,10 @@ const MatchingGamePage = () => {
                 <MatchingBoxes one = "Match" two = "Match" three = "Match" four = "Match"/>
                 <MatchingBoxes one = "07" two = "07" three = "07" four = "07"/> 
             </div>
-            <Continue text = "Continue"/>
+            <ContinueButton
+                text = "Continue"
+                disabled={true}
+            />
         </div>
     )
 }

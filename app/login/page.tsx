@@ -1,7 +1,7 @@
 'use client'
 import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import signIn, { enterCode } from "@/src/FirebaseBridge/Auth/signIn";
-import { getData } from "@/src/FirebaseBridge/firestore/getData";
+import { getData, getDataAsync } from "@/src/FirebaseBridge/firestore/getData";
 import { UserCredential } from "firebase/auth";
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import { useRouter } from 'next/navigation';
@@ -48,10 +48,10 @@ function Page(): JSX.Element {
   }
 
   const enterCodeForm  = () => {
-    getData("users/", user!.user.uid).then((value: { result: DocumentSnapshot<DocumentData, DocumentData> | null }) => {
+    getDataAsync("users/", user!.user.uid).then((value: { result: DocumentSnapshot<DocumentData, DocumentData> | null }) => {
       let data = value.result?.data();
       console.log(data);
-      setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role, data?.score, data?.streak);
+      setCurrentUser(data?.UUID, data?.emailID, data?.displayName, data?.role, data?.score, data?.streak);
       console.log("Not Admin");
 
       if (data?.role == "admin") {

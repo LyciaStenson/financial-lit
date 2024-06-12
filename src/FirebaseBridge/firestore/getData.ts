@@ -1,5 +1,5 @@
 import { getFirestoreDatabase } from "../firebaseApp";
-import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference, DocumentSnapshot, DocumentData } from "firebase/firestore";
 import { currentUser } from "../Auth/currentUser";
 import { quizData } from "@/src/Game/quiz/quizData";
 
@@ -7,7 +7,7 @@ import { quizData } from "@/src/Game/quiz/quizData";
 const db = getFirestoreDatabase();
 
 // Function to retrieve a document from a Firestore collection
-export async function getData(collection: string, id: string) {
+export async function getDataAsync(collection: string, id: string) {
   // Create a document reference using the provided collection and ID
   const docRef = doc(db, collection, id);
   // Variable to store the result of the operation
@@ -31,6 +31,19 @@ export async function getData(collection: string, id: string) {
   return { result };
 }
 
+export function getData(collection: string, id: string, callback: (result: DocumentSnapshot<DocumentData> | null, error: Error | null) => void) {
+  const docRef = doc(db, collection, id);
+
+  getDoc(docRef)
+    .then(result => {
+      callback(result, null);
+    })
+    .catch(error => {
+      console.log(error);
+      callback(null, error);
+    });
+}
+
 export async function getDataFromServer(doc: DocumentReference) {
   return await getDoc(doc);
 }
@@ -45,7 +58,7 @@ export async function getUserCollection(path: string): Promise<currentUser[]> {
     return {
       UUID: data.UUID,
       emailID: data.emailID,
-      dispalyName: data.dispalyName,
+      displayName: data.displayName,
       role: data.role,
       score: data.score,
       streak: data.streak,
@@ -60,7 +73,7 @@ async function getUserCollectionFromServer(path: string): Promise<currentUser[]>
     return {
       UUID: data.UUID,
       emailID: data.emailID,
-      dispalyName: data.dispalyName,
+      displayName: data.displayName,
       role: data.role,
       score: data.score,
       streak: data.streak,

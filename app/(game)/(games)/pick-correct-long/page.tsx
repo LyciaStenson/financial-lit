@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import ContinueButton from "../../continue-button";
-import { getCurrentQuestion, getNextQuizQuestion, questions, loadQuiz } from "@/src/Game/quiz/quiz";
+import { getCurrentQuestion, getNextQuizQuestion, questions } from "@/src/Game/quiz/quiz";
 import React, { useEffect, useState } from "react";
 import { quizData } from "@/src/Game/quiz/quizData";
 import { useRouter } from "next/navigation";
 import ToggleButtons from "./toggle-buttons";
 import { TopBar } from "../top-bar";
-import { Underdog } from "next/font/google";
 
 type PickCorrectQuestion = {
     question?: string,
@@ -19,7 +18,7 @@ const QuizDataToQuestion = (data : quizData | null) : PickCorrectQuestion => {
     return {question: data?.question, answers: data?.answer}
 }
 
-const PickCorrectGamePage = () => {
+const PickCorrectLongGamePage = () => {
 
     const [questionsComplete, setQuestionsComplete] = useState<number>(0);
 
@@ -32,8 +31,6 @@ const PickCorrectGamePage = () => {
 
     const [frozen, setFrozen] = useState<boolean>(false);
 
-    const [disabledAnswers, setDisabledAnswers] = useState<boolean[]>([false, false, false, false, false]);
-
     const handleAnswerSelected = (index: number, isCorrect: boolean) => {
         if (frozen) return;
         
@@ -42,35 +39,23 @@ const PickCorrectGamePage = () => {
         if (isCorrect) {
             setTimeout(loadNextQuestion, 700);
         } else {
-            setTimeout(() => incorrectAnswer(index), 700);
+            setTimeout(incorrectAnswer, 700);
         }
     }
 
     const loadNextQuestion = () => {
         console.log("loadNextQuestion");
-        console.log("questions.length", questions.length);
-        setQuestionsComplete(questionsComplete + 1);
+        setQuestionsComplete(1);
         setFrozen(false);
         setSelected(null);
-        setDisabledAnswers([false, false, false, false, false]);
-        getNextQuizQuestion().then((value:quizData) => {
-            if (value != null || undefined) {
-                setCurrentQuestion(QuizDataToQuestion(value));
-            }
+        getNextQuizQuestion().then((value:quizData)=> {
+            setCurrentQuestion(QuizDataToQuestion(value));
         });
     }
 
-    const incorrectAnswer = (index: number) => {
+    const incorrectAnswer = () => {
         setFrozen(false);
         setSelected(null);
-        const nextDisabledAnswers = disabledAnswers.map((c, i) => {
-            if (i === index) {
-                return true;
-            } else {
-                return c;
-            }
-        });
-        setDisabledAnswers(nextDisabledAnswers);
     }
 
     /*
@@ -134,7 +119,6 @@ const PickCorrectGamePage = () => {
                     <ToggleButtons
                         answers={question.answers}
                         selected={selected}
-                        disabledButtons={disabledAnswers}
                         handleToggle={handleAnswerSelected}
                     />
                 </div>
@@ -149,4 +133,4 @@ const PickCorrectGamePage = () => {
     );
 }
 
-export default PickCorrectGamePage;
+export default PickCorrectLongGamePage;

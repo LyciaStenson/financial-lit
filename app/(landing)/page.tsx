@@ -31,7 +31,7 @@ export function useIsVisible(ref: MutableRefObject<Element | null>): boolean {
 const LandingPage = () => {
     return (
         <div className="flex flex-col w-full h-full items-center">
-            <h1 className="pt-14 font-bold text-5xl text-outward-red px-36">
+            <h1 id="mission" className="pt-14 font-bold text-5xl text-outward-red px-36">
                 My Money Confidence - The Mission
             </h1>
             <div className="flex flex-row items-center px-36">
@@ -54,19 +54,19 @@ const LandingPage = () => {
                     </h3>
                 </div>
             </div>
-            <h1 className="pt-14 font-bold text-5xl text-outward-red px-36">
+            <h1 id="story" className="pt-14 font-bold text-5xl text-outward-red px-36">
                 My Money Confidence - The Story
             </h1>
             <div className="flex flex-row items-center px-36">
                 <div>
                     <h3 className="pt-14 text-xl">
-                        Do you remember all those lessons about money you were taught in school? No?! That&CloseCurlyQuote;s because you probably weren&CloseCurlyQuote;t!
+                        Do you remember all those lessons about money you were taught in school? No?! That&#x2019;s because you probably weren&#x2019;t!
                     </h3>
                     <h3 className="pt-14 text-xl">
-                        Maybe it&CloseCurlyQuote;s no surprise then that people are now struggling with the crippling cost-of-living crisis, burgeoning debt, and inadequate savings all while having to navigate a financial landscape that’s rapidly becoming more complex.
+                        Maybe it&#x2019;s no surprise then that people are now struggling with the crippling cost-of-living crisis, burgeoning debt, and inadequate savings all while having to navigate a financial landscape that’s rapidly becoming more complex.
                     </h3>
                     <h3 className="pt-14 text-xl">
-                        Transformative children&CloseCurlyQuote;s financial education in school is essential to lay the foundation for a lifetime of informed and responsible decision-making. However, extremely tight school budgets, overwhelming existing workloads, and a lack of expert provision mean schools alone can’t deliver this! 
+                        Transformative children&#x2019;s financial education in school is essential to lay the foundation for a lifetime of informed and responsible decision-making. However, extremely tight school budgets, overwhelming existing workloads, and a lack of expert provision mean schools alone can’t deliver this! 
                     </h3>
                 </div>
                 <Image
@@ -87,14 +87,14 @@ const LandingPage = () => {
                 />
                 <div>
                     <h3 className="pt-14 text-xl">
-                        My Money Confidence is a social enterprise established by a group of qualified teachers with financial backgrounds passionate about children&CloseCurlyQuote;s financial education.
+                        My Money Confidence is a social enterprise established by a group of qualified teachers with financial backgrounds passionate about children&#x2019;s financial education.
                     </h3>
                     <h3 className="pt-14 text-xl">
                         We know every child should have access to free, impactful, fun financial education, which is why My Money Confidence promise to never charge a penny for our programme delivery in schools!
                     </h3>
                 </div>                             
             </div>
-            <h1 className="pt-14 font-bold text-5xl text-outward-red px-36">
+            <h1 id="method" className="pt-14 font-bold text-5xl text-outward-red px-36">
                 My Money Confidence - The Method
             </h1>
             <div className="flex flex-row items-center px-36">
@@ -119,9 +119,9 @@ const LandingPage = () => {
                 alt="Horizonatal Method "
                 width={0}
                 height={0}
-                className="w-[55rem] h-auto"
+                className="w-[60rem] h-auto"
             />
-            <h1 className="pt-14 font-bold text-5xl text-outward-red px-24">
+            <h1 id="community" className="pt-14 font-bold text-5xl text-outward-red px-24">
                 My Money Confidence - The Community
             </h1>
             <div className="flex flex-row items-center px-36">

@@ -1,13 +1,11 @@
 'use client'
 
 import Image from "next/image";
-import Continue from "./continue";
+import ContinueButton from "../../continue-button";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useEffect, useState } from "react";
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+import { useState } from "react";
 
 /*const theme = createTheme({
     palette: {
@@ -112,7 +110,10 @@ const DragBarGamePage = () => {
             </div>
             
             <div className="flex items-center justify-center text-center" >
-                <Continue text = "Lock in guess"/>
+                <ContinueButton
+                    text="Lock in guess"
+                    disabled={false}
+                />
             </div>
         </div>
     )

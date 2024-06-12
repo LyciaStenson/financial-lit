@@ -39,7 +39,7 @@ const DownloadPage = () => {
                     users?.map((user, index) => (
                         <div key={index}>
                             <div>
-                                <h1>{user.dispalyName} is the winner</h1>
+                                <h1>{user.displayName} is the winner</h1>
                             </div>
                         </div>
                     ))
@@ -52,7 +52,7 @@ const DownloadPage = () => {
                      users?.map((user, index) => (
                         <div key={index}>
                         <div>
-                            <h1>{user.dispalyName} is the winner</h1>
+                            <h1>{user.displayName} is the winner</h1>
                         </div>
                     </div>
                      ))

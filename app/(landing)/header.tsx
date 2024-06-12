@@ -1,10 +1,31 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const Header = () => {
     return (
         <header className="h-[766px] w-full bg-outward-red">
-            <div className="flex flex-row items-end h-[80px]">
-                
+            <div className="flex flex-row items-center justify-between h-[80px]">
+                <Image
+                        src="./logo-inverted.svg"
+                        alt="My Money Confidence Logo"
+                        width={0}
+                        height={0}
+                        className="w-20 h-auto"
+                    />
+                <div className="flex space-x-8 pr-10">
+                    <Link href="#mission" className="text-white text-2xl font-extrabold">
+                        Mission
+                    </Link>
+                    <Link  href="#story" className="text-white text-2xl font-extrabold">
+                        Story
+                    </Link>
+                    <Link href="#method" className="text-white text-2xl font-extrabold">
+                        Method
+                    </Link>
+                    <Link href="#community" className="text-white text-2xl font-extrabold">
+                        Community
+                    </Link>
+                </div>
             </div>
             <div className="flex flex-col items-center justify-end w-full space-y-7 pt-20">
                 <h1 className="w-[38rem] h-auto leading-[7rem] font-bold text-center text-[5.5rem] text-white">

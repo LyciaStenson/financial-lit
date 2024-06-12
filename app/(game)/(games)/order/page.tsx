@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Continue from "./continue";
+import ContinueButton from "../../continue-button";
 import PickBoxes from "./pick-boxes";
 
 const OrderGamePage = () => {
@@ -36,7 +36,10 @@ const OrderGamePage = () => {
                 <h3 className="underline"> {"text"} </h3>
             </div>
             <div className="flex items-center justify-center text-center" >
-                <Continue text = "Lock in guess"/>
+                <ContinueButton
+                    text="Lock in guess"
+                    disabled={false}
+                />
             </div>
         </div>
     )

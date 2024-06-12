@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import ContinueButton from "../continue-button"
+import ContinueButton from "../../continue-button";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import Draggable from "./draggable";
 import Droppable from "./droppable";
@@ -81,6 +81,7 @@ const DragGamePage = () => {
             </div>
             <ContinueButton
                 text="Continue"
+                disabled={false}
             />
         </div>
     )

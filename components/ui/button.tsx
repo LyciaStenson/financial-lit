@@ -22,6 +22,7 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-14 px-11 py-2",
+        wide: "w-80 h-14",
         topBar: "h-[90px]",
         quiz: "w-32 h-24",
         continue: "w-96 h-11"

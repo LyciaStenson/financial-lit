@@ -11,25 +11,21 @@ import { notFound, useRouter } from 'next/navigation'
 import setData from '@/src/FirebaseBridge/firestore/setData';
 import signUp from '@/src/FirebaseBridge/Auth/signUp';
 import { User, UserCredential } from 'firebase/auth';
-import { getData } from '@/src/FirebaseBridge/firestore/getData';
-import { useAuthContext } from '../game-firebase/pageLoading';
+import { getData, getDataAsync } from '@/src/FirebaseBridge/firestore/getData';
 import { quizData, quizType } from '@/src/Game/quiz/quizData';
 import { getRandom } from '@/src/random/randomNumberGenerator';
-import { Thermometer } from 'lucide-react';
 import { SideBar } from '@/components/side-bar';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getCurrentAuth } from '@/src/FirebaseBridge/firebaseApp';
 
-
-function randomIntFromInterval() {
-    return Math.floor(Math.random() * 70000000);
-}
-
+const auth = getCurrentAuth();
 
 const AdminPage = () => {
 
     const [studentName, setStudentName] = useState('');
     const [role, setRole] = useState('');
 
-    const { user } = useAuthContext() as { user: User };
+    const [user, loading, error] = useAuthState(auth);
     const [isAdmin, setIsAdmin] = useState(false);
 
     // Access the user object from the authentication context
@@ -37,7 +33,7 @@ const AdminPage = () => {
     const router = useRouter();
 
     if (user) {
-        getData("users/", user.uid).then((value) => {
+        getDataAsync("users/", user.uid).then((value) => {
             let data = value.result?.data();
             if (data?.role == "admin") {
                 setIsAdmin(true);
@@ -71,7 +67,6 @@ const AdminPage = () => {
             let emailId: string = "";
             let password: string = "";
             if(role == "student"){
-                emailId = randomIntFromInterval().toString();
                 email = emailId + "@moneyconfidence.co.uk";
                 password = "23@f1-*1HA%^3(DA)";
             }
@@ -101,7 +96,7 @@ const AdminPage = () => {
                     </SideBar>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">
-                    <h1 className='text-5xl'>Hello {getCurrentUser().dispalyName}</h1>
+                    <h1 className='text-5xl'>Hello {getCurrentUser().displayName}</h1>
                     <h1 className='text-3xl'>Welcome to the Admin Page</h1>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">

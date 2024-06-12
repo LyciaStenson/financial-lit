@@ -27,11 +27,14 @@ const ProfilePointsGamePage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-5 border">
-      <TopBar streak = {getCurrentUser()?.streak!}/>
+      <TopBar
+        streak = {getCurrentUser()?.streak!}
+        score = {getCurrentUser()?.score!}
+      />
       <div className="flex w-full px-5 items-center justify-center">
         <div className="w-96 h-20 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
           <h1 className="text-xl font-extrabold">
-            Adam&CloseCurlyQuote;s money Confidence
+            Adam&#x2019;s money Confidence
           </h1>
         </div>
       </div>
@@ -87,7 +90,7 @@ const ProfilePointsGamePage = () => {
       </div>
       <div className="w-96 h-20 px-5 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
         <h1 className="text-xl font-extrabold">
-          School Top Three Leaders
+          School Top Three Scores
         </h1>
       </div>
       <div className="flex flex-row justify-center items-center px-5">

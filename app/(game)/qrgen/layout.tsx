@@ -4,7 +4,7 @@ type Props = {
 
 const QRGenLayout = ({ children }: Props) => {
     return (
-        <main className="w-[1400px] h-[900px] mx-auto bg-moneyconf-gold">
+        <main className="w-[1400px] h-[900px]">
             {children}
         </main>
     )

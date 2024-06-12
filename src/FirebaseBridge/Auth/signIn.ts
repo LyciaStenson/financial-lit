@@ -1,8 +1,8 @@
 import { useRouter } from "next/navigation";
 import { getCurrentAuth } from "../firebaseApp";
-import { signInWithEmailAndPassword, getAuth, sendEmailVerification, multiFactor, PhoneAuthProvider, RecaptchaVerifier, ApplicationVerifier, PhoneMultiFactorGenerator, UserCredential } from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth, multiFactor, PhoneAuthProvider, ApplicationVerifier, PhoneMultiFactorGenerator, UserCredential } from "firebase/auth";
 import { setCurrentUser } from "./currentUser";
-import { getData } from "../firestore/getData";
+import { getDataAsync } from "../firestore/getData";
 
 // Get the authentication instance using the Firebase app
 const auth = getAuth();
@@ -23,8 +23,8 @@ export async function signInWhenEnteredCode(id: string | null) {
     return;
   }
 
-  let data = (await getData("users/", result!.user.uid)).result?.data();
-  setCurrentUser(data?.UUID, data?.emailID, data?.dispalyName, data?.role, data?.score, data?.streak);
+  let data = (await getDataAsync("users/", result!.user.uid)).result?.data();
+  setCurrentUser(data?.UUID, data?.emailID, data?.displayName, data?.role, data?.score, data?.streak);
 }
 
 // Function to sign in with email and password
@@ -35,11 +35,11 @@ export default async function signIn(email: string, password: string, recaptchaV
   try {
     //console.log(email);
     result = await signInWithEmailAndPassword(auth, email, password); // Sign in with email and password
-    let data = (await getData("users/", result!.user.uid)).result?.data();
+    let data = (await getDataAsync("users/", result!.user.uid)).result?.data();
     if (data?.role == "admin") {
       multiFactor(result.user).getSession().then(function (multiFactorSession) {
         const phoneInfoOptions = {
-          phoneNumber: "+4407496767274", //https://smstome.com/united-kingdom/phone/447488855044/sms/5544
+          phoneNumber: "+4407496767274", //TODO: Need to change this phone number
           session: multiFactorSession
         };
 
@@ -61,6 +61,6 @@ export async function enterCode(code:string){
         const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
 
         // Complete enrollment.
-        let data = (await getData("users/", user!.user.uid)).result?.data();
+        let data = (await getDataAsync("users/", user!.user.uid)).result?.data();
         return multiFactor(user!.user).enroll(multiFactorAssertion, data?.displayName);
 }

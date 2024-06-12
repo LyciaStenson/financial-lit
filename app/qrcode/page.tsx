@@ -10,7 +10,7 @@ const QRPage = () => {
       <h1 className='text-7xl'>Hello Lewis</h1>
       <h3 className='text-4xl'>Are you ready to play!</h3>
       <Canvas
-      text={'https://financial-lit.vercel.app/?id=32819709'}
+      text={'https://financial-lit.vercel.app/?id=32819709'} /*TODO: Need to change this to Adams URL*/
       options={{
         errorCorrectionLevel: 'M',
         margin: 3,

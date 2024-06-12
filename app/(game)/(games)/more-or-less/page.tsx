@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import Continue from "./continue";
+import ContinueButton from "../../continue-button";
 import { Button } from "@/components/ui/button";
 import TextBoxes from "./text-boxes";
 import { useEffect, useState } from "react";
@@ -83,7 +83,11 @@ const MoreOrLessGamePage = () => {
                     <h3 className="text-2xl text-moneyconf-purple font-extrabold"> {"Less"} </h3>
                 </Button>
             </div>
-            <Continue click={continueQuiz} text = "Continue"/>
+            <ContinueButton
+                text="Continue"
+                disabled={false}
+                click={continueQuiz}
+            />
         </div>
     )
 }

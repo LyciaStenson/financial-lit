@@ -37,7 +37,7 @@ const DownloadPage = () => {
             {quiz.map((data, index) => (
                 <div key={index} className=' space-y-5 bg-gray-500'>
                     <h1>User {index}</h1>
-                    <h1>{data.dispalyName}</h1>
+                    <h1>{data.displayName}</h1>
                     <h1>{data.role}</h1>
                 </div>
             ))}
