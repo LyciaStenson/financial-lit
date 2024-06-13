@@ -119,7 +119,7 @@ const LandingPage = () => {
                 alt="Horizonatal Method "
                 width={0}
                 height={0}
-                className="w-[60rem] h-auto"
+                className="w-[60rem] h-auto py-20"
             />
             <h1 id="community" className="pt-14 font-bold text-5xl text-outward-red px-24">
                 My Money Confidence - The Community

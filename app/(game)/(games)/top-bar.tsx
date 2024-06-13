@@ -22,7 +22,7 @@ export const TopBar = ({ percentage }: Props) => {
                     />
                 </Link>
                 <ProgressBar
-                    percentage={percentage}
+                    percentage={(percentage > 100) ? 100 : percentage}
                 />
                 <div className="animate-jump animate-infinite animate-duration-1000">
                     <Image

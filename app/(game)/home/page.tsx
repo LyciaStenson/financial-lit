@@ -6,10 +6,9 @@ import Image from "next/image";
 import { TopBar } from "@/components/top-bar";
 import { loadQuiz } from "@/src/Game/quiz/quiz";
 import useUser from "@/Hooks/AuthUserContext";
+import { useEffect } from "react";
 
 const HomePage = () => {
-    loadQuiz();
-
     const lessonHrefs = [
         "drag", "pick-correct", "drag-bar", "matching", "order",
         "more-or-less", "triple-scrolling", "interest", "scrolling",
@@ -23,7 +22,7 @@ const HomePage = () => {
         return (
             <div className="h-screen flex items-center justify-center">
                 <Banner title="Loading your account"
-                description={"We are gathering your details... Please be patient"} />
+                    description={"We are gathering your details... Please be patient"} />
             </div>
         )
     }
@@ -32,9 +31,10 @@ const HomePage = () => {
         return (
             <div className="h-screen flex items-center justify-center">
                 <Banner title="Error"
-                description={`${error.message}`} />
+                    description={`${error.message}`} />
             </div>
-        )    }
+        )
+    }
 
     if (user) {
         return (

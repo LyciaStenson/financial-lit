@@ -9,7 +9,7 @@ const QRGenPage = () => {
     return (
             <div className="flex flex-col justify-stretch w-full h-full">
                 <Image
-                    src="./qr_code-final.svg"
+                    src="./qr-code-final.svg"
                     alt="QRCode"
                     width={0}
                     height={0}

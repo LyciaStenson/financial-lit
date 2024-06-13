@@ -6,13 +6,13 @@ type Props = {
     click?: () => void;
 }
 
-const ContinueButton = ({ text, click }: Props ) => {
+const ContinueButton = ({ text, disabled, click }: Props ) => {
     return (
         <Button
+            disabled={disabled}
             onClick={click}
-            variant="continue"
+            variant={disabled ? "continueLocked" : "continueUnlocked"}
             size="continue"
-            className="shadow-[0_3.5px_0px_rgba(0,0,0,0.3),inset_0_5px_0px_rgb(255,255,255,0.5)]"
         >
             {text}
         </Button>

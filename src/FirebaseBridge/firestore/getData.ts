@@ -1,10 +1,10 @@
-import { getFirestoreDatabase } from "../firebaseApp";
+import { getCurrentDatabase } from "../firebaseApp";
 import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference, DocumentSnapshot, DocumentData } from "firebase/firestore";
 import { currentUser } from "../Auth/currentUser";
 import { quizData } from "@/src/Game/quiz/quizData";
 
 // Get the Firestore instance
-const db = getFirestoreDatabase();
+const db = getCurrentDatabase();
 
 // Function to retrieve a document from a Firestore collection
 export async function getDataAsync(collection: string, id: string) {

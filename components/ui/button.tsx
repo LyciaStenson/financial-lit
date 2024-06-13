@@ -12,13 +12,14 @@ const buttonVariants = cva(
         default: "bg-white text-slate-500 border-slate-200 border-[3px] border-b-[5px] text-md hover:bg-slate-100 active:border-b-[3px]",
         ghost: "",
         primary: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue border-[3px] border-b-[5px] hover:bg-fin-lit-gold/80 active:border-b-[3px]",
-        primaryOutline: "bg-white text-moneyconf-gold",
-        secondary: "bg-moneyconf-blue text-white border-moneyconf-blue hover:bg-fin-lit-blue/80 border-b-4 active:border-b-0",
+        //primaryOutline: "bg-white text-moneyconf-gold",
+        //secondary: "bg-moneyconf-blue text-white border-moneyconf-blue hover:bg-fin-lit-blue/80 border-b-4 active:border-b-0",
         lessonCompleted: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue",
         lessonUnlocked: "bg-moneyconf-green text-moneyconf-blue border-moneyconf-blue",
         lessonLocked: "bg-moneyconf-grey text-moneyconf-blue border-moneyconf-blue",
         quiz: "rounded-3xl flex items-center justify-center bg-moneyconf-grey border-[3px] border-dashed border-moneyconf-green",
-        continue: "bg-moneyconf-grey border-2 border-moneyconf-blue text-xl text-moneyconf-grey-dark"
+        continueLocked: "bg-moneyconf-grey border-2 border-moneyconf-blue text-xl text-moneyconf-grey-dark shadow-[0_3.5px_0px_rgba(0,0,0,0.3),inset_0_5px_0px_rgb(255,255,255,0.5)]",
+        continueUnlocked: "bg-moneyconf-gold border-2 border-moneyconf-blue text-xl text-moneyconf-purple shadow-[0_3.5px_0px_rgba(0,0,0,0.3),inset_0_5px_0px_rgb(255,255,255,0.5)]"
       },
       size: {
         default: "h-14 px-11 py-2",

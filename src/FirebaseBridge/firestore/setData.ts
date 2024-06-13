@@ -1,9 +1,9 @@
 import { uuidv4 } from "@firebase/util";
-import { getFirestoreDatabase } from "../firebaseApp";
+import { getCurrentDatabase } from "../firebaseApp";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 // Get the Firestore instance
-const db = getFirestoreDatabase();
+const db = getCurrentDatabase();
 
 // Function to add data to a Firestore collection
 export default async function setData(
