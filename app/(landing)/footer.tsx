@@ -15,7 +15,7 @@ export const Footer = () => {
                     </Link>
                     <h3 className="text-md text-white px-1"> | </h3>
                     <h3 className="text-md text-white"> Contact Us: </h3>
-                    <Link href={"mailto:info@mymoneyconfidence.co.uk"} className="text-white px-1">
+                    <Link href={"mailto:info@mymoneyconfidence.co.uk"} className="text-white underline px-1">
                         info@mymoneyconfidence.co.uk 
                     </Link>
                 </div>

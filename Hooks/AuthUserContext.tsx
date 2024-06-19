@@ -4,10 +4,12 @@ import { getCurrentAuth } from '@/src/FirebaseBridge/firebaseApp';
 import { getData } from '@/src/FirebaseBridge/firestore/getData';
 import { currentUser } from '@/src/FirebaseBridge/Auth/currentUser';
 import { LoadingHook } from 'react-firebase-hooks/auth/dist/util';
+import { serverTimestamp } from 'firebase/firestore';
 
 export declare type MyAuthStateHook = LoadingHook<currentUser | null, Error>;
 
 const auth = getCurrentAuth();
+
 
 const useUser = (): MyAuthStateHook => {
   const [firebaseUser, loading, error] = useAuthState(auth);
@@ -17,7 +19,6 @@ const useUser = (): MyAuthStateHook => {
   useEffect(() => {
     if (firebaseUser) {
       setDataLoading(true);
-      console.log("Hello User", firebaseUser.email);
 
       getData("users", firebaseUser.uid, (result, error) => {
         if (error) {
@@ -32,12 +33,15 @@ const useUser = (): MyAuthStateHook => {
             UUID: data.UUID,
             displayName: data.displayName,
             emailID: data.emailID,
+            createdDate:data.createdDate,
             role: data.role,
             score: data.score,
             streak: data.streak,
+            day:data.day,
           };
 
-          console.log("Get User: ", newUser);
+          console.log("User Score: ", newUser.score);
+
           setMyUser(newUser);
         }
         setDataLoading(false);

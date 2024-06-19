@@ -4,7 +4,7 @@ type Props = {
     children: React.ReactNode;
 }
 
-const ScrollingGameLayout = ({ children }: Props) => {
+const BargainShopperLayout = ({ children }: Props) => {
     return (
         <main>
             <div className="max-w-[400px] mx-auto h-full justify-center">
@@ -17,4 +17,4 @@ const ScrollingGameLayout = ({ children }: Props) => {
     )
 };
 
-export default ScrollingGameLayout;
+export default BargainShopperLayout;

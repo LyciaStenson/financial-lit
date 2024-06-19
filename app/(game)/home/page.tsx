@@ -4,19 +4,46 @@ import { Banner } from "./banner";
 import { LessonButton } from "./lesson-button";
 import Image from "next/image";
 import { TopBar } from "@/components/top-bar";
-import { loadQuiz } from "@/src/Game/quiz/quiz";
 import useUser from "@/Hooks/AuthUserContext";
-import { useEffect } from "react";
+import { getCurrentDay } from "@/src/FirebaseBridge/Auth/signIn";
+import { useEffect, useState } from "react";
+import { useBonusScoreContext } from "@/Hooks/BonusScore";
+import { getRandom } from "@/src/random/randomNumberGenerator";
 
 const HomePage = () => {
     const lessonHrefs = [
-        "drag", "pick-correct", "drag-bar", "matching", "order",
+        "drag", "pick-correct", "pick-correct-long", "drag-bar", "matching", "order",
         "more-or-less", "triple-scrolling", "interest", "scrolling",
         "home", "home", "home", "home", "home", "home", "home",
         "home", "home", "home", "home", "home", "home", "home",
-        "home", "home", "home", "home", "home", "home", "home"
+        "home", "home", "home", "home", "home", "home"
     ];
     const [user, loading, error] = useUser();
+
+    const[day, setDay] = useState<number>(0);
+
+    const { setBonus } = useBonusScoreContext(); 
+    
+    const generateBonus = () =>{ 
+        let numb = getRandom();
+        let digits = ("" + numb).split("");
+        if (digits.length <= 2) {
+          digits.unshift("0")
+        }
+        console.log(digits);
+
+        return digits;
+    }
+
+    useEffect(() => {
+        if(user){
+            getCurrentDay(user).then((value) => {
+                setDay(value);
+            })
+
+            setBonus(generateBonus());
+        }
+    }, [user]);
 
     if (loading) {
         return (
@@ -97,6 +124,7 @@ const HomePage = () => {
                 <div className="pt-20 px-5 grid grid-cols-4">
                     {lessonHrefs.map((lessonHref, index) => (
                         <LessonButton
+                            userDay={day}
                             day={index + 1}
                             href={lessonHref}
                             key={index}

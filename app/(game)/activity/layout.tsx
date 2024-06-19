@@ -1,3 +1,5 @@
+import { BonusScoreProvider } from "@/Hooks/BonusScore";
+import { DataProvider } from "@/Hooks/GetDataFromPage";
 
 
 type Props = {
@@ -7,10 +9,13 @@ type Props = {
 const ActivityGameLayout = ({ children }: Props) => {
     return (
         <div className="flex justify-center w-full">
-            
-            <main className="max-w-[400px] mx-auto h-full justify-center">
-                {children}
-            </main>
+            <DataProvider>
+                <BonusScoreProvider>
+                    <main className="max-w-[400px] mx-auto h-full justify-center">
+                        {children}
+                    </main>
+                </BonusScoreProvider>
+            </DataProvider>
         </div>
     )
 };

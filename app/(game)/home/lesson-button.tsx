@@ -3,11 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
+import { currentUser, getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 
 type Props = {
     day: number;
     href: string;
+    userDay:number
 }
 
 function StreakIcons({streak}: {streak: boolean}) {
@@ -68,6 +69,7 @@ type Variants = "lessonLocked"|"lessonUnlocked"|"lessonCompleted"
 export const LessonButton = ({
     day,
     href,
+    userDay,
 }: Props) => {
     const router = useRouter();
 
@@ -82,10 +84,10 @@ export const LessonButton = ({
     const div5 = day % 5;
 
     let variant:Variants = "lessonLocked"
-    if(day > 8){
+    if(day > userDay){
        variant = "lessonLocked"
     }
-    else if(day == 8){
+    else if(day == userDay){
         variant = "lessonUnlocked"
     }
     else{

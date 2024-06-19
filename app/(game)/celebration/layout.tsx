@@ -1,12 +1,19 @@
+import { BonusScoreProvider } from "@/Hooks/BonusScore";
+import { DataProvider } from "@/Hooks/GetDataFromPage";
+
 type Props = {
     children: React.ReactNode;
 }
 
 const CelebrationLayout = ({ children }: Props) => {
     return (
-        <main className="max-w-[450px] mx-auto">
-            {children}
-        </main>
+        <DataProvider>
+            <BonusScoreProvider>
+                <main className="max-w-[450px] mx-auto">
+                    {children}
+                </main>
+            </BonusScoreProvider>
+        </DataProvider>
     )
 }
 

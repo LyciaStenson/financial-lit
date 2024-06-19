@@ -25,6 +25,21 @@ const ProfilePointsGamePage = () => {
 
   console.log("streak:"+ getCurrentUser()?.streak!)
 
+  function ordinal_suffix_of(i:number) {
+    let j = i % 10,
+        k = i % 100;
+    if (j === 1 && k !== 11) {
+        return i + "st";
+    }
+    if (j === 2 && k !== 12) {
+        return i + "nd";
+    }
+    if (j === 3 && k !== 13) {
+        return i + "rd";
+    }
+    return i + "th";
+}
+
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-5 border">
       <TopBar
@@ -82,15 +97,15 @@ const ProfilePointsGamePage = () => {
         </h1>
       </div>
       <div className="flex flex-col px-5 items-center justify-center space-y-1">
-        <LeaderboardEntry placement={15} name="Jack" score={12789} isUser={false}/>
-        <LeaderboardEntry placement={16} name="Cameron" score={12695} isUser={false}/>
-        <LeaderboardEntry placement={17} name="Adam" score={12551} isUser={true}/>
-        <LeaderboardEntry placement={18} name="Sarah" score={12512} isUser={false}/>
-        <LeaderboardEntry placement={19} name="Oliver" score={12497} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(11)} score={12789} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(20)} score={12695} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(21)} score={12551} isUser={true}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(22)} score={12512} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(23)} score={12497} isUser={false}/>
       </div>
       <div className="w-96 h-20 px-5 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
         <h1 className="text-xl font-extrabold">
-          School Top Three Scores
+          Example School Top Three Scores
         </h1>
       </div>
       <div className="flex flex-row justify-center items-center px-5">
@@ -110,10 +125,7 @@ const ProfilePointsGamePage = () => {
         />
         <div className=" w-[15rem] h-16 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
           <h1 className="text-sm font-extrabold">
-            Emperor
-          </h1>
-          <h1 className="text-sm font-extrabold px-1">
-            Olivia:
+            Emperor:
           </h1>
           <h1 className="text-sm font-extrabold px-1">
             22,456
@@ -137,10 +149,7 @@ const ProfilePointsGamePage = () => {
         />
         <div className=" w-[15rem] h-16 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-grey py-2 text-moneyconf-purple border-moneyconf-purple">
           <h1 className="text-sm font-extrabold">
-            Commander
-          </h1>
-          <h1 className="text-sm font-extrabold px-1">
-            Alex:
+            Commander:
           </h1>
           <h1 className="text-sm font-extrabold px-1">
             19,112
@@ -164,10 +173,7 @@ const ProfilePointsGamePage = () => {
         />
         <div className=" w-[15rem] h-16 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-orange-400 py-2 text-moneyconf-purple border-moneyconf-purple">
           <h1 className="text-sm font-extrabold">
-            Centurion
-          </h1>
-          <h1 className="text-sm font-extrabold px-1">
-            Sophie:
+            Centurion:
           </h1>
           <h1 className="text-sm font-extrabold px-1">
             18,783

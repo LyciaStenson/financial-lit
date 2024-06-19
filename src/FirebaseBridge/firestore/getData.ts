@@ -1,5 +1,5 @@
 import { getCurrentDatabase } from "../firebaseApp";
-import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference, DocumentSnapshot, DocumentData } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference, DocumentSnapshot, DocumentData, serverTimestamp } from "firebase/firestore";
 import { currentUser } from "../Auth/currentUser";
 import { quizData } from "@/src/Game/quiz/quizData";
 
@@ -49,36 +49,60 @@ export async function getDataFromServer(doc: DocumentReference) {
 }
 
 export async function getUserCollection(path: string): Promise<currentUser[]> {
-  const querySnapshot = await getDocsFromCache(collection(db, path));
+  try {
+    //let querySnapshot = await getDocsFromCache(collection(db, path));
+    let querySnapshot = await getDocs(collection(db, path));
 
-  if (querySnapshot.empty) return getUserCollectionFromServer(path);
-
-  return querySnapshot.docs.map(doc => {
-    const data = doc.data();
-    return {
-      UUID: data.UUID,
-      emailID: data.emailID,
-      displayName: data.displayName,
-      role: data.role,
-      score: data.score,
-      streak: data.streak,
+    if (querySnapshot.empty) {
+      console.log('Cache is empty, fetching from server.');
+      querySnapshot = await getDocs(collection(db, path));
     }
-  });
+
+    const users: currentUser[] = [];
+    console.log('Collection Sizes:', querySnapshot.size);
+
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+      console.log('Fetched data:', data);
+      users.push({
+        UUID: data.UUID,
+        emailID: data.emailID,
+        displayName: data.displayName,
+        role: data.role,
+        score: data.score,
+        streak: data.streak,
+        day:data.day,
+      });
+    });
+
+    console.log('Users array:', users);
+
+    return users;
+  } catch (error) {
+    console.error('Error fetching user collection:', error);
+    // Optionally, handle error or return fallback data
+    throw new Error('Failed to fetch user collection');
+  }
 }
 
+// Assuming this function is already defined somewhere
 async function getUserCollectionFromServer(path: string): Promise<currentUser[]> {
   const querySnapshot = await getDocs(collection(db, path));
-  return querySnapshot.docs.map(doc => {
+  const users: currentUser[] = querySnapshot.docs.map(doc => {
     const data = doc.data();
     return {
       UUID: data.UUID,
       emailID: data.emailID,
+      loginDate: serverTimestamp(),
       displayName: data.displayName,
       role: data.role,
       score: data.score,
       streak: data.streak,
-    }
+      day:data.day,
+    };
   });
+
+  return users;
 }
 
 export async function getQuizCollection(path: string): Promise<quizData[]> {

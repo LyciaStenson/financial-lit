@@ -9,42 +9,24 @@ import {
 	InputOTPSlot,
 } from "@/components/ui/input-otp"
 
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
+
 import { useState } from "react"
-import signIn from "@/src/FirebaseBridge/Auth/signIn"
-import { setCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser"
+import signIn, { signInWhenEnteredCode } from "@/src/FirebaseBridge/Auth/signIn"
+import { currentUser } from "@/src/FirebaseBridge/Auth/currentUser"
 import { getDataAsync } from "@/src/FirebaseBridge/firestore/getData"
 import { SignInSuspenseWrapper } from "@/app/(game)/game/SignInSuspenseWrapper"
 import { DocumentData, DocumentSnapshot } from "firebase/firestore"
+import setData from "@/src/FirebaseBridge/firestore/setData"
 
 export default function Home() {
 	const router = useRouter();
 	const [value, setValue] = useState("");
 
-	async function signInWhenEnteredCode(id: string) {
-		const username = id + "@moneyconfidence.co.uk";
-		const password = "23@f1-*1HA%^3(DA)";
-
-		// Attempt to sign in with provided email and password
-		const { result, error } = await signIn(username, password, undefined);
-
-		if (error) {
-			// Display and log any sign-in errors
-			console.log(`login failed ${error}`);
-			return;
-		}
-
-		await getDataAsync("users/", result!.user.uid).then((value: { result: DocumentSnapshot<DocumentData, DocumentData> | null }) => {
-			let data = value.result?.data();
-			setCurrentUser(data?.UUID, data?.emailID, data?.displayName, data?.role, data?.score, data?.streak);
-		});
-
-		// Sign in successful
-		router.push("/home");
-	}
-
 	function handleClick(value: string) {
-		signInWhenEnteredCode(value);
-	}
+		signInWhenEnteredCode(value).then((value) => {
+            router.push("/home");
+        });	}
 
 	return (
 		<div className="p-4 space-y-4 flex flex-col">
@@ -59,7 +41,7 @@ export default function Home() {
 				</h1>
 			</div>
 
-			<InputOTP maxLength={400} onChange={(value) => setValue(value)}>
+			<InputOTP maxLength={400} onChange={(value) => setValue(value)} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
 				<InputOTPGroup>
 					<InputOTPSlot index={0} />
 					<InputOTPSlot index={1} />

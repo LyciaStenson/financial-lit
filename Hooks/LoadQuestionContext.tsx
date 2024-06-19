@@ -1,8 +1,5 @@
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { useState, useEffect } from 'react';
-import { getCurrentAuth, getCurrentDatabase } from '@/src/FirebaseBridge/firebaseApp';
-import { getData } from '@/src/FirebaseBridge/firestore/getData';
-import { currentUser } from '@/src/FirebaseBridge/Auth/currentUser';
+import { getCurrentDatabase } from '@/src/FirebaseBridge/firebaseApp';
 import { LoadingHook } from 'react-firebase-hooks/auth/dist/util';
 import { DocumentData, QuerySnapshot, collection } from 'firebase/firestore';
 

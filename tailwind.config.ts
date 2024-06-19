@@ -1,3 +1,4 @@
+import { Ms_Madi } from "next/font/google"
 import type { Config } from "tailwindcss"
 
 const config = {
@@ -21,7 +22,6 @@ const config = {
       colors: {
         'moneyconf-gold': '#ffd400',
         'moneyconf-purple': '#390176',
-        'moneyconf-grey-old': '#cccccc',
         'moneyconf-grey': '#f2f2f2',
         'moneyconf-grey-dark': '#999999',
         'moneyconf-grey-border': '#e6e6e6',
@@ -66,6 +66,9 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+      fontFamily:{
+        msmadi: ["var(--font-ms-madi)"]
       },
       borderRadius: {
         lg: "var(--radius)",

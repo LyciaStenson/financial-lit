@@ -1,3 +1,6 @@
+import { BonusScoreProvider } from "@/Hooks/BonusScore";
+import { DataProvider } from "@/Hooks/GetDataFromPage";
+
 type Props = {
     children: React.ReactNode;
 }
@@ -5,9 +8,13 @@ type Props = {
 const PickCorrectGameLayout = ({ children }: Props) => {
     return (
         <main>
-            <div className="max-w-[400px] mx-auto h-full justify-center">
-                {children}
-            </div>
+            <DataProvider>
+                <BonusScoreProvider>
+                    <div className="max-w-[400px] mx-auto h-full justify-center">
+                        {children}
+                    </div>
+                </BonusScoreProvider>
+            </DataProvider>
         </main>
     )
 };

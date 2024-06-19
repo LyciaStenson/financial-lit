@@ -12,6 +12,7 @@ const buttonVariants = cva(
         default: "bg-white text-slate-500 border-slate-200 border-[3px] border-b-[5px] text-md hover:bg-slate-100 active:border-b-[3px]",
         ghost: "",
         primary: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue border-[3px] border-b-[5px] hover:bg-fin-lit-gold/80 active:border-b-[3px]",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         //primaryOutline: "bg-white text-moneyconf-gold",
         //secondary: "bg-moneyconf-blue text-white border-moneyconf-blue hover:bg-fin-lit-blue/80 border-b-4 active:border-b-0",
         lessonCompleted: "bg-moneyconf-gold text-moneyconf-blue border-moneyconf-blue",

@@ -46,9 +46,9 @@ export async function getAllQuizQuestions(): Promise<quizData[]> {
             questions.push({
                 UUID: item.UUID,
                 question: item.question,
-                type: item.type,
                 year: item.year,
                 answer: item.answer,
+                day:item.day
             });
         });
     } catch (error) {
@@ -61,5 +61,5 @@ export async function getAllQuizQuestions(): Promise<quizData[]> {
 export function setQuizQuestion(data: quizData) {
     data.year = quizYear.year3;
     data.UUID = uuidv4();
-    setData("questions/" + data.year + "/" + data.type, data.UUID, data);
+    setData("questions/" + data.year + "/" + data.day?.day, data.UUID, data);
 }

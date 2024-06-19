@@ -7,7 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { getQuizCollection } from "@/src/FirebaseBridge/firestore/getData";
 import { setQuizQuestion } from "@/src/Game/quiz/quiz";
-import { quizData, quizType } from "@/src/Game/quiz/quizData";
+import { quizData, quizDay, quizType } from "@/src/Game/quiz/quizData";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -15,6 +15,7 @@ const DownloadPage = () => {
     const [quiz, setQuiz] = useState<quizData[]>([]);
 
     const [question, setQuestion] = useState('');
+    const [day, setDay] = useState('');
     const [photoURL, setPhotoURL] = useState('');
     const [choices, setChoices] = useState([{ Answer: '', Result: false }]);
 
@@ -26,6 +27,10 @@ const DownloadPage = () => {
         getQuizCollection("questions/" + filter).then((data: quizData[]) => {
             setQuiz(data);
         });
+    }
+
+    const handleDayChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setDay(event.target.value);
     }
 
     const handleFilter = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -52,14 +57,23 @@ const DownloadPage = () => {
         setChoices(updatedChoices);
     };
 
+    
+
     const handleAddChoice = () => {
         setChoices(prevChoices => [...prevChoices, { Answer: '', Result: false }]);
     };
 
     const handleAddQuestion = () => {
+        if(!day.startsWith("day")){
+            setDay("day" + day);
+        }
+        const dayData: quizDay ={
+            day:day,
+            type:quizType.pick,
+        }
         const data: quizData = {
             question: question,
-            type: quizType.pick,
+            day:dayData,
             answer: choices,
         }
         setQuizQuestion(data);
@@ -92,6 +106,7 @@ const DownloadPage = () => {
             <div className="grid w-3/5 gap-2 p-4">
                 <h1 className='text-xl'>Add Question</h1>
                 <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
+                <Textarea placeholder="Day Here." value={day} onChange={handleDayChange} />
                 <Textarea placeholder="Photo URL, leave blank if question does not have contain photos" value={photoURL} onChange={handlePhotoURLChange} />
                 {choices.map((choice, index) => (
                     <div key={index} className='space-y-2'>

@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea"
+import { Toaster, toast } from 'sonner';
+import ScrollAnimation from 'react-animate-on-scroll';
+import "animate.css/animate.compat.css"
 //import { useState, useEffect, MutableRefObject } from "react";
 
 /*
@@ -29,12 +33,15 @@ export function useIsVisible(ref: MutableRefObject<Element | null>): boolean {
 */
 
 const LandingPage = () => {
+    const emailfeedback= () => {toast.success("Email Sent");}
+    console.log(window.innerWidth)
     return (
         <div className="flex flex-col w-full h-full items-center">
             <h1 id="mission" className="pt-14 font-bold text-5xl text-outward-red px-36">
                 My Money Confidence - The Mission
             </h1>
-            <div className="flex flex-row items-center px-36">
+            <ScrollAnimation animateIn="fadeIn">
+            <div className="flex items-center px-36 lg:flex-row md:flex-col sm:flex-col">
                 <Image
                     src="./investment.svg"
                     alt="Investment"
@@ -42,7 +49,7 @@ const LandingPage = () => {
                     height={0}
                     className="w-[30rem] h-auto"
                 />
-                <div className="animate-fade-right animate-run">
+                <div className="">
                     <h3 className="pt-14 text-xl">
                         My Money Confidence are a social enterprise on a mission to empower children with money confidence through financial education in the UK.
                     </h3>
@@ -54,10 +61,12 @@ const LandingPage = () => {
                     </h3>
                 </div>
             </div>
+            </ScrollAnimation>
             <h1 id="story" className="pt-14 font-bold text-5xl text-outward-red px-36">
                 My Money Confidence - The Story
             </h1>
-            <div className="flex flex-row items-center px-36">
+            <ScrollAnimation animateIn="fadeIn">
+            <div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
                 <div>
                     <h3 className="pt-14 text-xl">
                         Do you remember all those lessons about money you were taught in school? No?! That&#x2019;s because you probably weren&#x2019;t!
@@ -77,7 +86,9 @@ const LandingPage = () => {
                     className="w-[24rem] h-auto"
                 />
             </div>
-            <div className="flex flex-row items-center px-36">
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="fadeIn">
+            <div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
                 <Image
                     src="./backpack.svg"
                     alt="Backpack"
@@ -94,10 +105,12 @@ const LandingPage = () => {
                     </h3>
                 </div>                             
             </div>
+            </ScrollAnimation>
             <h1 id="method" className="pt-14 font-bold text-5xl text-outward-red px-36">
                 My Money Confidence - The Method
             </h1>
-            <div className="flex flex-row items-center px-36">
+            <ScrollAnimation animateIn="fadeIn">
+            <div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
                 <Image
                     src="./classroom.svg"
                     alt="Classroom"
@@ -114,17 +127,19 @@ const LandingPage = () => {
                     </h3>
                 </div>                             
             </div>
+            </ScrollAnimation>
             <Image
-                src="./horizonatal-method.svg"
-                alt="Horizonatal Method "
+                src={window.innerWidth > 1024? "./horizonatal-method.svg" : "./vertical-method.svg"}
+                alt="Method"
                 width={0}
                 height={0}
-                className="w-[60rem] h-auto py-20"
+                className="h-auto py-20 lg:w-[60rem] md:w-[15rem] sm:w-[15rem]"
             />
             <h1 id="community" className="pt-14 font-bold text-5xl text-outward-red px-24">
                 My Money Confidence - The Community
             </h1>
-            <div className="flex flex-row items-center px-36">
+            <ScrollAnimation animateIn="fadeIn">
+            <div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
                 <div>
                     <h3 className="pt-14 text-xl">
                         My Money Confidence is funded entirely by corporate sponsors, government, and funding organisations. We are always open to collaborating with like-minded individuals, organisations, and institutions that share a passion for empowering the next generation with financial literacy skills and solving the financial challenges we face!
@@ -141,6 +156,7 @@ const LandingPage = () => {
                     className="w-[24rem] h-auto"
                 />                             
             </div>
+            </ScrollAnimation>
             <div className="flex flex-col items-center text-outward-blue px-16">
                 <h1 className="pt-14 text-xl">
                     Contact My Money Confidence
@@ -149,26 +165,20 @@ const LandingPage = () => {
                     <h3 className="pt-5 text-lg">
                         Email
                     </h3>
-                    <div className="w-96 h-20 flex flex-col items-start justify-center bg-blue-100 rounded-xl px-5">
-                        <h3 className="text-sm text-blue-600"> e.g., email@example.com </h3>
-                    </div>
+                    <Textarea placeholder="e.g., email@example.com" className="w-96 h-20 flex flex-col bg-blue-100 text-black rounded-xl px-5"/>
                     <h3 className="pt-5 text-lg">
                         Subject
                     </h3>
-                    <div className="w-96 h-20 flex flex-col items-start justify-center bg-blue-100 rounded-xl px-5">
-                        <h3 className="text-sm text-blue-600"> e.g, Sponsorship </h3>
-                    </div>
+                    <Textarea placeholder="e.g, Sponsorship" className="w-96 h-20 flex flex-col bg-blue-100 text-black rounded-xl px-5"/>
                     <h3 className="pt-5 text-lg">
                         Your message
                     </h3>
-                    <div className="w-96 h-80 flex flex-col items-start bg-blue-100 rounded-xl px-4 py-3">
-                        <h3 className="text-sm text-blue-600"> Enter text here </h3>
-                    </div>
-                    
+                    <Textarea placeholder="Enter text here" className="w-96 h-80 flex flex-col bg-blue-100 text-black rounded-xl px-4 py-3"/>                
                 </div>
-                <Button className="w-40 h-16 rounded-xl flex items-center justify-center bg-blue-700">
+                <Button onClick={emailfeedback} className="w-40 h-16 rounded-xl flex items-center justify-center bg-blue-700">
                         <h3 className="text-2xl text-white font-bold"> Send </h3>
-                    </Button>
+                </Button>
+                <Toaster/>
             </div>
         </div>
         

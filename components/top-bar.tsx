@@ -23,10 +23,10 @@ export const TopBar = ({ streak, score }: Props) => {
                     streak={streak}
                 />
                 <RankBar
-                    points={score}
+                    points={Math.round(score)}
                 />
                 <Points
-                    points={score}
+                    points={Math.round(score)}
                 />
             </div>
         </div>

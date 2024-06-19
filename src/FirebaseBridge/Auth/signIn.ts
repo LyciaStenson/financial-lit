@@ -1,14 +1,43 @@
 import { useRouter } from "next/navigation";
 import { getCurrentAuth } from "../firebaseApp";
 import { signInWithEmailAndPassword, getAuth, multiFactor, PhoneAuthProvider, ApplicationVerifier, PhoneMultiFactorGenerator, UserCredential } from "firebase/auth";
-import { setCurrentUser } from "./currentUser";
+import { currentUser, setCurrentUser } from "./currentUser";
 import { getDataAsync } from "../firestore/getData";
+import setData from "../firestore/setData";
 
 // Get the authentication instance using the Firebase app
 const auth = getAuth();
 
 let user:UserCredential;
 let vertID:string;
+
+export async function getCurrentDay(user:currentUser){
+  const createdDate = user.createdDate;
+
+  if (createdDate) {
+    const [prefDay, prefMonth, prefYear] = createdDate.split('/').map((part: string) => parseInt(part, 10));
+    const prefixedDateObject = new Date(2000 + prefYear, prefMonth - 1, prefDay); // Adjust the year as needed
+  
+    const dateInterface: Date = new Date();
+    const day = dateInterface.getDate().toString().padStart(2, '0');
+    const month = (dateInterface.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateInterface.getFullYear();
+    const currentDate = `${day}/${month}/${year}`;
+  
+    // Calculate the difference in time (milliseconds)
+    const timeDifference = dateInterface.getTime() - prefixedDateObject.getTime();
+  
+    // Convert the time difference to days
+    const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  
+    console.log(`Current date: ${currentDate}`);
+    console.log(`Difference in days: ${dayDifference}`);
+    return dayDifference;
+  } else {
+    console.log('createdDate is undefined');
+    return 0;
+  }
+}
 
 export async function signInWhenEnteredCode(id: string | null) {
   const username = id + "@moneyconfidence.co.uk";
@@ -24,6 +53,13 @@ export async function signInWhenEnteredCode(id: string | null) {
   }
 
   let data = (await getDataAsync("users/", result!.user.uid)).result?.data();
+
+  data!.createdDate = "15/06/24";
+
+  setData("users/", result!.user.uid, data);
+
+  console.log("User: ", (await getDataAsync("users/", result!.user.uid)).result?.data());
+
   setCurrentUser(data?.UUID, data?.emailID, data?.displayName, data?.role, data?.score, data?.streak);
 }
 

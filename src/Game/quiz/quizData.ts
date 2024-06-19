@@ -10,11 +10,16 @@ export enum quizYear{
     year4 = "year4",
 }
 
+export interface quizDay{
+    day:string,
+    type:quizType,
+}
+
 export interface quizData{
     UUID?:string;
     question?:string;
     photoURL?:string;
     year?:quizYear.year3;
-    type?:quizType;
+    day?:quizDay;
     answer?:any;
 }

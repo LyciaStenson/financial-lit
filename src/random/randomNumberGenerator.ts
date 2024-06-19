@@ -2,9 +2,24 @@ export default function getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function getRandomCode(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 8; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters[randomIndex];
+    }
+    return result;
+}
 export function getRandom(): number {
-    const numbers = [20, 45, 60, 75, 100, 125, 135, 145, 155, 165, 175, 185, 200, 225, 250, 300, 350, 400, 450, 500];
+    const numbers = [2, 4, 6, 7, 10, 12, 13, 14, 15, 16, 17, 18, 20, 22, 25, 30, 35, 40, 45, 50];
     const weights = [1,   1,  2,  2,   5,   5,   6,   7,  10,   8,   8,   7,   7,   5,   3,   3,   2,   2,   1,   1];
+
+    for(let i = 0; i < 20; i++){
+        const rNumber = getRandomNumber(0, 9);
+        numbers[i] = parseInt(numbers[i].toString() + rNumber.toString());    
+    }
+
     return getWeightedRandom(numbers, weights);
 }
 
