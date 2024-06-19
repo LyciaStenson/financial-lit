@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Toaster, toast } from 'sonner';
 import ScrollAnimation from 'react-animate-on-scroll';
 import "animate.css/animate.compat.css"
+import { useEffect, useState } from "react";
 //import { useState, useEffect, MutableRefObject } from "react";
 
 /*
@@ -33,8 +34,23 @@ export function useIsVisible(ref: MutableRefObject<Element | null>): boolean {
 */
 
 const LandingPage = () => {
-    const emailfeedback= () => {toast.success("Email Sent");}
-    console.log(window.innerWidth)
+
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        handleResize;
+
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const emailfeedback= () => { toast.success("Email Sent"); }
+
     return (
         <div className="flex flex-col w-full h-full items-center">
             <h1 id="mission" className="pt-14 font-bold text-5xl text-outward-red px-36">
@@ -129,7 +145,7 @@ const LandingPage = () => {
             </div>
             </ScrollAnimation>
             <Image
-                src={window.innerWidth > 1024? "./horizonatal-method.svg" : "./vertical-method.svg"}
+                src={windowWidth > 1024? "./horizonatal-method.svg" : "./vertical-method.svg"}
                 alt="Method"
                 width={0}
                 height={0}
