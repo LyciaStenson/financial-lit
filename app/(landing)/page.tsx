@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea"
-import { Toaster, toast } from 'sonner';
 import ScrollAnimation from 'react-animate-on-scroll';
 import "animate.css/animate.compat.css"
 import { useEffect, useState } from "react";
@@ -34,9 +32,40 @@ export function useIsVisible(ref: MutableRefObject<Element | null>): boolean {
 }
 */
 
+const Method = () => {
+	return (
+		<div className="flex flex-row space-x-5">
+			<Image
+				src={1 > 1024 ? "./horizonatal-method.svg" : "./vertical-method.svg"}
+				alt="Method"
+				width={0}
+				height={0}
+				className="h-auto py-20 w-[15rem] lg:w-[60rem] md:w-[15rem] sm:w-[15rem]"
+			/>
+			<div className="flex flex-col pt-44 text-xl space-y-40 lg:text-[0rem] lg:space-y-1 md:flex-col md:pt-44 md:text-xl md:space-y-40">
+				<h3>
+					School workshops
+				</h3>
+				<h3>
+					Online challenge activities
+				</h3>
+				<h3>
+					Parents&#x2019; workshops
+				</h3>
+				<h3>
+					Parental online support
+				</h3>
+				<h3>
+					Teachers&#x2019; resources
+				</h3>
+			</div>
+		</div>
+	)
+}
+
 const LandingPage = () => {
 
-	const [windowWidth, setWindowWidth] = useState(0);
+	const [windowWidth, setWindowWidth] = useState(1024);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -50,15 +79,15 @@ const LandingPage = () => {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	const emailfeedback = () => { toast.success("Email Loading"); }
+	//const emailfeedback = () => { toast.success("Email Loading"); }
 
 	return (
-		<div className="flex flex-col items-center">
-			<h1 id="mission" className="pt-14 font-bold text-5xl text-outward-red px-36">
+		<div className="flex flex-col items-center text-center">
+			<h1 id="mission" className="pt-14 font-bold text-5xl text-outward-red">
 				My Money Confidence - The Mission
 			</h1>
 			<ScrollAnimation animateIn="fadeIn">
-				<div className="flex items-center px-36 lg:flex-row md:flex-col sm:flex-col">
+				<div className="flex flex-col lg:flex-row px-10 items-center">
 					<Image
 						src="./investment.svg"
 						alt="Investment"
@@ -83,7 +112,7 @@ const LandingPage = () => {
 				My Money Confidence - The Story
 			</h1>
 			<ScrollAnimation animateIn="fadeIn">
-				<div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
+				<div className="flex flex-col lg:flex-row px-10 items-center">
 					<div>
 						<h3 className="pt-14 text-xl">
 							Do you remember all those lessons about money you were taught in school? No?! That&#x2019;s because you probably weren&#x2019;t!
@@ -105,7 +134,7 @@ const LandingPage = () => {
 				</div>
 			</ScrollAnimation>
 			<ScrollAnimation animateIn="fadeIn">
-				<div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
+				<div className="flex flex-col lg:flex-row px-10 items-center">
 					<Image
 						src="./backpack.svg"
 						alt="Backpack"
@@ -123,11 +152,11 @@ const LandingPage = () => {
 					</div>
 				</div>
 			</ScrollAnimation>
-			<h1 id="method" className="pt-14 font-bold text-5xl text-outward-red px-36">
+			<h1 id="method" className="pt-14 font-bold text-5xl text-outward-red">
 				My Money Confidence - The Method
 			</h1>
 			<ScrollAnimation animateIn="fadeIn">
-				<div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
+				<div className="flex flex-col lg:flex-row px-10 items-center">
 					<Image
 						src="./classroom.svg"
 						alt="Classroom"
@@ -145,37 +174,13 @@ const LandingPage = () => {
 					</div>
 				</div>
 			</ScrollAnimation>
-			<div className="flex flex-row space-x-5">
-				<Image
-					src={windowWidth > 1024 ? "./horizonatal-method.svg" : "./vertical-method.svg"}
-					alt="Method"
-					width={0}
-					height={0}
-					className="h-auto py-20 w-[15rem] lg:w-[60rem] md:w-[15rem] sm:w-[15rem]"
-				/>
-				<div className="flex flex-col pt-44 text-xl space-y-40 lg:text-[0rem] lg:space-y-1 md:flex-col md:pt-44 md:text-xl md:space-y-40">
-					<h3>
-						School workshops
-					</h3>
-					<h3>
-						Online challenge activities
-					</h3>
-					<h3>
-						Parents&#x2019; workshops
-					</h3>
-					<h3>
-						Parental online support
-					</h3>
-					<h3>
-						Teachers&#x2019; resources
-					</h3>
-				</div>
-			</div>
-			<h1 id="community" className="pt-14 font-bold text-5xl text-outward-red px-24">
+			<Method
+			/>
+			<h1 id="community" className="pt-14 font-bold text-5xl text-outward-red">
 				My Money Confidence - The Community
 			</h1>
 			<ScrollAnimation animateIn="fadeIn">
-				<div className="flex flex-row items-center px-36 lg:flex-row md:flex-col sm:flex-col">
+				<div className="flex flex-col lg:flex-row px-10 items-center">
 					<div>
 						<h3 className="pt-14 text-xl">
 							My Money Confidence is funded entirely by corporate sponsors, government, and funding organisations. We are always open to collaborating with like-minded individuals, organisations, and institutions that share a passion for empowering the next generation with financial literacy skills and solving the financial challenges we face!
@@ -193,16 +198,17 @@ const LandingPage = () => {
 					/>
 				</div>
 			</ScrollAnimation>
-			<div className="flex flex-col items-center text-outward-blue px-16">
+			<div className="flex flex-col items-center justify-center text-outward-blue">
 				<h1 className="pt-14 text-5xl pb-5">
 					Contact My Money Confidence
 				</h1>
-				<Button onClick={emailfeedback} className="w-40 h-16 rounded-xl flex items-center justify-center bg-blue-700">
+				{/*onClick={emailfeedback}*/}
+				<Button className="w-40 h-16 rounded-xl flex items-center justify-center bg-blue-700">
 					<Link href={"mailto:info@mymoneyconfidence.co.uk"} className="text-2xl text-white font-bold px-1">
 						Contact Us
 					</Link>
 				</Button>
-				<Toaster />
+				{/*<Toaster />*/}
 			</div>
 		</div>
 
