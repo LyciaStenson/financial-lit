@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Header = () => {
     return (
-        <header className="h-[766px] w-full bg-outward-red">
+        <header className="h-[766px] bg-outward-red">
             <div className="flex flex-row items-center justify-between h-[80px]">
                 <Image
                         src="./logo-inverted.svg"
@@ -27,11 +27,11 @@ export const Header = () => {
                     </Link>
                 </div>
             </div>
-            <div className="flex flex-col items-center justify-end w-full space-y-7 pt-20">
+            <div className="flex flex-col items-center justify-end space-y-7 pt-20">
                 <h1 className="w-[38rem] h-auto leading-[7rem] font-bold text-center text-[5.5rem] text-white">
                     My Money Confidence
                 </h1>
-                <div className="flex flex-row w-full items-center justify-center space-x-7 pb-9">
+                <div className="flex flex-row items-center justify-center space-x-7 pb-9">
                     <Image
                         src="./logo-inverted.svg"
                         alt="My Money Confidence Logo"

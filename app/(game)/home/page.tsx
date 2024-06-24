@@ -20,15 +20,15 @@ const HomePage = () => {
     ];
     const [user, loading, error] = useUser();
 
-    const[day, setDay] = useState<number>(0);
+    const [day, setDay] = useState<number>(0);
 
-    const { setBonus } = useBonusScoreContext(); 
-    
-    const generateBonus = () =>{ 
+    const { setBonus } = useBonusScoreContext();
+
+    const generateBonus = () => {
         let numb = getRandom();
         let digits = ("" + numb).split("");
         if (digits.length <= 2) {
-          digits.unshift("0")
+            digits.unshift("0")
         }
         console.log(digits);
 
@@ -36,7 +36,7 @@ const HomePage = () => {
     }
 
     useEffect(() => {
-        if(user){
+        if (user) {
             getCurrentDay(user).then((value) => {
                 setDay(value);
             })
@@ -135,7 +135,10 @@ const HomePage = () => {
             </div>
         );
     }
-    return <h1>You are not a user</h1>;
+    return <div className="h-screen flex items-center justify-center">
+        <Banner title="You are not a user"
+            description={"Are you sure you have an account"} />
+    </div>
 };
 
 export default HomePage;

@@ -1,10 +1,10 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export const Footer = () => {
     return (
-        <footer className="h-[120px] w-full bg-outward-red">
+        <footer className="h-[120px] bg-outward-red">
             <div className="h-full flex items-center justify-center flex-col">
-                <h3 className="text-md text-white"> ©2024 My Money Confidence. All rights reserved. </h3>
+                <h3 className="text-md text-white">&copy;2024 My Money Confidence. All rights reserved.</h3>
                 <div className="flex flex-row">
                     <Link href={"privacy-policy"} className="underline text-white">
                         Privacy Policy
@@ -27,8 +27,8 @@ export const Footer = () => {
                 </div>
                 <div className="flex flex-row">
                     <h3 className="text-md text-white"> Website made by: </h3>
-                    <Link href={"https://youtu.be/ytAt_EJIr7Q?si=Si--4XbcxDeS0_2t"} className="underline text-white pl-1">
-                        Luca Stenson
+                    <Link href={"https://lyciastenson.github.io/"} className="underline text-white pl-1">
+                        Lycia Stenson
                     </Link>
                     <h3 className="text-md text-white px-1"> | </h3>
                     <Link href={"https://jakehood.github.io/"} className="underline text-white">
