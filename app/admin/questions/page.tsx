@@ -85,7 +85,9 @@ const DownloadPage = () => {
 
     return (
         <div className=" pl-[250px]">
-            <SideBar>
+            <SideBar
+                title="Questions"
+            >
                 <Button onClick={() => loadPage("/admin")}>Home</Button>
                 <Button onClick={() => loadPage("/admin/questions")}>Questions</Button>
                 <Button onClick={() => loadPage("/admin/users")}>Users</Button>

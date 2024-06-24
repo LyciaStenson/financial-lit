@@ -7,6 +7,7 @@ import { useState } from "react";
 import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import { TopBar } from "@/components/top-bar";
 import LeaderboardEntry from "./leaderboard-entry";
+import { PointsToRank } from "@/src/points-to-rank";
 
 const ProfilePointsGamePage = () => {
 
@@ -97,15 +98,15 @@ const ProfilePointsGamePage = () => {
         </h1>
       </div>
       <div className="flex flex-col px-5 items-center justify-center space-y-1">
-        <LeaderboardEntry placement={ordinal_suffix_of(11)} score={12789} isUser={false}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(20)} score={12695} isUser={false}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(21)} score={12551} isUser={true}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(22)} score={12512} isUser={false}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(23)} score={12497} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(23)} rank={PointsToRank(12789)} score={12789} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(22)} rank={PointsToRank(12695)} score={12695} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(21)} rank={PointsToRank(12551)} score={12551} isUser={true}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(20)} rank={PointsToRank(12512)} score={12512} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(11)} rank={PointsToRank(12497)} score={12497} isUser={false}/>
       </div>
       <div className="w-96 h-20 px-5 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
         <h1 className="text-xl font-extrabold">
-          Example School Top Three Scores
+          School Top Three Scores
         </h1>
       </div>
       <div className="flex flex-row justify-center items-center px-5">

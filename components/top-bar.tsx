@@ -3,8 +3,6 @@ import { RankBar } from "./rank-bar";
 import { Points } from "./points";
 import { StreakIcon } from "./streak-icon";
 
-import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
-
 type Props = {
     streak: number;
     score: number;

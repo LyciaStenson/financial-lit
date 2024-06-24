@@ -16,15 +16,16 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-
-/*const firebaseConfig = {
+/*
+const firebaseConfig = {
     apiKey: "AIzaSyCVKpBIpYpehl0RoE7vAZRxGL-U1rHOt9A",
     authDomain: "space-man-game.firebaseapp.com",
     projectId: "space-man-game",
     storageBucket: "space-man-game.appspot.com",
     messagingSenderId: "533835724521",
     appId: "1:533835724521:web:67832422129ffba216a278",
-};*/
+};
+*/
 
 let currentApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 

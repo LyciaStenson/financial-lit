@@ -125,6 +125,7 @@ const HomePage = () => {
                     {lessonHrefs.map((lessonHref, index) => (
                         <LessonButton
                             userDay={day}
+                            streak={user.streak!}
                             day={index + 1}
                             href={lessonHref}
                             key={index}

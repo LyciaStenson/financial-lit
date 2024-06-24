@@ -18,7 +18,7 @@ const auth = getCurrentAuth();
 const AdminPage = () => {
     
     const [user, loading, error] = useUser();
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isTeacher, setIsTeacher] = useState(false);
 
     // Access the user object from the authentication context
     // const { user } = useAuthContext();
@@ -27,15 +27,15 @@ const AdminPage = () => {
     if (user) {
         getDataAsync("users/", user.UUID!).then((value) => {
             let data = value.result?.data();
-            if (data?.role == "admin") {
-                setIsAdmin(true);
+            if (data?.role == "teacher") {
+                setIsTeacher(true);
             } else {
                 return router.push("/home");
             }
         })
     }
 
-    if (isAdmin) {
+    if (isTeacher) {
 
         const loadPage = (path:string) => {
             router.push(path);
@@ -44,16 +44,13 @@ const AdminPage = () => {
         return (
             <div className=" pl-[250px]">
                 <div>
-                    <SideBar title="Admin">
-                        <Button onClick={() => loadPage("/admin/questions")}>Questions</Button>
-                        <Button onClick={() => loadPage("/admin/users")}>Users</Button>
-                        <Button onClick={() => loadPage("/admin/certificate")}>Certification</Button>
-                        <Button onClick={() => loadPage("/admin/qr")}>QR</Button>                 
+                    <SideBar title="Teacher">
+                        <Button onClick={() => router.push("teacher/users")}>Users</Button>
                     </SideBar>
                 </div>
                 <div className="grid w-3/5 gap-2 p-4">
                     <h1 className='text-5xl'>Hello {user?.displayName}</h1>
-                    <h1 className='text-3xl'>Welcome to the Admin Page</h1>
+                    <h1 className='text-3xl'>Welcome to the Teacher Page</h1>
                 </div>
             </div>
         );

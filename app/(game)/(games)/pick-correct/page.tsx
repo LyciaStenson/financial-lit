@@ -12,7 +12,6 @@ import { isDayCompleted, setDayCompleted, setScore } from "@/src/FirebaseBridge/
 import { Banner } from "../../activity/banner";
 import useDataCollection from "@/Hooks/LoadQuestionContext";
 import usePersistantTimer from "@/Hooks/Timer";
-import Link from 'next/link'
 import shuffle from "@/src/random/shuffle";
 import { useDataContext } from "@/Hooks/GetDataFromPage";
 

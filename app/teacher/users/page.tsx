@@ -142,14 +142,8 @@ const DownloadPage = () => {
 
     return (
         <div className="pl-[270px]">
-            <SideBar
-                title="Users"
-            >
-                <Button onClick={() => loadPage("/admin")}>Home</Button>
-                <Button onClick={() => loadPage("/admin/questions")}>Questions</Button>
-                <Button onClick={() => loadPage("/admin/users")}>Users</Button>
-                <Button onClick={() => loadPage("/admin/certificate")}>Certification</Button>
-                <Button onClick={() => loadPage("/admin/qr")}>QR</Button>
+            <SideBar title="Teacher">
+                <Button onClick={() => loadPage("/teacher")}>Home</Button>
             </SideBar>
             <Button onClick={() => generate("")}>Get all users</Button>
             {users.map((data, index) => (
@@ -173,44 +167,7 @@ const DownloadPage = () => {
                         </tbody>
                     </table>
                 </div>
-
             ))}
-            <input className="mt-4" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
-            {excelData.length > 0 && (
-                <div className="mt-4">
-                    <h2>Excel Data:</h2>
-                    <table className="min-w-full bg-white border border-gray-200">
-                        <thead>
-                            <tr>
-                                {excelData[0].map((cell, index) => (
-                                    <th key={index} className="px-4 py-2 border">{cell}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {excelData.slice(1).map((row, rowIndex) => (
-                                <tr key={rowIndex}>
-                                    {row.map((cell, cellIndex) => (
-                                        <td key={cellIndex} className="px-4 py-2 border">{cell}</td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <Button onClick={generateAccounts}>Generate Accounts</Button>
-                </div>
-            )}
-            {generatedAccounts && (
-                <div>
-                    <Toaster />
-                </div>
-            )}
-            <div className="grid w-3/5 gap-2 p-4">
-                <h1 className='text-xl'>Add Users</h1>
-                <Textarea placeholder="Name." value={studentName} onChange={handleStudentName} />
-                <Textarea placeholder="Role." value={role} onChange={handleRole} />
-                <Button onClick={handleAddUser}>Add User</Button>
-            </div>
         </div>
     );
 };

@@ -7,6 +7,7 @@ import { currentUser, getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUs
 
 type Props = {
     day: number;
+    streak:number;
     href: string;
     userDay:number
 }
@@ -68,6 +69,7 @@ type Variants = "lessonLocked"|"lessonUnlocked"|"lessonCompleted"
 
 export const LessonButton = ({
     day,
+    streak,
     href,
     userDay,
 }: Props) => {
@@ -104,7 +106,7 @@ export const LessonButton = ({
             }}
         >
             <StreakIcons
-                streak={(day < getCurrentUser()?.streak!)}
+                streak={(day < streak)}
             />
             <Button
                 className={"w-[90px] h-[90px] border-[2.5px] shadow-[inset_0_-11px_0px_rgba(0,0,0,0.3),inset_0_3px_0px_rgb(255,255,255,0.7)]"}

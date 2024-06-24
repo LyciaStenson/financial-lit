@@ -7,6 +7,7 @@ import { Toaster, toast } from 'sonner';
 import ScrollAnimation from 'react-animate-on-scroll';
 import "animate.css/animate.compat.css"
 import { useEffect, useState } from "react";
+import Link from "next/link";
 //import { useState, useEffect, MutableRefObject } from "react";
 
 /*
@@ -49,7 +50,7 @@ const LandingPage = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const emailfeedback= () => { toast.success("Email Sent"); }
+    const emailfeedback= () => { toast.success("Email Loading"); }
 
     return (
         <div className="flex flex-col w-full h-full items-center">
@@ -144,13 +145,32 @@ const LandingPage = () => {
                 </div>                             
             </div>
             </ScrollAnimation>
-            <Image
-                src={windowWidth > 1024? "./horizonatal-method.svg" : "./vertical-method.svg"}
-                alt="Method"
-                width={0}
-                height={0}
-                className="h-auto py-20 lg:w-[60rem] md:w-[15rem] sm:w-[15rem]"
-            />
+            <div className="flex flex-row space-x-5">
+                <Image
+                    src={windowWidth > 1024? "./horizonatal-method.svg" : "./vertical-method.svg"}
+                    alt="Method"
+                    width={0}
+                    height={0}
+                    className="h-auto py-20 w-[15rem] lg:w-[60rem] md:w-[15rem] sm:w-[15rem]"
+                />
+                <div className="flex flex-col pt-44 text-xl space-y-40 lg:text-[0rem] lg:space-y-1 md:flex-col md:pt-44 md:text-xl md:space-y-40">
+                    <h3>
+                        School workshops
+                    </h3>
+                    <h3>
+                        Online challenge activities
+                    </h3>
+                    <h3>
+                        Parents&#x2019; workshops
+                    </h3>
+                    <h3>
+                        Parental online support
+                    </h3>
+                    <h3>
+                        Teachers&#x2019; resources
+                    </h3>
+                </div>
+            </div>
             <h1 id="community" className="pt-14 font-bold text-5xl text-outward-red px-24">
                 My Money Confidence - The Community
             </h1>
@@ -174,25 +194,13 @@ const LandingPage = () => {
             </div>
             </ScrollAnimation>
             <div className="flex flex-col items-center text-outward-blue px-16">
-                <h1 className="pt-14 text-xl">
+                <h1 className="pt-14 text-5xl pb-5">
                     Contact My Money Confidence
                 </h1>
-                <div>
-                    <h3 className="pt-5 text-lg">
-                        Email
-                    </h3>
-                    <Textarea placeholder="e.g., email@example.com" className="w-96 h-20 flex flex-col bg-blue-100 text-black rounded-xl px-5"/>
-                    <h3 className="pt-5 text-lg">
-                        Subject
-                    </h3>
-                    <Textarea placeholder="e.g, Sponsorship" className="w-96 h-20 flex flex-col bg-blue-100 text-black rounded-xl px-5"/>
-                    <h3 className="pt-5 text-lg">
-                        Your message
-                    </h3>
-                    <Textarea placeholder="Enter text here" className="w-96 h-80 flex flex-col bg-blue-100 text-black rounded-xl px-4 py-3"/>                
-                </div>
                 <Button onClick={emailfeedback} className="w-40 h-16 rounded-xl flex items-center justify-center bg-blue-700">
-                        <h3 className="text-2xl text-white font-bold"> Send </h3>
+                    <Link href={"mailto:info@mymoneyconfidence.co.uk"} className="text-2xl text-white font-bold px-1">
+                        Contact Us
+                    </Link>
                 </Button>
                 <Toaster/>
             </div>
