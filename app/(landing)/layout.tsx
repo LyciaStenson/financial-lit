@@ -9,9 +9,9 @@ type Props = {
 
 const LandingLayout = ({ children }: Props) => {
     return (
-        <div>
+        <main>
             {children}
-        </div>
+        </main>
     );
 };
 

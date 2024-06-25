@@ -8,12 +8,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { getQuizCollection } from "@/src/FirebaseBridge/firestore/getData";
 import { answer, quizData, quizDay, quizType, setQuizQuestion, stringToQuizType } from "@/src/Game/quiz/quizDataBase";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Toaster, toast } from "sonner";
 
 //Question Data imports
 import bargainShopperQuestionData from "@/src/Game/AnswerData/BargainShopperQuestionData";
-import orderQuestionData from "@/src/Game/AnswerData/OrderQuestionData";
+import orderQuestionData, { orderQuestionAnswer } from "@/src/Game/AnswerData/OrderQuestionData";
 import pickCorrectQuestionData from "@/src/Game/AnswerData/PickCorrectQuestionData";
 
 const DownloadPage = () => {
@@ -24,6 +24,11 @@ const DownloadPage = () => {
     const [type, setType] = useState('');
     const [photoURL, setPhotoURL] = useState('');
     const [choices, setChoices] = useState<answer[]>([]);
+
+    const [orderAnswer, setOrdrrAnswer] = useState<orderQuestionAnswer>();
+    const [orderWords, setOrdrrWords] = useState<string[]>([]);
+    const [word, setWord] = useState("");
+    const [wordFinal, setWordFinal] = useState("");
 
     const router = useRouter();
 
@@ -61,21 +66,37 @@ const DownloadPage = () => {
         setChoices(updatedChoices);
     };
 
+    const handleOrderWordChange = (index: number, event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const updatedChoices = [...orderWords];
+        updatedChoices[index] = event.target.value;
+        setOrdrrWords(updatedChoices);
+    };
+
     const handleChoiceResultChange = (index: number, value: boolean) => {
         const updatedChoices = [...choices];
         updatedChoices[index].result = value;
         setChoices(updatedChoices);
     };
 
-
-
     const handleAddChoice = () => {
-        setChoices(prevChoices => [...prevChoices, { answer: '', result: false }]);
+        setChoices(prevChoices => [...prevChoices, { answer: "", result: false }]);
     };
 
     const handleRemoveChoice = (index: number) => {
         setChoices(prevChoices => prevChoices.filter((_, i) => i !== index));
     };
+
+    const handleWordChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setWord(event.target.value);
+    }
+
+    const handleAddOrderChoice = () => {
+        setOrdrrAnswer({ answer: "", word: wordFinal});
+    }
+
+    const handleRemoveOrderChoice = (index: number) => {
+        setOrdrrWords(prevOrder => prevOrder.filter((_, i) => i !== index));
+    }
 
     const handleAddQuestion = () => {
         if (!day.startsWith("day")) {
@@ -88,44 +109,56 @@ const DownloadPage = () => {
             type: stringToQuizType(type)!,
         }
 
-        if(type == "bargain-shopper"){
-            let questionData:bargainShopperQuestionData = {
-                question:question,
-                day:dayData,
-                answer:choices
+        if (type == "bargain-shopper") {
+            let questionData: bargainShopperQuestionData = {
+                question: question,
+                day: dayData,
+                answer: choices
             }
 
-            setQuizQuestion(questionData);     
-            toast.success("Added Bargain Shopper Question");   
-        }else if(type == "drag"){
+            setQuizQuestion(questionData);
+            toast.success("Added Bargain Shopper Question");
+        } else if (type == "drag") {
 
-        }else if(type == "drag-bar"){
-            
-        }else if(type == "interest"){
-            
-        }else if(type == "matching"){
-            
-        }else if(type == "more-or-less"){
-            
-        }else if(type == "order"){
-            
-        }else if(type == "pick-correct" || type == "pick-correct-long"){
-            let questionData:pickCorrectQuestionData = {
-                question:question,
-                day:dayData,
-                answer:choices
+        } else if (type == "drag-bar") {
+
+        } else if (type == "interest") {
+
+        } else if (type == "matching") {
+
+        } else if (type == "more-or-less") {
+
+        } else if (type == "order") {
+            let questionData: orderQuestionData = {
+                question: question,
+                day: dayData,
+                answer: orderAnswer,
+                words: orderWords,
             }
 
-            setQuizQuestion(questionData);  
+            setQuizQuestion(questionData);
             toast.success("Added Pick Correct Question");
-        }else if(type == "tripple-scrolling"){
-            
+        } else if (type == "pick-correct" || type == "pick-correct-long") {
+            let questionData: pickCorrectQuestionData = {
+                question: question,
+                day: dayData,
+                answer: choices
+            }
+
+            setQuizQuestion(questionData);
+            toast.success("Added Pick Correct Question");
+        } else if (type == "tripple-scrolling") {
+
         }
     };
 
     const loadPage = (path: string) => {
         router.push(path);
     };
+
+    function handleOrderAnswer(event: ChangeEvent<HTMLTextAreaElement>): void {
+        setWordFinal(event.target.value);
+    }
 
     return (
         <div className=" pl-[250px]">
@@ -150,29 +183,28 @@ const DownloadPage = () => {
                 ))}
             </div>
             <div className="grid w-3/5 gap-2 p-4">
-                <h1 className='text-xl'>Add Question</h1>
-                <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
-                <Textarea placeholder="Day Here." value={day} onChange={handleDayChange} />
                 <Textarea placeholder="Quiz Type ie pick." value={type} onChange={handleQuestionType} />
                 {type == "bargain-shopper" && (
                     <div className="space-y-4">
-                    <h1>Bargain Shopper is the question type</h1>
-
-                    {choices.map((choice, index) => (
-                        <div key={index} className='space-y-2'>
-                            <Textarea placeholder={`Choice ${index + 1}`} value={choice.answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
-                            <div className="space-x-4">
-                                <Switch id={`true-false-${index}`} checked={choices[index].result} onCheckedChange={(value) => handleChoiceResultChange(index, value)} />
-                                <Label htmlFor={`true-false-${index}`}>{choices[index].result ? 'True' : 'False'}</Label>
-                                <Button className=" w-40 h-15 text-xs" onClick={() => handleRemoveChoice(index)}>Remove Choice</Button>
+                        <h1 className='text-xl'>Add Bargain Shopper Question</h1>
+                        <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
+                        <Textarea placeholder="Day Here." value={day} onChange={handleDayChange} />
+                        <Textarea placeholder="Quiz Type ie pick." value={type} onChange={handleQuestionType} />
+                        {choices.map((choice, index) => (
+                            <div key={index} className='space-y-2'>
+                                <Textarea placeholder={`Choice ${index + 1}`} value={choice.answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
+                                <div className="space-x-4">
+                                    <Switch id={`true-false-${index}`} checked={choices[index].result} onCheckedChange={(value) => handleChoiceResultChange(index, value)} />
+                                    <Label htmlFor={`true-false-${index}`}>{choices[index].result ? 'True' : 'False'}</Label>
+                                    <Button className=" w-40 h-15 text-xs" onClick={() => handleRemoveChoice(index)}>Remove Choice</Button>
+                                </div>
                             </div>
+                        ))}
+                        <div>
+                            <Button onClick={handleAddChoice}>Add Choice</Button>
                         </div>
-                    ))}
-                    <div>
-                        <Button onClick={handleAddChoice}>Add Choice</Button>
+                        <Button className="" onClick={handleAddQuestion}>Add Question</Button>
                     </div>
-                    <Button className="" onClick={handleAddQuestion}>Add Question</Button>
-                </div>
                 )}
                 {type == "drag" && (
                     <div>
@@ -202,12 +234,30 @@ const DownloadPage = () => {
                 {type == "order" && (
                     <div className="space-y-4">
                         <h1>Order is the question type</h1>
+                        <h1 className='text-xl'>Add Order Question</h1>
+                        <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
+                        <Textarea placeholder="Day Here." value={day} onChange={handleDayChange} />
+                        <Textarea placeholder="Word ie APR" value={word} onChange={handleWordChange} />
+                        <Textarea placeholder={"Answer Word ie Annual percentage rate"} value={wordFinal} onChange={(event) => handleOrderAnswer(event)} />
+                        {orderWords.map((choice, index) => (
+                            <div key={index} className='space-y-2'>
+                                <Textarea placeholder={`Word ${index + 1}`} value={choice[index]} onChange={(event) => handleOrderWordChange(index, event)} />
+                                <div className="space-x-4">
+                                    <Button className=" w-40 h-15 text-xs" onClick={() => handleRemoveOrderChoice(index)}>Remove Word</Button>
+                                </div>
+                            </div>
+                        ))}
+                        <div>
+                            <Button onClick={handleAddOrderChoice}>Add Word</Button>
+                        </div>
+                        <Button className="" onClick={handleAddQuestion}>Add Question</Button>
                     </div>
                 )}
                 {type == "pick-correct" && (
                     <div className="space-y-4">
-                        <h1>Pick Correct is the question type</h1>
-
+                        <h1 className='text-xl'>Add Pick Correct Question</h1>
+                        <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
+                        <Textarea placeholder="Day Here." value={day} onChange={handleDayChange} />
                         {choices.map((choice, index) => (
                             <div key={index} className='space-y-2'>
                                 <Textarea placeholder={`Choice ${index + 1}`} value={choice.answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
@@ -226,8 +276,9 @@ const DownloadPage = () => {
                 )}
                 {type == "pick-correct-long" && (
                     <div className="space-y-4">
-                        <h1>Pick Correct is the question type</h1>
-
+                        <h1 className='text-xl'>Add Pick Correct Long Question</h1>
+                        <Textarea placeholder="Question Here." value={question} onChange={handleQuestionChange} />
+                        <Textarea placeholder="Day Here." value={day} onChange={handleDayChange} />
                         {choices.map((choice, index) => (
                             <div key={index} className='space-y-2'>
                                 <Textarea placeholder={`Choice ${index + 1}`} value={choice.answer} onChange={(event) => handleChoiceAnswerChange(index, event)} />
@@ -250,7 +301,7 @@ const DownloadPage = () => {
                     </div>
                 )}
             </div>
-            <Toaster/>
+            <Toaster />
         </div>
     );
 };

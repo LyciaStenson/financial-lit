@@ -35,17 +35,17 @@ type MethodProps = {
 	windowWidth: number;
 }
 
-const Method = ({windowWidth}: MethodProps) => {
+const Method = ({ windowWidth }: MethodProps) => {
 
 	if (windowWidth < 1024) {
 		return (
-			<div className="flex flex-row space-x-5">
+			<div className="flex flex-row space-x-5 px-5 pt-20">
 				<Image
 					src={"./vertical-method.svg"}
 					alt="Method"
 					width={0}
 					height={0}
-					className="h-auto py-20 w-[15rem] lg:w-[60rem]"
+					className="h-auto w-[10rem]"
 				/>
 				<div className="flex flex-col justify-evenly text-xl font-bold">
 					<h3>
@@ -74,7 +74,7 @@ const Method = ({windowWidth}: MethodProps) => {
 					alt="Method"
 					width={0}
 					height={0}
-					className="h-auto py-20 w-[15rem] lg:w-[60rem]"
+					className="h-auto w-[60rem]"
 				/>
 			</div>
 		)
@@ -83,7 +83,7 @@ const Method = ({windowWidth}: MethodProps) => {
 
 const LandingPage = () => {
 
-	const [windowWidth, setWindowWidth] = useState(1025);
+	const [windowWidth, setWindowWidth] = useState(0);
 
 	useEffect(() => {
 		setWindowWidth(window.innerWidth);
@@ -97,8 +97,6 @@ const LandingPage = () => {
 
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
-
-	//const emailfeedback = () => { toast.success("Email Loading"); }
 
 	return (
 		<div className="flex flex-col items-center text-center">
@@ -127,7 +125,7 @@ const LandingPage = () => {
 					</div>
 				</div>
 			</ScrollAnimation>
-			<h1 id="story" className="pt-14 font-bold text-5xl text-outward-red px-36">
+			<h1 id="story" className="pt-14 font-bold text-5xl text-outward-red">
 				My Money Confidence - The Story
 			</h1>
 			<ScrollAnimation animateIn="fadeIn">
@@ -222,16 +220,13 @@ const LandingPage = () => {
 				<h1 className="pt-14 text-5xl pb-5">
 					Contact My Money Confidence
 				</h1>
-				{/*onClick={emailfeedback}*/}
 				<Button className="w-40 h-16 rounded-xl flex items-center justify-center bg-blue-700">
 					<Link href={"mailto:info@mymoneyconfidence.co.uk"} className="text-2xl text-white font-bold px-1">
 						Contact Us
 					</Link>
 				</Button>
-				{/*<Toaster />*/}
 			</div>
 		</div>
-
 	);
 };
 

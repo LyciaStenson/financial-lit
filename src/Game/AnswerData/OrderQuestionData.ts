@@ -3,7 +3,9 @@
 import { answer, quizData } from "../quiz/quizDataBase";
 
 export interface orderQuestionAnswer extends Omit<answer, "result">{
-    word:string; //Added for the word that the question is based on such as APR
+    word:string; 
 }
 
-export default interface orderQuestionData extends quizData<orderQuestionAnswer> {}
+export default interface orderQuestionData extends quizData<orderQuestionAnswer> {
+    words:string[];//The list of words ie Placement, Regulatory ect
+}
