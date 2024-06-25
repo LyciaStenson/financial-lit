@@ -1,7 +1,8 @@
+import { answer } from "@/src/Game/quiz/quizDataBase";
 import ToggleButton from "./toggle-button";
 
 type Props = {
-    answers: { Answer: string; Result: boolean; }[]
+    answers:answer[]
     selected: number | null
     disabledButtons: boolean[]
     disabled: boolean
@@ -11,43 +12,47 @@ type Props = {
 const ToggleButtons = ({ answers, selected, disabledButtons, disabled, handleToggle }: Props) => {
     return (
         <div className="space-y-3">
-            <div className="flex flex-col justify-center space-y-3">
+            <div className="flex flex-row justify-center space-x-28">
                 <ToggleButton
                     index={0}
-                    text={answers[0].Answer}
-                    isCorrect={answers[0].Result}
+                    text={answers[0].answer}
+                    isCorrect={answers[0].result}
                     toggled={selected == 0}
                     disabled={disabledButtons[0] || disabled}
                     onToggle={handleToggle}
                 />
                 <ToggleButton
                     index={1}
-                    text={answers[1].Answer}
-                    isCorrect={answers[1].Result}
+                    text={answers[1].answer}
+                    isCorrect={answers[1].result}
                     toggled={selected == 1}
                     disabled={disabledButtons[1] || disabled}
                     onToggle={handleToggle}
                 />
+            </div>
+            <div className="flex justify-center">
                 <ToggleButton
                     index={2}
-                    text={answers[2].Answer}
-                    isCorrect={answers[2].Result}
+                    text={answers[2].answer}
+                    isCorrect={answers[2].result}
                     toggled={selected == 2}
                     disabled={disabledButtons[2] || disabled}
                     onToggle={handleToggle}
                 />
+            </div>
+            <div className="flex flex-row justify-center space-x-28">
                 <ToggleButton
                     index={3}
-                    text={answers[3].Answer}
-                    isCorrect={answers[3].Result}
+                    text={answers[3].answer}
+                    isCorrect={answers[3].result}
                     toggled={selected == 3}
                     disabled={disabledButtons[3] || disabled}
                     onToggle={handleToggle}
                 />
                 <ToggleButton
                     index={4}
-                    text={answers[4].Answer}
-                    isCorrect={answers[4].Result}
+                    text={answers[4].answer}
+                    isCorrect={answers[4].result}
                     toggled={selected == 4}
                     disabled={disabledButtons[4] || disabled}
                     onToggle={handleToggle}

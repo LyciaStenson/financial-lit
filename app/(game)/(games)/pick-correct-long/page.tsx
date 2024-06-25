@@ -3,7 +3,6 @@
 import Image from "next/image";
 import ContinueButton from "../../continue-button";
 import React, { useEffect, useState } from "react";
-import { quizData } from "@/src/Game/quiz/quizData";
 import { useRouter } from 'next/navigation'
 import ToggleButtons from "./toggle-buttons";
 import { TopBar } from "../top-bar";
@@ -14,21 +13,13 @@ import useDataCollection from "@/Hooks/LoadQuestionContext";
 import usePersistantTimer from "@/Hooks/Timer";
 import shuffle from "@/src/random/shuffle";
 import { useDataContext } from "@/Hooks/GetDataFromPage";
-
-type PickCorrectQuestion = {
-	question?: string,
-	answers: { Answer: string, Result: boolean }[]
-}
-
-const QuizDataToQuestion = (data: quizData | null): PickCorrectQuestion => {
-	return { question: data?.question, answers: data?.answer }
-}
+import pickCorrectQuestionData from "@/src/Game/AnswerData/PickCorrectQuestionData";
 
 const PickCorrectGamePage = () => {
 
 	const [questionsCompleted, setQuestionsCompleted] = useState<number>(0);
 
-	const [questions, setQuestions] = useState<quizData[]>([]);
+	const [questions, setQuestions] = useState<pickCorrectQuestionData[]>([]);
 
 	const [timerCount, timerStart, timerPause, timerReset] = usePersistantTimer(false, { updateFrequency: 1 });
 
@@ -42,7 +33,7 @@ const PickCorrectGamePage = () => {
 
 	const [totalQuestions, setTotalQuestions] = useState(0);
 
-	const [currentQuestion, setCurrentQuestion] = useState<PickCorrectQuestion | null>(null);
+	const [currentQuestion, setCurrentQuestion] = useState<pickCorrectQuestionData | null>(null);
 
 	const [quizLoaded, setQuizLoaded] = useState(false);
 
@@ -83,7 +74,7 @@ const PickCorrectGamePage = () => {
 
 		if (questions.length > 0) {
 			setQuestionsCompleted(questionsCompleted + 1);
-			setCurrentQuestion(QuizDataToQuestion(questions.pop() || null));
+			setCurrentQuestion(questions.pop() || null);
 		} else {
 			setQuestionsComplete(true);
 		}
@@ -125,7 +116,7 @@ const PickCorrectGamePage = () => {
 			points: finalScore,
 			time: Math.round(timerCount / 1000),
 			totalQuestions: totalQuestions,
-			totalAnsweredCorrect: totalQuestions - totalIncorrectAttempts,
+			totalInccorrect: totalIncorrectAttempts,
 			day: 2, //The current day - 1 for the array
 		})
 
@@ -134,11 +125,11 @@ const PickCorrectGamePage = () => {
 
 	useEffect(() => {
 		if (value && user) {
-			let newQuestions: quizData[] = [];
+			let newQuestions: pickCorrectQuestionData[] = [];
 
 			value.docs.map((doc) => {
-				const q = doc.data() as quizData;
-				let answers: any[] = shuffle(QuizDataToQuestion(q).answers);
+				const q = doc.data() as pickCorrectQuestionData;
+				let answers: any[] = shuffle(q.answer!);
 				q.answer = answers;
 				newQuestions.push(q);
 			});
@@ -147,7 +138,7 @@ const PickCorrectGamePage = () => {
 
 			setQuestions(newQuestions);
 			setTotalQuestions(newQuestions.length);
-			setCurrentQuestion(QuizDataToQuestion(newQuestions.pop() || null));
+			setCurrentQuestion(newQuestions.pop() || null);
 			setQuizLoaded(true);
 			timerReset();
 		}
@@ -213,7 +204,7 @@ const PickCorrectGamePage = () => {
 					</div>
 					<div className="flex flex-col items-center justify-center space-y-1">
 						<ToggleButtons
-							answers={currentQuestion.answers}
+							answers={currentQuestion.answer!}
 							selected={selected}
 							disabledButtons={disabledAnswers}
 							disabled={questionsComplete}

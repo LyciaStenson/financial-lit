@@ -3,18 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { currentUser, getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
+import { getCollection } from "@/src/FirebaseBridge/firestore/getData";
+import { CollectionReference, DocumentData, FirestoreError, QuerySnapshot, collection, getDocs } from "firebase/firestore";
+import { getCurrentDatabase } from "@/src/FirebaseBridge/firebaseApp";
 
 type Props = {
     day: number;
-    streak:number;
+    streak: number;
     href: string;
-    userDay:number
+    userDay: number
 }
 
-function StreakIcons({streak}: {streak: boolean}) {
+function StreakIcons({ streak }: { streak: boolean }) {
     if (!streak) {
-        return 
+        return
     }
 
     return (
@@ -65,7 +67,7 @@ function StreakIcons({streak}: {streak: boolean}) {
     )
 }
 
-type Variants = "lessonLocked"|"lessonUnlocked"|"lessonCompleted"
+type Variants = "lessonLocked" | "lessonUnlocked" | "lessonCompleted"
 
 export const LessonButton = ({
     day,
@@ -75,25 +77,38 @@ export const LessonButton = ({
 }: Props) => {
     const router = useRouter();
 
-    const sequence = [1,2,3,4,4,4,3,2,1,1]
+    const sequence = [1, 2, 3, 4, 4, 4, 3, 2, 1, 1]
 
-    let col;
+    const cycleIndex = (day - 1) % sequence.length;
 
-    const cycleIndex = (day-1) % sequence.length;
-
-    col = sequence[cycleIndex];
+    let col = sequence[cycleIndex];
 
     const div5 = day % 5;
 
-    let variant:Variants = "lessonLocked"
-    if(day > userDay){
-       variant = "lessonLocked"
+    let variant: Variants = "lessonLocked"
+    if (day > userDay) {
+        variant = "lessonLocked"
     }
-    else if(day == userDay){
+    else if (day == userDay) {
         variant = "lessonUnlocked"
     }
-    else{
+    else {
         variant = "lessonCompleted"
+    }
+
+    async function loadDay(day: number) {
+        let correctDay = "day" + day;
+
+        //Gets the day type from the database
+        try {
+            const yearCollection = collection(getCurrentDatabase(), `questions/year3/${correctDay}`);
+            const snapshot = await getDocs(yearCollection);
+            const docsArray = snapshot.docs.map(doc => doc.data());
+            router.push(docsArray[0].day.type);
+          } catch (error) {
+            console.error('Error retrieving documents:', error);
+          }
+        
     }
 
     return (
@@ -112,15 +127,15 @@ export const LessonButton = ({
                 className={"w-[90px] h-[90px] border-[2.5px] shadow-[inset_0_-11px_0px_rgba(0,0,0,0.3),inset_0_3px_0px_rgb(255,255,255,0.7)]"}
                 variant={variant}
                 shape="round"
-                onClick={() => router.push(href)}
-                disabled={variant=="lessonLocked"}
+                onClick={() => loadDay(day)}
+                disabled={variant == "lessonLocked"}
             >
-            <div>
-                <div className="w-[70px] h-[70px] bg-stripes border-moneyconf-blue border-[2.5px] rounded-full flex flex-col items-center justify-center">
-                    <p className="text-md">Day</p>
-                    <p className="text-xl">{day}</p>
+                <div>
+                    <div className="w-[70px] h-[70px] bg-stripes border-moneyconf-blue border-[2.5px] rounded-full flex flex-col items-center justify-center">
+                        <p className="text-md">Day</p>
+                        <p className="text-xl">{day}</p>
+                    </div>
                 </div>
-            </div>
             </Button>
         </div>
 

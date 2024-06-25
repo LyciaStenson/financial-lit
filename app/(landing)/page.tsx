@@ -31,43 +31,62 @@ export function useIsVisible(ref: MutableRefObject<Element | null>): boolean {
 	return isIntersecting;
 }
 */
+type MethodProps = {
+	windowWidth: number;
+}
 
-const Method = () => {
-	return (
-		<div className="flex flex-row space-x-5">
-			<Image
-				src={1 > 1024 ? "./horizonatal-method.svg" : "./vertical-method.svg"}
-				alt="Method"
-				width={0}
-				height={0}
-				className="h-auto py-20 w-[15rem] lg:w-[60rem] md:w-[15rem] sm:w-[15rem]"
-			/>
-			<div className="flex flex-col pt-44 text-xl space-y-40 lg:text-[0rem] lg:space-y-1 md:flex-col md:pt-44 md:text-xl md:space-y-40">
-				<h3>
-					School workshops
-				</h3>
-				<h3>
-					Online challenge activities
-				</h3>
-				<h3>
-					Parents&#x2019; workshops
-				</h3>
-				<h3>
-					Parental online support
-				</h3>
-				<h3>
-					Teachers&#x2019; resources
-				</h3>
+const Method = ({windowWidth}: MethodProps) => {
+
+	if (windowWidth < 1024) {
+		return (
+			<div className="flex flex-row space-x-5">
+				<Image
+					src={"./vertical-method.svg"}
+					alt="Method"
+					width={0}
+					height={0}
+					className="h-auto py-20 w-[15rem] lg:w-[60rem]"
+				/>
+				<div className="flex flex-col justify-evenly text-xl font-bold">
+					<h3>
+						School workshops
+					</h3>
+					<h3>
+						Online challenge activities
+					</h3>
+					<h3>
+						Parents&#x2019; workshops
+					</h3>
+					<h3>
+						Parental online support
+					</h3>
+					<h3>
+						Teachers&#x2019; resources
+					</h3>
+				</div>
 			</div>
-		</div>
-	)
+		)
+	} else {
+		return (
+			<div className="flex flex-row space-x-5">
+				<Image
+					src={"./horizonatal-method.svg"}
+					alt="Method"
+					width={0}
+					height={0}
+					className="h-auto py-20 w-[15rem] lg:w-[60rem]"
+				/>
+			</div>
+		)
+	}
 }
 
 const LandingPage = () => {
 
-	const [windowWidth, setWindowWidth] = useState(1024);
+	const [windowWidth, setWindowWidth] = useState(1025);
 
 	useEffect(() => {
+		setWindowWidth(window.innerWidth);
 		const handleResize = () => {
 			setWindowWidth(window.innerWidth);
 		};
@@ -175,6 +194,7 @@ const LandingPage = () => {
 				</div>
 			</ScrollAnimation>
 			<Method
+				windowWidth={windowWidth}
 			/>
 			<h1 id="community" className="pt-14 font-bold text-5xl text-outward-red">
 				My Money Confidence - The Community

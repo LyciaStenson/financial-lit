@@ -11,7 +11,7 @@ import { getRandomCode } from "@/src/random/randomNumberGenerator";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import readXlsxFile from 'read-excel-file';
+import readXlsxFile, { Row } from 'read-excel-file';
 import { Toaster, toast } from 'sonner'
 
 const auth = getCurrentAuth();
@@ -42,9 +42,26 @@ const DownloadPage = () => {
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>): void => {
         const file = event.target.files?.[0];
         if (file) {
-            readXlsxFile(file).then((rows) => {
-                console.log(rows);
-                setExcelData(rows);
+            readXlsxFile(file).then((rows: Row[]) => {
+                const headers = rows[0];
+                const dataRows = rows.slice(1);
+    
+                dataRows[0].sort((a, b) => {
+                    if (a < b) {
+                        return -1;
+                      }
+                      if (a > b) {
+                        return 1;
+                      }
+                      return 0;                
+                });
+    
+                console.log(dataRows);
+
+                // Add headers back to the sorted data
+                const sortedRows = [headers, ...dataRows];
+                
+                setExcelData(sortedRows);
             }).catch((error) => {
                 console.error("Error reading the Excel file:", error);
             });
@@ -57,13 +74,16 @@ const DownloadPage = () => {
             const name = data[0];
             school = data[1];
             const role = data[2];
-            handleAddMultipleUser(name, school, role);
+            const id = data[3];
+            const schoolid = data[4];
+            handleAddMultipleUser(name, school, role, id, schoolid);
         });
+     
         setGeneratedAccounts(true);
         toast.success(`Multiple Users for school ${school} have been created`);
     };
 
-    const handleAddMultipleUser = (name: string, school: string, role: string) => {
+    const handleAddMultipleUser = (name: string, school: string, role: string, id: number, schoolid: number) => {
         let email: string = "";
         let emailId: string = "";
         let password: string = "";
@@ -72,7 +92,6 @@ const DownloadPage = () => {
             email = emailId + "@moneyconfidence.co.uk";
             password = "23@f1-*1HA%^3(DA)";
         }
-        //Create a firebase account without logging out of this account
     }
 
     const handleStudentName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -96,11 +115,11 @@ const DownloadPage = () => {
             emailId = getRandomCode();
             email = emailId + "@moneyconfidence.co.uk";
             password = "23@f1-*1HA%^3(DA)";
-        }else if(role == "teacher"){
+        } else if (role == "teacher") {
 
-        }else if(role == "admin"){
+        } else if (role == "admin") {
 
-        }else{
+        } else {
             toast.error("User needs a role of either student, teacher or admin.");
         }
 
@@ -109,33 +128,33 @@ const DownloadPage = () => {
         console.log(email);
 
         createUserWithEmailAndPassword(email, password).then((user) => {
-            let days:dayComplete[] = [];
+            let days: dayComplete[] = [];
 
-            for(let i = 0; i < 30; i++){
+            for (let i = 0; i < 30; i++) {
                 const dayString = "Day " + i
                 days.push({
-                    day:dayString,
-                    completed:false,
+                    day: dayString,
+                    completed: false,
                 })
             }
-    
+
             const dateInterface: Date = new Date();
             const day = dateInterface.getDate().toString().padStart(2, '0');
             const month = (dateInterface.getMonth() + 1).toString().padStart(2, '0');
             const year = dateInterface.getFullYear();
             const currentDate = `${day}/${month}/${year}`;
 
-            let newUser:currentUser = {
-                UUID:user?.user.uid,
-                createdDate:currentDate,
-                displayName:studentName,
-                emailID:emailId,
-                role:role,
-                day:days,
-                score:0,
-                streak:0,
+            let newUser: currentUser = {
+                UUID: user?.user.uid,
+                createdDate: currentDate,
+                displayName: studentName,
+                emailID: emailId,
+                role: role,
+                day: days,
+                score: 0,
+                streak: 0,
             }
-    
+
             setData("users/", newUser.UUID!, newUser);
         })
     }
@@ -143,7 +162,7 @@ const DownloadPage = () => {
     return (
         <div className="pl-[270px]">
             <SideBar
-                title="Users"
+                title="Admin"
             >
                 <Button onClick={() => loadPage("/admin")}>Home</Button>
                 <Button onClick={() => loadPage("/admin/questions")}>Questions</Button>

@@ -8,10 +8,13 @@ import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import { TopBar } from "@/components/top-bar";
 import LeaderboardEntry from "./leaderboard-entry";
 import { PointsToRank } from "@/src/points-to-rank";
+import useUser from "@/Hooks/AuthUserContext";
 
 const ProfilePointsGamePage = () => {
 
   const [number, setNumber] = useState<string[]>();
+
+  const [user, loading, error] = useUser();
 
   const getMorePoints = (event:React.MouseEvent<HTMLButtonElement | null>) => {
     let numb = getRandom();
@@ -44,13 +47,13 @@ const ProfilePointsGamePage = () => {
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-5 border">
       <TopBar
-        streak = {getCurrentUser()?.streak!}
-        score = {getCurrentUser()?.score!}
+        streak = {user?.streak!}
+        score = {user?.score!}
       />
       <div className="flex w-full px-5 items-center justify-center">
         <div className="w-96 h-20 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
           <h1 className="text-xl font-extrabold">
-            Adam&#x2019;s money Confidence
+            {user?.displayName}&#x2019;s money Confidence
           </h1>
         </div>
       </div>
@@ -63,7 +66,7 @@ const ProfilePointsGamePage = () => {
             height={0}
             className="w-auto h-32"
           />
-          <TextBoxes text="5 Day Steak!" />
+          <TextBoxes text= {user?.streak! + " Day Steak!"} />
           </div>
           <div className="flex flex-col items-center justify-center space-y-2">
             <Image
@@ -73,7 +76,7 @@ const ProfilePointsGamePage = () => {
               height={0}
               className="w-auto h-32"
             />
-            <TextBoxes text="Level: 99 Maifa Boss" />
+            <TextBoxes text={PointsToRank(user?.score!)} />
           </div>
         </div>
         <div className="flex flex-row space-x-2 items-center">
@@ -87,7 +90,7 @@ const ProfilePointsGamePage = () => {
             />
           </div>
           <div className="text-lg font-extrabold text-moneyconf-purple w-40 border-[2.5px] border-moneyconf-purple rounded-md stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 px-2">
-            <h3 className="text-sm text-moneyconf-purple font-extrabold"> Points: 12,551 </h3>
+            <h3 className="text-sm text-moneyconf-purple font-extrabold"> Points: {user?.score!.toLocaleString()} </h3>
           </div>
         </div>
         <div className="flex flex-row space-x-2">       
@@ -98,11 +101,11 @@ const ProfilePointsGamePage = () => {
         </h1>
       </div>
       <div className="flex flex-col px-5 items-center justify-center space-y-1">
-        <LeaderboardEntry placement={ordinal_suffix_of(23)} rank={PointsToRank(12789)} score={12789} isUser={false}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(22)} rank={PointsToRank(12695)} score={12695} isUser={false}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(21)} rank={PointsToRank(12551)} score={12551} isUser={true}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(20)} rank={PointsToRank(12512)} score={12512} isUser={false}/>
-        <LeaderboardEntry placement={ordinal_suffix_of(11)} rank={PointsToRank(12497)} score={12497} isUser={false}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(23)} rank={PointsToRank(12789)} score={"12,789"}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(22)} rank={PointsToRank(12695)} score={"12,695"}/>
+        <LeaderboardEntry placement={"You"} rank={PointsToRank(user?.score!)} score={user?.score!.toLocaleString()}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(20)} rank={PointsToRank(12512)} score={"12,512"}/>
+        <LeaderboardEntry placement={ordinal_suffix_of(11)} rank={PointsToRank(12497)} score={"12,497"}/>
       </div>
       <div className="w-96 h-20 px-5 rounded-2xl text-center flex items-center justify-center border-2 border-b-8 stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2 text-moneyconf-purple border-moneyconf-purple">
         <h1 className="text-xl font-extrabold">

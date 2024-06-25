@@ -1,27 +1,19 @@
 'use client';
 
-import { setUserDetails } from '@/src/FirebaseBridge/Auth/currentUser';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation'
-import setData from '@/src/FirebaseBridge/firestore/setData';
-import signUp from '@/src/FirebaseBridge/Auth/signUp';
-import { UserCredential } from 'firebase/auth';
+import { redirect, useRouter } from 'next/navigation'
 import { getDataAsync } from '@/src/FirebaseBridge/firestore/getData';
 import { SideBar } from '@/components/side-bar';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { getCurrentAuth } from '@/src/FirebaseBridge/firebaseApp';
 import useUser from '@/Hooks/AuthUserContext';
-
-const auth = getCurrentAuth();
+import { Banner } from '../(game)/activity/banner';
 
 const AdminPage = () => {
     
     const [user, loading, error] = useUser();
     const [isAdmin, setIsAdmin] = useState(false);
 
-    // Access the user object from the authentication context
-    // const { user } = useAuthContext();
     const router = useRouter();
 
     if (user) {
@@ -33,6 +25,15 @@ const AdminPage = () => {
                 return router.push("/home");
             }
         })
+    }
+
+    if (error) {
+        return (
+            <div className="h-screen flex items-center justify-center">
+                <Banner title="Error"
+                    description={`${error.message}`} />
+            </div>
+        )
     }
 
     if (isAdmin) {

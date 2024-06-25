@@ -43,7 +43,7 @@ const ActivityGamePage = () => {
     return (
       <div className="flex flex-col items-center justify-center text-center space-y-5 border">
         <TopBar streak={user?.streak!} score={user?.score!} />
-        <Banner title="Day 6" description={`${user?.displayName}'s money Confidence`} />
+        <Banner title={`Day ${value.day! + 1}`}  description={`${user?.displayName}'s money Confidence`} />
           <div>
             <div className="flex flex-row items-end justify-center space-x-2">
               <div className="flex flex-col items-center justify-center space-y-2">
@@ -54,8 +54,8 @@ const ActivityGamePage = () => {
                   height={0}
                   className="w-auto h-20"
                 />
-                <h3 className="text-sm text-moneyconf-purple font-extrabold"> Correct answers </h3>
-                <TextBoxes text={`${value.totalAnsweredCorrect} out of ${value.totalQuestions}`} />
+                <h3 className="text-sm text-moneyconf-purple font-extrabold"> Incorrect answers </h3>
+                <TextBoxes text={`${value.totalInccorrect}`} />
               </div>
               <div className="flex flex-col items-center justify-center space-y-2">
                 <Image
@@ -80,13 +80,13 @@ const ActivityGamePage = () => {
                 <TextBoxes text={`${Math.round(value.points!)}`} />
               </div>
             </div>
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row items-center justify-center space-x-2 pt-5">
               <div className="text-lg font-extrabold text-moneyconf-purple w-72 border-[2.5px] border-moneyconf-purple rounded-md stripes stripes-size-[300px] stripes-opacity-30 stripes-white bg-moneyconf-gold py-2">
                 <h3 className="text-sm text-moneyconf-purple font-extrabold"> You’ve smashed today’s challenge! </h3>
                 <h3 className="text-sm text-moneyconf-purple font-extrabold"> Your extra bonus is ... </h3>
               </div>
             </div>
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row space-x-2 items-center justify-center py-2">
               <div className="animate-jump animate-delay-500 animate-thrice animate-duration-1000">
                 <Image
                   src="./safe.svg"
@@ -104,7 +104,7 @@ const ActivityGamePage = () => {
                 className="w-auto h-32"
               />
             </div>
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row space-x-2 items-center justify-center">
               <div className="w-14 h-20 flex items-center justify-center text-2xl font-extrabold text-moneyconf-purple border-moneyconf-grey-border rounded-md bg-moneyconf-grey border-4 border-dashed">
                 {number && (
                   <h1 className="animate-jump">{number![0].toString()}</h1>

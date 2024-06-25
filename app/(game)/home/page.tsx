@@ -6,9 +6,11 @@ import Image from "next/image";
 import { TopBar } from "@/components/top-bar";
 import useUser from "@/Hooks/AuthUserContext";
 import { getCurrentDay } from "@/src/FirebaseBridge/Auth/signIn";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { useBonusScoreContext } from "@/Hooks/BonusScore";
 import { getRandom } from "@/src/random/randomNumberGenerator";
+import { redirect } from "next/navigation";
+import useDataCollection from "@/Hooks/LoadQuestionContext";
 
 const HomePage = () => {
     const lessonHrefs = [
@@ -18,6 +20,7 @@ const HomePage = () => {
         "home", "home", "home", "home", "home", "home", "home",
         "home", "home", "home", "home", "home", "home"
     ];
+    
     const [user, loading, error] = useUser();
 
     const [day, setDay] = useState<number>(0);
@@ -64,11 +67,14 @@ const HomePage = () => {
     }
 
     if (user) {
+        if(user.role == "none"){
+            return redirect("/");
+        }
         return (
             <div>
                 <TopBar streak={user.streak || 0} score={user.score || 0} />
                 <Banner
-                    title={`${user.displayName ?? "No Name"}’s Money Confidence Month: Day 8`}
+                    title={`${user.displayName ?? "No Name"}’s Money Confidence Month: Day ${day}`}
                     description={"You’re back for more I see... Okay, let’s do this"}
                 />
                 <div className="flex flex-row items-center relative">
@@ -142,3 +148,11 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+const MyInput = forwardRef(function MyInput(props, ref) {
+    return (
+      <label>
+      </label>
+    );
+  });

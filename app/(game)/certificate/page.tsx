@@ -1,11 +1,12 @@
 'use client';
 
 import { getCurrentUser } from "@/src/FirebaseBridge/Auth/currentUser";
-import Image from "next/image"
 import { currentUser } from "@/src/FirebaseBridge/Auth/currentUser";
 import { getUserCollection } from "@/src/FirebaseBridge/firestore/getData";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Switch } from "@/components/ui/switch";
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
+import { Certificate } from "./certificate";
 
 const CertificatePage = () => {
     console.log(getCurrentUser());
@@ -15,7 +16,7 @@ const CertificatePage = () => {
 
     let tempUsers: currentUser[] = [];
 
-    const generate = () =>{
+    const generate = () => {
         getUserCollection("users/").then((users: currentUser[]) => {
             setUsers(users);
             users.forEach((user) => {
@@ -27,31 +28,25 @@ const CertificatePage = () => {
         })
     }
 
+    const componentRef = useRef<HTMLDivElement>(null);
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current!,
+      });
+
     return (
-        <div className="flex flex-col w-full h-full "> 
-                <div className="flex items-center justify-center relative">
-                {
-                    users?.map((user, index) => (
-                        <div key={index}>
-                            <div>
-                                <h1 className="w-full flex items-center justify-center text-white font-msmadi text-center font-extrabold text-[4rem] absolute top-[335px] right-[0px]">
-                                    {user.displayName}
-                                </h1>
+        <div className="flex flex-col w-full h-full ">
+                <div className="flex flex-col items-center justify-center">
+                    {
+                        users?.map((user, index) => (
+                            <div key={index}>
+                                <Certificate studentname = {user?.displayName!}/>
                             </div>
-                        </div>
-                    ))
-                }
+                        ))
+                    }
                 </div>
-            <div className="flex items-center justify-center">
-                <Image
-                    src="./certificate.svg"
-                    alt="Certificate"
-                    width={0}
-                    height={0}
-                    className="w-full h-auto"
-                />
-            </div>
-            <button onClick={generate}>Generate</button>
+                <button onClick={generate}>Generate</button>
+                <Certificate ref={componentRef} studentname="test"/>
+                <button onClick={handlePrint}>Print</button>
         </div>
     )
 }

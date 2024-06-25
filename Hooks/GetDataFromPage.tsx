@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 interface ActivityData {
   points?: number | null;
   time?: number | null;
-  totalAnsweredCorrect?: number | null;
+  totalInccorrect?: number | null;
   totalQuestions?: number | null;
   day:number | null;
 }

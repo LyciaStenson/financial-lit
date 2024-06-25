@@ -1,5 +1,5 @@
 import { getCurrentDatabase } from "../firebaseApp";
-import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference, DocumentSnapshot, DocumentData, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference, DocumentSnapshot, DocumentData, serverTimestamp, QuerySnapshot } from "firebase/firestore";
 import { currentUser } from "../Auth/currentUser";
 import { quizData } from "@/src/Game/quiz/quizData";
 
@@ -29,6 +29,12 @@ export async function getDataAsync(collection: string, id: string) {
 
   // Return the result and error as an object
   return { result };
+}
+
+export async function getCollection(path: string): Promise<QuerySnapshot<DocumentData>> {
+  const colRef = collection(db, path);
+  const snapshot = await getDocs(colRef);
+  return snapshot;
 }
 
 export function getData(collection: string, id: string, callback: (result: DocumentSnapshot<DocumentData> | null, error: Error | null) => void) {
@@ -115,7 +121,8 @@ export async function getQuizCollection(path: string): Promise<quizData[]> {
     return {
       question: data.question,
       type: data.type,
-      answer: data.answer
+      answer: data.answer,
+      word: data.word
     }
   });
 }
@@ -128,7 +135,8 @@ export async function getQuizCollectionFromServer(path: string): Promise<quizDat
     return {
       question: data.question,
       type: data.type,
-      answer: data.answer
+      answer: data.answer,
+      word: data.word
     }
   });
 }
