@@ -3,9 +3,11 @@ import Image from "next/image";
 
 type CertificateProps = { studentname: string }
 
+/*ref={ref!}*/
+
 export const Certificate = React.forwardRef(function Certificate({studentname}:CertificateProps, ref) {
     return (
-        <div ref={ref!} className="relative">
+        <div className="relative">
         <h1 className="w-full flex items-center justify-center text-white font-msmadi text-center font-extrabold text-[4rem] absolute top-[335px] right-[0px]">
             {studentname}
         </h1>

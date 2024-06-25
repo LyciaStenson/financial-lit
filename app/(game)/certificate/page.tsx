@@ -45,7 +45,7 @@ const CertificatePage = () => {
                     }
                 </div>
                 <button onClick={generate}>Generate</button>
-                <Certificate ref={componentRef} studentname="test"/>
+                {/*<Certificate ref={componentRef} studentname="test"/>*/}
                 <button onClick={handlePrint}>Print</button>
         </div>
     )

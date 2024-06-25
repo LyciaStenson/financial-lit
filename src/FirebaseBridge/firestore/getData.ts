@@ -1,7 +1,7 @@
 import { getCurrentDatabase } from "../firebaseApp";
 import { doc, getDoc, collection, getDocs, getDocsFromCache, getDocFromCache, DocumentReference, DocumentSnapshot, DocumentData, serverTimestamp, QuerySnapshot } from "firebase/firestore";
 import { currentUser } from "../Auth/currentUser";
-import { quizData } from "@/src/Game/quiz/quizData";
+import { answer, quizData } from "@/src/Game/quiz/quizDataBase";
 
 // Get the Firestore instance
 const db = getCurrentDatabase();
@@ -111,7 +111,7 @@ async function getUserCollectionFromServer(path: string): Promise<currentUser[]>
   return users;
 }
 
-export async function getQuizCollection(path: string): Promise<quizData[]> {
+export async function getQuizCollection(path: string): Promise<quizData<answer>[]> {
   const querySnapshot = await getDocsFromCache(collection(db, path));
 
   if (querySnapshot.empty) return getQuizCollectionFromServer(path);
@@ -127,7 +127,7 @@ export async function getQuizCollection(path: string): Promise<quizData[]> {
   });
 }
 
-export async function getQuizCollectionFromServer(path: string): Promise<quizData[]> {
+export async function getQuizCollectionFromServer(path: string): Promise<quizData<answer>[]> {
   const querySnapshot = await getDocs(collection(db, path));
 
   return querySnapshot.docs.map(doc => {

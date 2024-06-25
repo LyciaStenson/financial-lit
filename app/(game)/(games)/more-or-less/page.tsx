@@ -5,26 +5,25 @@ import ContinueButton from "../../continue-button";
 import { Button } from "@/components/ui/button";
 import TextBoxes from "./text-boxes";
 import { useEffect, useState } from "react";
-import { quizData } from "@/src/Game/quiz/quizData";
-import { getNextQuizQuestion } from "@/src/Game/quiz/quiz";
+import { answer, quizData } from "@/src/Game/quiz/quizDataBase";
 import { useRouter } from "next/navigation";
 
 const MoreOrLessGamePage = () => {
 
     const router = useRouter();
     
-    const [question, setQuestion] = useState<quizData | null>(null);
+    const [question, setQuestion] = useState<quizData<answer>[]>([]);
     const [quizLoaded, setQuizLoaded] = useState(false);
     const [answerCorrect, setAnswerCorrect] = useState(false);
 
     const checkCurrentAnswer = (index:number, event:React.MouseEvent<HTMLButtonElement | null>) => {
-        if(question?.answer[index].Result){
-            console.log("Answer is correct");
-            setAnswerCorrect(true);
-        }else{
-            console.log("Answer is wrong");
-            event.currentTarget.disabled = true;
-        }
+        //if(question?.answer[index].Result){
+            //console.log("Answer is correct");
+            //setAnswerCorrect(true);
+        //}else{
+            //console.log("Answer is wrong");
+            //event.currentTarget.disabled = true;
+        //}
     }
 
     const continueQuiz = () =>{
@@ -35,12 +34,12 @@ const MoreOrLessGamePage = () => {
         }
     }
 
-    useEffect(() => {
-        getNextQuizQuestion().then((value:quizData | null) => {
-            setQuestion(value);
-            setQuizLoaded(true);
-        })
-    }, []);
+    //useEffect(() => {
+        //getNextQuizQuestion().then((value:quizData | null) => {
+            //setQuestion(value);
+            //setQuizLoaded(true);
+        //})
+    //}, []);
 
 
     return (

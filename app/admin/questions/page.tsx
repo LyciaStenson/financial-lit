@@ -17,7 +17,7 @@ import orderQuestionData from "@/src/Game/AnswerData/OrderQuestionData";
 import pickCorrectQuestionData from "@/src/Game/AnswerData/PickCorrectQuestionData";
 
 const DownloadPage = () => {
-    const [quiz, setQuiz] = useState<quizData<answer[]>[]>([]);
+    const [quiz, setQuiz] = useState<quizData<answer>[]>([]);
 
     const [question, setQuestion] = useState('');
     const [day, setDay] = useState('');
@@ -30,7 +30,7 @@ const DownloadPage = () => {
     const [filter, setFilter] = useState("");
 
     const generate = (filter: string) => {
-        getQuizCollection("questions/" + filter).then((data: quizData<answer[]>[]) => {
+        getQuizCollection("questions/" + filter).then((data: quizData<answer>[]) => {
             setQuiz(data);
         });
     }

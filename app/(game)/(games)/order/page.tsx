@@ -7,7 +7,7 @@ import Picker from 'react-mobile-picker';
 import shuffle from "@/src/random/shuffle";
 import { useRouter } from "next/navigation";
 import useDataCollection from "@/Hooks/LoadQuestionContext";
-import { quizData } from "@/src/Game/quiz/quizDataBase";
+import { answer, quizData } from "@/src/Game/quiz/quizDataBase";
 import usePersistantTimer from "@/Hooks/Timer";
 import useUser from "@/Hooks/AuthUserContext";
 import { useDataContext } from "@/Hooks/GetDataFromPage";
@@ -19,9 +19,9 @@ type OrderQuestion = {
     answers: { Answer: string, Result: boolean }[]
 }
 
-const QuizDataToQuestion = (data: quizData | null, word?: string): OrderQuestion => {
-    return { question: data?.question, word: word, answers: data?.answer }
-}
+//const QuizDataToQuestion = (data: quizData | null, word?: string): OrderQuestion => {
+    //return { question: data?.question, word: word, answers: data?.answer }
+//}
 
 const OrderGamePage = () => {
 
@@ -31,7 +31,7 @@ const OrderGamePage = () => {
 
     const [pickerValue, setPickerValue] = useState({ value: "" });
 
-    const [questions, setQuestions] = useState<quizData[]>([]);
+    const [questions, setQuestions] = useState<quizData<answer>[]>([]);
 
     const [timerCount, timerStart, timerPause, timerReset] = usePersistantTimer(false, { updateFrequency: 1 });
 
@@ -77,30 +77,30 @@ const OrderGamePage = () => {
 
     useEffect(() => {
         if (value && user) {
-            let newQuestions: quizData[] = [];
+            //let newQuestions: quizData[] = [];
 
-            value.docs.forEach((doc) => {
-                const q = doc.data() as quizData;
-                const word = doc.data().word;
-                let answers: any[] = shuffle(QuizDataToQuestion(q, word).answers);
-                q.answer = answers;
-                newQuestions.push(q);
-            });
+            //value.docs.forEach((doc) => {
+                //const q = doc.data() as quizData;
+                //const word = doc.data().word;
+                //let answers: any[] = shuffle(QuizDataToQuestion(q, word).answers);
+                //q.answer = answers;
+                //newQuestions.push(q);
+            //});
 
-            newQuestions = shuffle(newQuestions);
+            //newQuestions = shuffle(newQuestions);
 
             // Get the last question from newQuestions array
-            const lastQuestion = newQuestions.pop() || null;
+            //const lastQuestion = newQuestions.pop() || null;
 
-            if (lastQuestion) {
-                const word = lastQuestion.word; // Assign word from the last question
-                setCurrentQuestion(QuizDataToQuestion(lastQuestion, word));
-            }
+            //if (lastQuestion) {
+                //const word = lastQuestion.word; // Assign word from the last question
+                //setCurrentQuestion(QuizDataToQuestion(lastQuestion, word));
+            //}
 
-            setQuestions(newQuestions);
-            setTotalQuestions(newQuestions.length);
-            setQuizLoaded(true);
-            timerReset();
+            //setQuestions(newQuestions);
+            //setTotalQuestions(newQuestions.length);
+            //setQuizLoaded(true);
+            //timerReset();
         }
     }, [value, user]);
 
