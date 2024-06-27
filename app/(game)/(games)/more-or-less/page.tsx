@@ -85,6 +85,7 @@ const MoreOrLessGamePage = () => {
             <ContinueButton
                 text="Continue"
                 disabled={false}
+                incorrect={false}
                 click={continueQuiz}
             />
         </div>

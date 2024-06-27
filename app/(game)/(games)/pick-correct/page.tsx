@@ -14,6 +14,7 @@ import usePersistantTimer from "@/Hooks/Timer";
 import shuffle from "@/src/random/shuffle";
 import { useDataContext } from "@/Hooks/GetDataFromPage";
 import pickCorrectQuestionData from "@/src/Game/AnswerData/PickCorrectQuestionData";
+import useSound from "use-sound";
 
 const PickCorrectGamePage = () => {
 
@@ -50,6 +51,13 @@ const PickCorrectGamePage = () => {
     const [questionStartTime, setQuestionStartTime] = useState<number>(0);
 
     const [finalScore, setFinalScore] = useState(0);
+
+    const correctPath = "./sounds/correct.mp3"
+
+    const [playOn] = useSound(
+        correctPath,
+        { volume: 0.25 }
+    );
 
     const handleAnswerSelected = (index: number, isCorrect: boolean) => {
         if (frozen) return;
@@ -112,6 +120,7 @@ const PickCorrectGamePage = () => {
     }
 
     const continueButton = () => {
+        playOn();
         setValue({
             points:finalScore,
             time:Math.round(timerCount / 1000),
@@ -164,12 +173,8 @@ const PickCorrectGamePage = () => {
 
     return (
         <div>
-            <div>{Math.round(timerCount / 1000)}</div>
             {quizLoaded && currentQuestion && (
                 <div className="flex flex-col items-center justify-center text-center space-y-2">
-                    <TopBar
-                        percentage={(questions.length) * 100}
-                    />
                     <h1 className="text-2xl font-extrabold text-moneyconf-purple">
                         Click the correct answer
                     </h1>
@@ -213,6 +218,7 @@ const PickCorrectGamePage = () => {
                     <ContinueButton
                         text="Continue"
                         disabled={!questionsComplete}
+                        incorrect={false}
                         click={continueButton}
                     />
                 </div>

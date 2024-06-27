@@ -20,6 +20,7 @@ const buttonVariants = cva(
         lessonLocked: "bg-moneyconf-grey text-moneyconf-blue border-moneyconf-blue",
         quiz: "rounded-3xl flex items-center justify-center bg-moneyconf-grey border-[3px] border-dashed border-moneyconf-green",
         continueLocked: "bg-moneyconf-grey border-2 border-moneyconf-blue text-xl text-moneyconf-grey-dark shadow-[0_3.5px_0px_rgba(0,0,0,0.3),inset_0_5px_0px_rgb(255,255,255,0.5)]",
+        continueIncorrect: "bg-moneyconf-red border-2 border-moneyconf-blue text-xl text-moneyconf-purple shadow-[0_3.5px_0px_rgba(0,0,0,0.3),inset_0_5px_0px_rgb(255,255,255,0.5)]",
         continueUnlocked: "bg-moneyconf-gold border-2 border-moneyconf-blue text-xl text-moneyconf-purple shadow-[0_3.5px_0px_rgba(0,0,0,0.3),inset_0_5px_0px_rgb(255,255,255,0.5)]"
       },
       size: {

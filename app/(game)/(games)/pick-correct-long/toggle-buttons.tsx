@@ -12,7 +12,7 @@ type Props = {
 const ToggleButtons = ({ answers, selected, disabledButtons, disabled, handleToggle }: Props) => {
     return (
         <div className="space-y-3">
-            <div className="flex flex-row justify-center space-x-28">
+            <div className="flex flex-col justify-center space-y-3">
                 <ToggleButton
                     index={0}
                     text={answers[0].answer}
@@ -29,8 +29,6 @@ const ToggleButtons = ({ answers, selected, disabledButtons, disabled, handleTog
                     disabled={disabledButtons[1] || disabled}
                     onToggle={handleToggle}
                 />
-            </div>
-            <div className="flex justify-center">
                 <ToggleButton
                     index={2}
                     text={answers[2].answer}
@@ -39,8 +37,6 @@ const ToggleButtons = ({ answers, selected, disabledButtons, disabled, handleTog
                     disabled={disabledButtons[2] || disabled}
                     onToggle={handleToggle}
                 />
-            </div>
-            <div className="flex flex-row justify-center space-x-28">
                 <ToggleButton
                     index={3}
                     text={answers[3].answer}

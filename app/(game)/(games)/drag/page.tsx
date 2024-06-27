@@ -82,6 +82,7 @@ const DragGamePage = () => {
             <ContinueButton
                 text="Continue"
                 disabled={false}
+                incorrect={false}
             />
         </div>
     )

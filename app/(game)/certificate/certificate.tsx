@@ -8,7 +8,7 @@ type CertificateProps = { studentname: string }
 export const Certificate = React.forwardRef(function Certificate({studentname}:CertificateProps, ref) {
     return (
         <div className="relative">
-        <h1 className="w-full flex items-center justify-center text-white font-msmadi text-center font-extrabold text-[4rem] absolute top-[335px] right-[0px]">
+        <h1 className="w-full flex items-center justify-center text-moneyconf-gold font-msmadi text-center font-extrabold text-[4rem] absolute top-[335px] right-[0px]">
             {studentname}
         </h1>
         <div className="flex items-center justify-center">

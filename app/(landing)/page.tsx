@@ -39,7 +39,7 @@ const Method = ({ windowWidth }: MethodProps) => {
 
 	if (windowWidth < 1024) {
 		return (
-			<div className="flex flex-row space-x-5 px-5 pt-20">
+			<div className="flex flex-row space-x-5 px-5 pt-10">
 				<Image
 					src={"./vertical-method.svg"}
 					alt="Method"
@@ -68,7 +68,7 @@ const Method = ({ windowWidth }: MethodProps) => {
 		)
 	} else {
 		return (
-			<div className="flex flex-row space-x-5">
+			<div className="flex flex-row space-x-5 pt-10">
 				<Image
 					src={"./horizonatal-method.svg"}
 					alt="Method"
@@ -99,7 +99,7 @@ const LandingPage = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col items-center text-center">
+		<div className="flex flex-col items-center text-center space-y-5">
 			<h1 id="mission" className="pt-14 font-bold text-5xl text-outward-red">
 				My Money Confidence - The Mission
 			</h1>

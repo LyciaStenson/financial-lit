@@ -18,7 +18,7 @@ const ToggleButton = ({index, text, isCorrect, toggled, disabled, onToggle}: Pro
             className="w-96 h-16 text-md text-wrap text-moneyconf-blue"
             style={{
                 backgroundColor: toggled ? (isCorrect) ? "#8cc63f" : "#f23b3b" : "#f2f2f2",
-                borderColor: toggled ? "#000000" : "#8cc63f",
+                borderColor: disabled ? "#a9a9a9" : (toggled ? "#000000" : "#8cc63f"),
             }}
         >
             {text}

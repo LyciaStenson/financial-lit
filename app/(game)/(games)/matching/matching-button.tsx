@@ -22,14 +22,14 @@ const MatchingButton = ({ id, text, isSelected, isMatched, onClick }: Props) => 
 
     return (
         <Button
-            className="w-40 h-16 rounded-3xl flex items-center justify-center border-4 border-dashed border-moneyconf-grey-dark"
+            className="w-auto h-32 rounded-3xl flex items-center justify-center border-4 border-dashed border-moneyconf-grey-dark"
             onClick={() => onClick(id)}
             disabled={isMatched}
             style={{
                 backgroundColor: backgroundColor
             }}
         >
-            <h3 className="text-2xl text-moneyconf-purple font-extrabold"> {text} </h3>
+            <h3 className="text-md text-moneyconf-purple font-extrabold text-balance"> {text} </h3>
         </Button>
     )
 }

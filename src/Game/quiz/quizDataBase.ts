@@ -70,5 +70,6 @@ export function stringToQuizType(type: string) {
 export function setQuizQuestion<T extends quizData<any>>(data: T) {
     data.year = quizYear.year3;
     data.UUID = uuidv4();
+    console.log(data);
     setData("questions/" + data.year + "/" + data.day?.day, data.UUID, data);
 }

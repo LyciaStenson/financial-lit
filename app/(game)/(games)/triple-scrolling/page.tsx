@@ -46,6 +46,7 @@ const TripleScrollingGamePage = () => {
 			<ContinueButton
 				text="Lock in guess"
 				disabled={false}
+				incorrect={false}
 			/>
 		</div>
 	)

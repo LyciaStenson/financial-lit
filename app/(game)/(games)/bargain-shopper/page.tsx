@@ -12,6 +12,7 @@ import usePersistantTimer from "@/Hooks/Timer";
 import useUser from "@/Hooks/AuthUserContext";
 import { useDataContext } from "@/Hooks/GetDataFromPage";
 import { answer } from "@/src/Game/quiz/quizDataBase";
+import useSound from "use-sound";
 
 const BargainShopperPage = () => {
     const [value, loadingData, errorData] = useDataCollection("questions/year3/day1");
@@ -37,11 +38,24 @@ const BargainShopperPage = () => {
     const [quizLoaded, setQuizLoaded] = useState(false);
     const [finalScore, setFinalScore] = useState(0);
     const [totalIncorrectAttempts, setTotalIncorrectAttempts] = useState(0);
+    const [isIncorrect, setIsIncorrect] = useState(false);
+
+    const correctPath = "./sounds/correct.mp3"
+    const inccorrectPath = "./sounds/incorrect.mp3"
+
+    const [playOn] = useSound(
+        correctPath,
+        { volume: 0.25 }
+    );
+    const [playOff] = useSound(
+        inccorrectPath,
+        { volume: 0.25 }
+    );
 
     const continueButton = () => {
         const isCorrect = currentQuestion?.answer!.some(element => {
             if (pickerValue.value === element.answer && element.result) {
-                console.log("Correct Answer");
+                playOn();
                 setValue({
                     points: finalScore,
                     time: Math.round(timerCount / 1000),
@@ -60,8 +74,13 @@ const BargainShopperPage = () => {
             // Remove the incorrect answer from the question's answers array
             const updatedAnswers = currentQuestion?.answer!.filter(element => element.answer !== pickerValue.value);
             if (currentQuestion) {
+                playOff();
                 setCurrentQuestion({ ...currentQuestion, answer: updatedAnswers || [] });
+                setIsIncorrect(true);
                 setTotalIncorrectAttempts(totalIncorrectAttempts + 1);
+                setTimeout(() => {
+                    setIsIncorrect(false);
+                }, 1000)            
             }
         }
     }
@@ -135,6 +154,7 @@ const BargainShopperPage = () => {
                     <ContinueButton
                         text="Lock in guess"
                         disabled={pickerValue.value == ""}
+                        incorrect={isIncorrect}
                         click={continueButton}
                     />
                 </div>

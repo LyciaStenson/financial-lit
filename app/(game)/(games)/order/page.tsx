@@ -3,25 +3,22 @@
 import Image from "next/image";
 import ContinueButton from "../../continue-button";
 import { useEffect, useState } from 'react';
-import Picker from 'react-mobile-picker';
-import shuffle from "@/src/random/shuffle";
 import { useRouter } from "next/navigation";
 import useDataCollection from "@/Hooks/LoadQuestionContext";
-import { answer, quizData } from "@/src/Game/quiz/quizDataBase";
 import usePersistantTimer from "@/Hooks/Timer";
 import useUser from "@/Hooks/AuthUserContext";
 import { useDataContext } from "@/Hooks/GetDataFromPage";
 import PickBoxes from "./pick-boxes";
+import orderQuestionData from "@/src/Game/AnswerData/OrderQuestionData";
+import shuffle from "@/src/random/shuffle";
+import { Banner } from "../../activity/banner";
+import { Button } from "@/components/ui/button";
+import useSound from "use-sound";
 
-type OrderQuestion = {
-    question?: string,
-    word?: string,
-    answers: { Answer: string, Result: boolean }[]
+interface clicked {
+    clicked: boolean;
+    word: string;
 }
-
-//const QuizDataToQuestion = (data: quizData | null, word?: string): OrderQuestion => {
-    //return { question: data?.question, word: word, answers: data?.answer }
-//}
 
 const OrderGamePage = () => {
 
@@ -29,9 +26,14 @@ const OrderGamePage = () => {
 
     const router = useRouter();
 
-    const [pickerValue, setPickerValue] = useState({ value: "" });
+    const [index, setIndex] = useState(0);
+    const [word, setWord] = useState<string[]>([]);
 
-    const [questions, setQuestions] = useState<quizData<answer>[]>([]);
+    const [clicked, setClicked] = useState<clicked[]>(
+        Array.from({ length: 9 }, (_, index) => ({ clicked: false, word:"" }))
+    );
+
+    const [questions, setQuestions] = useState<orderQuestionData[]>([]);
 
     const [timerCount, timerStart, timerPause, timerReset] = usePersistantTimer(false, { updateFrequency: 1 });
 
@@ -41,70 +43,138 @@ const OrderGamePage = () => {
 
     const [totalQuestions, setTotalQuestions] = useState(0);
 
-    const [currentQuestion, setCurrentQuestion] = useState<OrderQuestion | null>(null);
+    const [currentQuestion, setCurrentQuestion] = useState<orderQuestionData | null>(null);
 
     const [quizLoaded, setQuizLoaded] = useState(false);
     const [finalScore, setFinalScore] = useState(0);
     const [totalIncorrectAttempts, setTotalIncorrectAttempts] = useState(0);
 
-    const continueButton = () => {
-        const isCorrect = currentQuestion?.answers.some(element => {
-            if (pickerValue.value === element.Answer && element.Result) {
-                console.log("Correct Answer");
-                setValue({
-                    points: finalScore,
-                    time: Math.round(timerCount / 1000),
-                    totalQuestions: totalQuestions,
-                    totalInccorrect: totalIncorrectAttempts,
-                    day: 0, // The current day - 1 for the array
-                });
+    const [isIncorrect, setIsIncorrect] = useState(false);
 
-                router.push("/celebration");
-                return true;
-            }
-            return false;
+    const correctPath = "./sounds/correct.mp3"
+    const inccorrectPath = "./sounds/incorrect.mp3"
+
+    const [playOn] = useSound(
+        correctPath,
+        { volume: 0.25 }
+    );
+
+    const [playOff] = useSound(
+        inccorrectPath,
+        { volume: 0.25 }
+    );
+
+    const addWordToFinal = (word: string, id: number) => {
+        if (index > 2) return;
+
+        setWord(prevWords => [...prevWords, word]);
+        setClicked(prevClicked => {
+            const newClicked = [...prevClicked];
+            newClicked[id].clicked = true;
+            newClicked[id].word = word;
+            return newClicked;
+        });
+        setIndex(index + 1);
+    };
+
+    const removeWordFromFinal = (wordIndex: number) => {
+        setWord(prevWords => prevWords.filter((_, i) => i !== wordIndex));
+
+        setClicked(prevClicked => {
+            const newClicked = [...prevClicked];
+            const clickedArray = newClicked.map((item):clicked[] => {
+                let newClickedArray:clicked[] = [];
+                if(item.word == word[wordIndex]){
+                    if(item.clicked){
+                        item.clicked = false;
+                        item.word = "";
+                        newClickedArray.push(item);   
+                    }else{
+                        newClickedArray.push(item);   
+                    }
+                }
+
+                return newClickedArray
+            });
+            
+            return newClicked;
         });
 
-        if (!isCorrect) {
-            // Remove the incorrect answer from the question's answers array
-            const updatedAnswers = currentQuestion?.answers.filter(element => element.Answer !== pickerValue.value);
-            if (currentQuestion) {
-                setCurrentQuestion({ ...currentQuestion, answers: updatedAnswers || [] });
-                setTotalIncorrectAttempts(totalIncorrectAttempts + 1);
-            }
+        setIndex(prevIndex => Math.max(prevIndex - 1, 0));
+    };
+
+    const calculateFinalScore = () => {
+        const baseScore = 1000;
+
+        const flooredTime = Math.floor(Math.round(timerCount / 1000));
+
+        console.log(timerCount);
+
+        const timePenalty = (flooredTime / 30) * 50;
+
+        const incorrectPenalty = totalIncorrectAttempts * 100; // Adjust as needed
+
+        console.log(baseScore - timePenalty - incorrectPenalty);
+
+        return baseScore - timePenalty - incorrectPenalty;
+    }
+
+
+    const lockInGuess = () =>{
+        const finalWord = word.join(" "); // joins the word array to create the answer word
+        console.log("Final: ", finalWord);
+        console.log("Answer Word: ", currentQuestion?.answer?.answer);
+        if(currentQuestion?.answer?.answer == finalWord){
+            playOn();
+            const finalScore = calculateFinalScore();
+            setFinalScore(finalScore);
+            setValue({
+                points:finalScore,
+                time:Math.round(timerCount / 1000),
+                totalQuestions:totalQuestions,
+                totalInccorrect:totalIncorrectAttempts,
+                day:5, //The current day - 1 for the array
+            })
+    
+            router.push("/celebration")
+        }else{
+            playOff();
+            setIsIncorrect(true);
+            setTotalIncorrectAttempts(totalIncorrectAttempts + 1);
+            setTimeout(() => {
+                setIsIncorrect(false);
+            }, 1000)        
         }
     }
 
     useEffect(() => {
         if (value && user) {
-            //let newQuestions: quizData[] = [];
+            let newQuestions: orderQuestionData[] = [];
 
-            //value.docs.forEach((doc) => {
-                //const q = doc.data() as quizData;
-                //const word = doc.data().word;
-                //let answers: any[] = shuffle(QuizDataToQuestion(q, word).answers);
-                //q.answer = answers;
-                //newQuestions.push(q);
-            //});
+            value.docs.map((doc) => {
+                const q = doc.data() as orderQuestionData;
+                const words = shuffle(q.words);
+                q.words = words;
+                newQuestions.push(q);
+            });
 
-            //newQuestions = shuffle(newQuestions);
-
-            // Get the last question from newQuestions array
-            //const lastQuestion = newQuestions.pop() || null;
-
-            //if (lastQuestion) {
-                //const word = lastQuestion.word; // Assign word from the last question
-                //setCurrentQuestion(QuizDataToQuestion(lastQuestion, word));
-            //}
-
-            //setQuestions(newQuestions);
-            //setTotalQuestions(newQuestions.length);
-            //setQuizLoaded(true);
-            //timerReset();
+            newQuestions = shuffle(newQuestions);
+            setQuestions(newQuestions);
+            setTotalQuestions(newQuestions.length);
+            setCurrentQuestion(newQuestions.pop() || null);
+            setQuizLoaded(true);
+            timerReset();
         }
     }, [value, user]);
 
-
+    if (loading) {
+        return (
+            <div className="h-screen flex items-center justify-center">
+                <Banner title="Loading your account"
+                    description={"We are gathering your details... Please be patient"} />
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -127,23 +197,27 @@ const OrderGamePage = () => {
                             <h2 className="text-2xl">{currentQuestion?.question}</h2>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center justify-center space-y-6">
-                        <PickBoxes one={currentQuestion?.answers[0].Answer!} two={currentQuestion?.answers[1].Answer!} three={currentQuestion?.answers[2].Answer!} />
-                        <PickBoxes one={currentQuestion?.answers[5].Answer!} two={currentQuestion?.answers[4].Answer!} three={currentQuestion?.answers[3].Answer!} />
-                        <PickBoxes one={currentQuestion?.answers[6].Answer!} two={currentQuestion?.answers[7].Answer!} three={currentQuestion?.answers[8].Answer!} />
+                    <div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-6">
+                        {currentQuestion?.words.map((word, index) => (
+                            <Button className=" w-28 h-16 rounded-3xl flex items-center justify-center bg-moneyconf-grey border-4 border-dashed border-moneyconf-green disabled:border-moneyconf-grey-dark" key={index} onClick={() => addWordToFinal(word, index)} disabled={clicked[index].clicked}>{word}</Button>
+                        ))}
                     </div>
 
                     <div className="flex space-x-1 font-extrabold text-moneyconf-purple p-3 border-[2.5px] bg-moneyconf-grey place-items-center justify-start text-start px-2">
                         <h3 className="text-xl font-extrabold text-moneyconf-purple px-3">
-                            {currentQuestion?.word} =   </h3>
-                        <h3 className="underline"> {"Place"} </h3>
-                        <h3 className="underline"> {"holder"} </h3>
-                        <h3 className="underline"> {"text"} </h3>
+                            {currentQuestion?.answer?.word} =   </h3>
+                        <button onClick={() => removeWordFromFinal(0)} className="underline"> {word[0]} </button>
+                        <button onClick={() => removeWordFromFinal(1)} className="underline"> {word[1]} </button>
+                        <button onClick={() => removeWordFromFinal(2)} className="underline"> {word[2]} </button>
                     </div>
                     <div className="flex items-center justify-center text-center" >
                         <ContinueButton
                             text="Lock in guess"
                             disabled={false}
+                            incorrect={isIncorrect}
+                            click={lockInGuess}
                         />
                     </div>
                 </div>
